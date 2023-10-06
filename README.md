@@ -4,13 +4,13 @@ This pixel-art RPG features a kid who loves playing and doing farm chores during
 In this game, players have to collect carrots to gain experience points and craft new equipment, levelling up to become stronger and defeat the monsters that haunt them in their sleep.
 
 # Early models:
-![BunnyFrontWalk](https://github.com/theWillPM/project-carrot-game/assets/96987268/4a86f5ad-c493-45d0-9ef7-7026c3bbb008)
-![Chiara_walkLeft](https://github.com/theWillPM/project-carrot-game/assets/96987268/095b2b86-d273-415f-9f72-e2ba153a4fe6)
-![Chiara_walkRight](https://github.com/theWillPM/project-carrot-game/assets/96987268/50f2944a-d99c-4713-a452-e1b0d90cfd4e)
-![Chiara_back_walk](https://github.com/theWillPM/project-carrot-game/assets/96987268/42cbb81c-144c-4d4e-b391-62aac7ca1709)
+![BunnyFrontWalk](https://github.com/hugozeminian/rad-project-rpg-game/assets/96987268/4c117c56-6d69-4ff5-a5d8-03c2611f108d)
+![Chiara_walkLeft](https://github.com/hugozeminian/rad-project-rpg-game/assets/96987268/f5a8d2ec-90fe-40c3-9aab-3180d2d671a2)
+![Chiara_walkRight](https://github.com/hugozeminian/rad-project-rpg-game/assets/96987268/1472a16e-7d8b-463d-b8f4-997e7b941903)
+![Chiara_back_walk](https://github.com/hugozeminian/rad-project-rpg-game/assets/96987268/96bf460d-cbc0-4b4b-b030-ac79eba8d654)
 
 # Alpha version of our team's intro:
-<img src="https://github.com/theWillPM/project-carrot-game/assets/96987268/56779c04-da8c-46ae-8fd3-a8de67296eee" width="400" alt="intro loop"/>
+<img src="https://github.com/hugozeminian/rad-project-rpg-game/assets/96987268/fca9fb4c-8039-4631-ab18-f3d3a94f4bb0" width="400" alt="intro loop"/>
 
 
 
