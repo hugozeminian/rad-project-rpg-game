@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace carrot_game
 {
@@ -14,11 +15,20 @@ namespace carrot_game
     internal class Window
 
     {
-    // Obtain the player's window size and make the game's window match that.
-    // Set a minimum size of 1024x768 pixels
-    // Center the display.
-    // Allow the changes to be saved (tip: create a text file that saves this information)
-    // Read the saved configuration files when initializing the game.
+        internal int Height { get; set; }
+        internal int Width { get; set; }
+
+    public Window() {
+        // Get the primary window's dimensions
+        this.Height = Screen.PrimaryScreen.Bounds.Height;
+        this.Width = Screen.PrimaryScreen.Bounds.Width;
+
+        }
+        // Obtain the player's window size and make the game's window match that.
+        // Set a minimum size of 1024x768 pixels
+        // Center the display.
+        // Allow the changes to be saved (tip: create a text file that saves this information)
+        // Read the saved configuration files when initializing the game.
 
 
     }

@@ -1,0 +1,9 @@
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\carrot-game.exe.config
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\carrot-game.exe
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\carrot-game.pdb
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.AssemblyReference.cache
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.Properties.Resources.resources
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.GenerateResource.cache
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.CoreCompileInputs.cache
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.exe
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.pdb
