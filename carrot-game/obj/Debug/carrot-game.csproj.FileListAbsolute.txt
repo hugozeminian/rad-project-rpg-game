@@ -7,3 +7,4 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\car
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.CoreCompileInputs.cache
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.exe
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.pdb
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.formIntro.resources

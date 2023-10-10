@@ -14,14 +14,12 @@ namespace carrot_game
         [STAThread]
         static void Main()
         {
-            Window window = new Window();
-            MessageBox.Show(window.Height + ": " + window.Width);
             // initialize a KeyHandler
             // initialize GameScreen
             // Create a player character
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new formIntro());
         }
     }
 }
