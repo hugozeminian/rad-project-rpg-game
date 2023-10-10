@@ -8,3 +8,9 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\car
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.exe
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.pdb
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.formIntro.resources
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\Interop.WMPLib.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\AxInterop.WMPLib.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.ResolveComReference.cache
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Interop.WMPLib.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\AxInterop.WMPLib.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.GameScreen.resources

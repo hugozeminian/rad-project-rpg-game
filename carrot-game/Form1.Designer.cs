@@ -1,6 +1,6 @@
 ﻿namespace carrot_game
 {
-    partial class formIntro
+    partial class FormIntro
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormIntro));
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.mediaIntro = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // timer
             // 
-            this.button1.Location = new System.Drawing.Point(231, 73);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(308, 258);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "exit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.timer.Interval = 4200;
             // 
-            // formIntro
+            // mediaIntro
+            // 
+            this.mediaIntro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaIntro.Enabled = true;
+            this.mediaIntro.Location = new System.Drawing.Point(0, 0);
+            this.mediaIntro.Name = "mediaIntro";
+            this.mediaIntro.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mediaIntro.OcxState")));
+            this.mediaIntro.Size = new System.Drawing.Size(300, 294);
+            this.mediaIntro.TabIndex = 0;
+            // 
+            // FormIntro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Name = "formIntro";
+            this.ClientSize = new System.Drawing.Size(300, 294);
+            this.Controls.Add(this.mediaIntro);
+            this.Name = "FormIntro";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Carrot-Game";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.formIntro_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private AxWMPLib.AxWindowsMediaPlayer mediaIntro;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

@@ -7,40 +7,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+
+using WMPLib;
 
 namespace carrot_game
 {
-    public partial class formIntro : Form
+    /// <summary>
+    /// FormIntro is the Windows Form that displays our group's introduction video. It should be set to fullscreen. When closed, the MainMenu should open.
+    /// </summary>
+    public partial class FormIntro : Form
     {
-        public formIntro()
+        public FormIntro()
         {
             InitializeComponent();
+            mediaIntro.uiMode = "none";
         }
 
         private void formIntro_Load(object sender, EventArgs e)
         {
-            if (Screen.PrimaryScreen.Bounds.Width >= 1919 && Screen.PrimaryScreen.Bounds.Height >= 1079)
-            {
-                // set this form to 1920x1080 resolution
-                this.Height = 1080;
-                this.Width = 1920;
-            }
-            else
-            {
-                this.Height = 768;
-                this.Width = 1280;
-            }
+            // Assign our media player url to display our intro video
+            mediaIntro.URL = "res\\video\\IntroCarrot.mp4";
 
-                // Set this form to fullscreen.
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+            mediaIntro.Ctlcontrols.play();
 
-            // Display a message box with the current resolution
-            MessageBox.Show($"Resolution: \n{Width} : {Height}");
+            // Set this form to fullscreen 1920x1080 -
+            // ToDO - Add exception handling if the display doesn't support chosen resolution.
+            // ToDo - Save resolution to a file and read it whenever we open the game
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1920, 1080);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
+            timer.Stop();
+            mediaIntro.Enabled = false;
+            mediaIntro.Visible = false;
             this.Close();
         }
     }
