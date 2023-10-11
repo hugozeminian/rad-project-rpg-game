@@ -18,6 +18,8 @@ namespace carrot_game
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormIntro());
             Application.Run(new GameScreen());
+
+            Player mainCharacter = new Player();
             // initialize a KeyHandler
             // initialize GameScreen
             // Create a player character

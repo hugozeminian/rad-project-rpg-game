@@ -57,6 +57,7 @@ namespace carrot_game
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnLoadGame = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
+            Player newPlayer = new Player();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,6 +166,7 @@ namespace carrot_game
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(852, 480);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(newPlayer);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameScreen";
@@ -182,6 +184,7 @@ namespace carrot_game
         private void GameScreen_Load(object sender, EventArgs e)
         {
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
