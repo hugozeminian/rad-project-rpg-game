@@ -25,28 +25,30 @@ namespace carrot_game
         public abstract string[] SpriteImages { get; set; }
 
         public abstract int Carrots { get; set; }
+        public abstract int Width {  get; set; }
+        public abstract int Height { get; set; }
 
         public abstract void HandleKeyPress(KeyEventArgs e);
 
-        //if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
-        //{
-        //    Move(0, -Speed, 0);
-        //}
-        //if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
-        //{
-        //    Move(0, Speed, 0);
-        //}
-        //if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
-        //{
-        //    Move(0, -Speed, 0);
-        //}
-        //if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
-        //{
-        //    Move(0, Speed, 0);
-        //}
+//        if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+//        {
+//            Move(0, -Speed, 0);
+//    }
+//        if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+//        {
+//            Move(0, Speed, 0);
+//}
+//if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+//{
+//    Move(0, -Speed, 0);
+//}
+//if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+//{
+//    Move(0, Speed, 0);
+//}
 
 
-        public abstract void Move(int x, int y, int z);
+public abstract void Move(int x, int y, int z);
         //{
         //    PosX += x;
         //    PosY += y;

@@ -46,7 +46,6 @@ namespace carrot_game
             timer.Stop();
             mediaIntro.Enabled = false;
             mediaIntro.Visible = false;
-            MessageBox.Show(this.ToString());
             this.Close();
         }
     }
