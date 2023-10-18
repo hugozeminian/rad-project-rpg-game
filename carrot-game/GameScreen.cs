@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -16,12 +17,15 @@ namespace carrot_game
         private Button btnLoadGame;
         private Button btnNewGame;
         private Panel panel1;
+        private Player newPlayer;
+        private PictureBox pictureBox1;
 
 
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        static SoundPlayer bgm = new SoundPlayer("res\\sound\\bgm\\menu.wav");
 
         /// <summary>
         /// Clean up any resources being used.
@@ -40,7 +44,7 @@ namespace carrot_game
         {
             InitializeComponent();
 
-            SoundPlayer bgm = new SoundPlayer("res\\sound\\bgm\\menu.wav");
+
             bgm.PlayLooping();
         }
 
@@ -57,8 +61,10 @@ namespace carrot_game
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnLoadGame = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
-            Player newPlayer = new Player();
+            this.newPlayer = new carrot_game.Player();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
@@ -107,6 +113,7 @@ namespace carrot_game
             this.btnNewGame.TabIndex = 5;
             this.btnNewGame.Text = "New Game";
             this.btnNewGame.UseVisualStyleBackColor = true;
+            this.btnNewGame.Click += new System.EventHandler(this.btnNewGame_Click);
             this.btnNewGame.MouseEnter += new System.EventHandler(this.btnHover);
             this.btnNewGame.MouseLeave += new System.EventHandler(this.btnLeaveHover);
             // 
@@ -159,14 +166,32 @@ namespace carrot_game
             this.btnOptions.MouseEnter += new System.EventHandler(this.btnHover);
             this.btnOptions.MouseLeave += new System.EventHandler(this.btnLeaveHover);
             // 
+            // newPlayer
+            // 
+            this.newPlayer.Location = new System.Drawing.Point(0, 0);
+            this.newPlayer.Name = "newPlayer";
+            this.newPlayer.Size = new System.Drawing.Size(0, 0);
+            this.newPlayer.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.pictureBox1.Image = global::carrot_game.Properties.Resources.front2;
+            this.pictureBox1.Location = new System.Drawing.Point(88, 351);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(65, 72);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // GameScreen
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.BackgroundImage = global::carrot_game.Properties.Resources.Main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(852, 480);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(newPlayer);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameScreen";
@@ -175,6 +200,7 @@ namespace carrot_game
             this.TopMost = true;
             this.Load += new System.EventHandler(this.GameScreen_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +233,19 @@ namespace carrot_game
         {
             Button b = sender as Button;
             b.ForeColor = System.Drawing.Color.FromArgb(40,40,40);
+        }
+
+        private void btnPlayer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNewGame_Click(object sender, EventArgs e)
+        {
+           Form game = new ActualGameScreen();
+            this.Hide();
+            bgm.Stop();
+            game.Show();
         }
 
 

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActualGameScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActualGameScreen.Designer.cs">
+      <DependentUpon>ActualGameScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ActualGameScreen.resx">
+      <DependentUpon>ActualGameScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +126,75 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\res\image\Main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\front2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottom_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottom_WaterTop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottomLeft_WaterTopRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottomRight_WaterTopLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassLeft_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassLeft_WaterRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassRight_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassRight_WaterLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTop_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTop_WaterBottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTopLeft_WaterBottomRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTopRight_WaterBottomLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\prop\grass.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

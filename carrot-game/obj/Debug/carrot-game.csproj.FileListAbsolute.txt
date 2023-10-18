@@ -14,3 +14,4 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\car
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Interop.WMPLib.dll
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\AxInterop.WMPLib.dll
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.GameScreen.resources
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.ActualGameScreen.resources

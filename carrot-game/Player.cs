@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace carrot_game
 {
@@ -13,40 +15,65 @@ namespace carrot_game
     {
         public string Name;
         // Controls how many pixels we move per Move()
-        public int Speed;
+        public int HealthPoints { get; set; }
         // Our x-axis position, in pixels
-        public int Pos_x;
+        public int ExperiencePoints { get; set; }
         // Our y-axis position, in pixels
-        public int Pos_y;
+        public int Attack { get; set; }
         // Our character's width, in pixels
-        public int Width;
+        public int Speed { get; set; }
         // Our character's height, in pixels
-        public int Height;
+        public int Defense { get; set; }
         // The path for the current sprite (image)
-        public string Sprite;
+        public int PosX { get; set; }
         // Identifies which direction the character is facing
-        public string Direction;//(up, down, left, right)
+        public int PosY { get; set; }//(up, down, left, right)
+        public int PosZ { get; set; }
+        public string[] SpriteImages { get; set; }
+        public int Carrots { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
 
-        public void MoveUp()
+
+        public void HandleKeyPress(KeyEventArgs e)
             {
-                // ToDo - check if we are inside the screen boundaries before moving!
-                //if yes,
-                Pos_y -= Speed;
-                Direction = "up";
-            }   
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            {
+                Move(0, -Speed, 0);
+            }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            {
+                Move(0, Speed, 0);
+            }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            {
+                Move(0, -Speed, 0);
+            }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            {
+                Move(0, Speed, 0);
+            }
+        }   
+
+        public void Move(int x, int y, int z)
+        {
+            PosX += x;
+            PosY += y;
+            PosZ += z;
+        }
 
         public Player()
         {
             Name = "Player";
             Speed = 4;
-            Pos_x = 100; // ToDo - Change to middle of the screen
-            Pos_y = 100; // ToDo - Change to middle of the screen
+            PosX = 100; // ToDo - Change to middle of the screen
+            PosY = 100; // ToDo - Change to middle of the screen
             Width = 64;
             Height = 64;
-            Sprite = "res\\image\\entity\\character\\front2.png";
+            SpriteImages.Append("Resources\\front2.bmp");
         }
 
-        public void ChangeName()
+        public void ChangeName(string name)
         {
 
         }
