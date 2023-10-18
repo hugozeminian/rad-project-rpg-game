@@ -45,7 +45,7 @@ namespace carrot_game
             InitializeComponent();
 
 
-            bgm.PlayLooping();
+            //bgm.PlayLooping();
         }
 
         #region Windows Form Designer generated code
@@ -168,10 +168,10 @@ namespace carrot_game
             // 
             // newPlayer
             // 
-            this.newPlayer.Location = new System.Drawing.Point(0, 0);
-            this.newPlayer.Name = "newPlayer";
-            this.newPlayer.Size = new System.Drawing.Size(0, 0);
-            this.newPlayer.TabIndex = 0;
+            //this.newPlayer.Location = new System.Drawing.Point(0, 0);
+            //this.newPlayer.Name = "newPlayer";
+            //this.newPlayer.Size = new System.Drawing.Size(0, 0);
+            //this.newPlayer.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -233,11 +233,6 @@ namespace carrot_game
         {
             Button b = sender as Button;
             b.ForeColor = System.Drawing.Color.FromArgb(40,40,40);
-        }
-
-        private void btnPlayer_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)

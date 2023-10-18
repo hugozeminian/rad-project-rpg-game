@@ -29,33 +29,34 @@ namespace carrot_game
         // Identifies which direction the character is facing
         public int PosY { get; set; }//(up, down, left, right)
         public int PosZ { get; set; }
-        public string[] SpriteImages { get; set; }
+        public Bitmap[] SpriteImages { get; set; }
         public int Carrots { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
 
 
-        public void HandleKeyPress(KeyEventArgs e)
-            {
+        public override void HandleKeyPress(KeyEventArgs e)
+        {
             if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
             {
-                Move(0, -Speed, 0);
+                Move(0, -Speed, 0); 
             }
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            else if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
-                Move(0, Speed, 0);
+                Move(0, Speed, 0); 
             }
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
-                Move(0, -Speed, 0);
+                Move(-Speed, 0, 0); 
             }
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
-                Move(0, Speed, 0);
+                Move(Speed, 0, 0); 
             }
-        }   
+        }
 
-        public void Move(int x, int y, int z)
+
+        public override void Move(int x, int y, int z)
         {
             PosX += x;
             PosY += y;
@@ -65,12 +66,12 @@ namespace carrot_game
         public Player()
         {
             Name = "Player";
-            Speed = 4;
+            Speed = 5;
             PosX = 100; // ToDo - Change to middle of the screen
             PosY = 100; // ToDo - Change to middle of the screen
             Width = 64;
             Height = 64;
-            SpriteImages.Append("Resources\\front2.bmp");
+            SpriteImages = new Bitmap[] { Properties.Resources.front2 };
         }
 
         public void ChangeName(string name)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,43 +13,41 @@ namespace carrot_game
     /// </summary>
     abstract class Entity
     {
-        public abstract string Name { get; set; }
-        public abstract int HealthPoints { get; set; }
-        public abstract int ExperiencePoints { get; set; }
-        public abstract int Attack { get; set; }
-        public abstract int Speed { get; set; }
-        public abstract int Defense { get; set; }
-        public abstract int PosX { get; set; }
-        public abstract int PosY { get; set; }
-        public abstract int PosZ { get; set; }
-
-        public abstract string[] SpriteImages { get; set; }
-
-        public abstract int Carrots { get; set; }
-        public abstract int Width {  get; set; }
-        public abstract int Height { get; set; }
+        public string Name { get; set; }
+        public int HealthPoints { get; set; } = 3;
+        public int ExperiencePoints { get; set; } = 0;
+        public int Attack { get; set; } = 1;
+        public int Speed { get; set; } = 5;
+        public int Defense { get; set; } = 1;
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+        public int PosZ { get; set; }
+        public Bitmap[] SpriteImages { get; set; }
+        public int Carrots { get; set; }
+        public int Width {  get; set; }
+        public int Height { get; set; }
 
         public abstract void HandleKeyPress(KeyEventArgs e);
 
-//        if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
-//        {
-//            Move(0, -Speed, 0);
-//    }
-//        if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
-//        {
-//            Move(0, Speed, 0);
-//}
-//if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
-//{
-//    Move(0, -Speed, 0);
-//}
-//if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
-//{
-//    Move(0, Speed, 0);
-//}
+        //        if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+        //        {
+        //            Move(0, -Speed, 0);
+        //    }
+        //        if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+        //        {
+        //            Move(0, Speed, 0);
+        //}
+        //if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+        //{
+        //    Move(0, -Speed, 0);
+        //}
+        //if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+        //{
+        //    Move(0, Speed, 0);
+        //}
 
 
-public abstract void Move(int x, int y, int z);
+        public abstract void Move(int x, int y, int z);
         //{
         //    PosX += x;
         //    PosY += y;
