@@ -47,7 +47,7 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            timer1.Interval = 1000 / fps;
+            timer1.Interval = ActualGameScreen.fps;
             // 
             // ActualGameScreen
             // 

@@ -21,6 +21,7 @@ namespace carrot_game
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            // this redraws everything in the form
             this.Refresh();
         }
     }
