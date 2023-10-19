@@ -14,7 +14,6 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\car
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Interop.WMPLib.dll
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\AxInterop.WMPLib.dll
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.GameScreen.resources
-D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.ActualGameScreen.resources
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\obj\Debug\carrot-game.csproj.AssemblyReference.cache
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\obj\Debug\carrot-game.csproj.SuggestedBindingRedirects.cache
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\obj\Debug\Interop.WMPLib.dll
@@ -33,3 +32,4 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\bin\Debug\carrot-
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\bin\Debug\carrot-game.pdb
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\bin\Debug\Interop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rap\Project\App\carrot-game\bin\Debug\AxInterop.WMPLib.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.MainMenu.resources

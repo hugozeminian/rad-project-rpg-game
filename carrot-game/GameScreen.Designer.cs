@@ -1,6 +1,6 @@
 ﻿namespace carrot_game
 {
-    partial class ActualGameScreen
+    partial class GameScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -37,15 +37,20 @@
             this.timer1.Interval = 16;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // ActualGameScreen
+            // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Green;
+            this.BackgroundImage = global::carrot_game.Properties.Resources.grass;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "ActualGameScreen";
+            this.DoubleBuffered = true;
+            this.Name = "GameScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ActualGameScreen";
-            this.Load += new System.EventHandler(this.ActualGameScreen_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameScreen_FormClosing);
+            this.Load += new System.EventHandler(this.GameScreen_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
             this.ResumeLayout(false);
 
         }
