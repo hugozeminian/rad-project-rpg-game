@@ -235,4 +235,40 @@
   <data name="right4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\image\entity\character\right4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bad_boss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bad_boss.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="down_tempo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down_tempo.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fast.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fast2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fast2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="game_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game_menu.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hero_walking_grass_side" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hero-walking-grass-side.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_inverted.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_outside" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_outside.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_slow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_slow.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_strings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_strings.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="up_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\up_down.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

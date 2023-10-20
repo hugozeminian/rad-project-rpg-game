@@ -24,7 +24,8 @@ namespace carrot_game
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        static SoundPlayer bgm = new SoundPlayer("res\\sound\\bgm\\menu.wav");
+        Audio bgm = new Audio();
+        
 
         /// <summary>
         /// Clean up any resources being used.
@@ -42,9 +43,7 @@ namespace carrot_game
         public MainMenu()
         {
             InitializeComponent();
-
-
-            //bgm.PlayLooping();
+            bgm.playAudioBackgroud(bgm.audioMenu);
         }
 
         #region Windows Form Designer generated code
@@ -213,10 +212,11 @@ namespace carrot_game
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
+           bgm.stopAudioBackgroud();
+           bgm.Dispose();
            Form game = new GameScreen();
-            this.Hide();
-            bgm.Stop();
-            game.Show();
+           this.Hide();
+           game.Show();
         }
 
 
