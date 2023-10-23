@@ -12,7 +12,8 @@ namespace carrot_game
         // Player's name.
         public override string Name { get; set; } = "Player";
         // Player's health points.
-        public override int HealthPoints { get; set; } = 1;
+        public override int MaxHealthPoints { get; set; } = 10;
+        public override int CurrentHealthPoints { get; set; } = 10;
         // Player's experience points.
         public override int ExperiencePoints { get; set; } = 0;
         // Player's attack power.
@@ -31,6 +32,7 @@ namespace carrot_game
         public override string Direction {get; set; } = "down";
         // A 2D array, each level corresponding to a direction and their respective images:
         // [up[], down[], left[], right[]]
+        public string ImgPack { get; set; } = "";
         public override Bitmap[,] SpriteImages { get; set; }
         public Bitmap CurrentSprite { get; set; }
         // Player's quantity of owned carrots.
@@ -57,12 +59,12 @@ namespace carrot_game
         public Player()
         {
             Name = "Player";
-            Speed = 5;
+            Speed = 4;
             PosX = 100; // ToDo - Change to middle of the screen
             PosY = 100; // ToDo - Change to middle of the screen
             Width = 128;
             Height = 128;
-            SpriteImages = GetPlayerImages("");
+            SpriteImages = GetPlayerImages(ImgPack);
             CurrentSprite = Properties.Resources.front1;
         }
 

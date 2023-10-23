@@ -213,7 +213,7 @@ namespace carrot_game
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-           Form game = new GameScreen();
+           Form game = new GameScreen(1);
             this.Hide();
             bgm.Stop();
             game.Show();

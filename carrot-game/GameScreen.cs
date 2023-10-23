@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,16 +17,20 @@ namespace carrot_game
     public partial class GameScreen : Form
     {
         Player heroCharacter = new Player();
+        public int savePos;
+        public GameScreen gs; 
 
         // Declaring a refresh rate of 30 frames per second [33.33ms] (1000ms / 30)
         public static int fps = 30;
         public static int refreshTime = 1000/fps;
-        public GameScreen()
+        public GameScreen(int save)
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             Size = new Size(1920, 1080);
+            savePos = save;
+            gs = this;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -63,17 +69,48 @@ namespace carrot_game
 
         private void GameScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            SaveToFile(savePos);
         }
 
         private void GameScreen_KeyDown(object sender, KeyEventArgs e)
         {
-            KeyHandler.HandleKeyDown(e, heroCharacter);
+            KeyHandler.HandleKeyDown(e, heroCharacter, gs);
         }
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
-            KeyHandler.HandleKeyRelease(e, heroCharacter);
+            KeyHandler.HandleKeyRelease(e, heroCharacter, gs);
+        }
+
+        private void SaveToFile(int SavePosition)
+        {
+            string path = "config.txt";
+            // This should run only the first time the game is closed, if the user hasn't manually saved it.
+            File.Delete(path);
+                using (FileStream fs = File.Create(path))
+                {
+                    AddText(fs, $"{{save{SavePosition}:{{\n");
+                    foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(heroCharacter))
+                    {
+                    string name = prop.Name;
+                        AddText(fs, $"\"{name}\": \"{prop.GetValue(heroCharacter)}\",\n");
+                    }
+                    fs.Seek(-2, SeekOrigin.End);
+                    AddText(fs, "};");
+                    fs.Close();
+                }
+            
+        }
+        // Encoding function Obtained from Microsoft Learning: (https://learn.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-7.0)
+        private static void AddText(FileStream fs, string value)
+        {
+            byte[] info = new UTF8Encoding(true).GetBytes(value);
+            fs.Write(info, 0, info.Length);
+        }
+
+        private void GameScreen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
