@@ -143,6 +143,7 @@ namespace carrot_game
             this.btnLoadGame.TabIndex = 3;
             this.btnLoadGame.Text = "Load Game";
             this.btnLoadGame.UseVisualStyleBackColor = true;
+            this.btnLoadGame.Click += new System.EventHandler(this.btnLoadGame_Click);
             this.btnLoadGame.MouseEnter += new System.EventHandler(this.btnHover);
             this.btnLoadGame.MouseLeave += new System.EventHandler(this.btnLeaveHover);
             // 
@@ -226,6 +227,11 @@ namespace carrot_game
             this.Hide();
             bgm.Stop();
             game.Show();
+        }
+
+        private void btnLoadGame_Click(object sender, EventArgs e)
+        {
+            btnContinue_Click(sender, e);
         }
 
 
