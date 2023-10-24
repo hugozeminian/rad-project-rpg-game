@@ -23,14 +23,19 @@ namespace carrot_game
         // Declaring a refresh rate of 30 frames per second [33.33ms] (1000ms / 30)
         public static int fps = 30;
         public static int refreshTime = 1000/fps;
-        public GameScreen(int save)
+
+        public GameScreen()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             Size = new Size(1920, 1080);
-            savePos = save;
             gs = this;
+        }
+        public GameScreen(int save) : this() 
+        {
+            savePos = save;
+            heroCharacter = new Player(save);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -39,12 +44,10 @@ namespace carrot_game
             Refresh();
             // updates the character's position and sprite image.
             heroCharacter.Update();
-
         }
 
         private void InitializeObjects()
         {
-            heroCharacter = new Player();
         }
 
         private void PaintObjects(object sender, PaintEventArgs e)
@@ -84,22 +87,21 @@ namespace carrot_game
 
         private void SaveToFile(int SavePosition)
         {
-            string path = "config.txt";
+            string path = $"save{SavePosition}.txt";
             // This should run only the first time the game is closed, if the user hasn't manually saved it.
             File.Delete(path);
                 using (FileStream fs = File.Create(path))
                 {
-                    AddText(fs, $"{{save{SavePosition}:{{\n");
                     foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(heroCharacter))
                     {
                     string name = prop.Name;
-                        AddText(fs, $"\"{name}\": \"{prop.GetValue(heroCharacter)}\",\n");
+                    if (prop.PropertyType == typeof(string))
+                            AddText(fs, $"{name}=\"{prop.GetValue(heroCharacter)}\"\n");
+                    else    AddText(fs, $"{name}={prop.GetValue(heroCharacter)}\n");
                     }
                     fs.Seek(-2, SeekOrigin.End);
-                    AddText(fs, "};");
                     fs.Close();
                 }
-            
         }
         // Encoding function Obtained from Microsoft Learning: (https://learn.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-7.0)
         private static void AddText(FileStream fs, string value)

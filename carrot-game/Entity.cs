@@ -24,7 +24,7 @@ namespace carrot_game
         public abstract int PosY { get; set; }
         public abstract int PosZ { get; set; }
         public abstract string Direction { get; set; }
-        public abstract Bitmap[,] SpriteImages { get; set; }
+        public Bitmap[,] SpriteImages;
         public abstract int Carrots { get; set; }
         public abstract int Width {  get; set; }
         public abstract int Height { get; set; }

@@ -1,0 +1,16 @@
+Name="""""""""""""Player"""""""""""""
+MaxHealthPoints=10
+CurrentHealthPoints=10
+ExperiencePoints=0
+Attack=1
+Defense=0
+Speed=5
+PosX=425
+PosY=575
+PosZ=0
+Direction=""left""
+ImgPack=""""""""""""""""""""""""""
+Carrots=0
+Height=128
+Width=128
+FrameCounter=0

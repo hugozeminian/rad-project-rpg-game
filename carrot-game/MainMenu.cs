@@ -126,6 +126,7 @@ namespace carrot_game
             this.btnContinue.TabIndex = 4;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             this.btnContinue.MouseEnter += new System.EventHandler(this.btnHover);
             this.btnContinue.MouseLeave += new System.EventHandler(this.btnLeaveHover);
             // 
@@ -213,7 +214,15 @@ namespace carrot_game
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-           Form game = new GameScreen(1);
+           Form game = new GameScreen();
+            this.Hide();
+            bgm.Stop();
+            game.Show();
+        }
+
+        private void btnContinue_Click(object sender, EventArgs e)
+        {
+            Form game = new GameScreen(1);
             this.Hide();
             bgm.Stop();
             game.Show();
