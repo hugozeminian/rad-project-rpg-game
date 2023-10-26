@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WhiteBunny.cs" />
     <Compile Include="GameScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,8 +236,12 @@
   <ItemGroup>
     <None Include="bin\Debug\res\image\entity\character\front1.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\WhiteBunny1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhiteBunny2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

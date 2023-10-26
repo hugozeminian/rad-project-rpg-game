@@ -17,6 +17,8 @@ namespace carrot_game
     public partial class GameScreen : Form
     {
         Player heroCharacter = new Player();
+        WhiteBunny m = new WhiteBunny();
+
         public int savePos;
         public GameScreen gs; 
 
@@ -44,6 +46,12 @@ namespace carrot_game
             Refresh();
             // updates the character's position and sprite image.
             heroCharacter.Update();
+            if (Monster.Counter == 0)
+            m = new WhiteBunny();
+            m.FollowPlayer(heroCharacter);
+            m.Update();
+            
+            
         }
 
         private void InitializeObjects()
@@ -55,8 +63,10 @@ namespace carrot_game
             // Create a Graphics object to draw on the form
             Graphics g = e.Graphics;
 
-                // Draw the image at the character's position (PosX, PosY)
-                g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height);
+            // Draw the image at the character's position (PosX, PosY)
+            g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height); 
+
+            g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
         }
 
         private void GameScreen_Load(object sender, EventArgs e)
