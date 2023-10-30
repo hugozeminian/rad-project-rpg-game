@@ -17,7 +17,7 @@ namespace carrot_game
     public partial class GameScreen : Form
     {
         Player heroCharacter = new Player();
-        WhiteBunny m = new WhiteBunny();
+        Monster m = new WhiteBunny();
 
         public int savePos;
         public GameScreen gs; 
