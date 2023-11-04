@@ -19,12 +19,16 @@ namespace carrot_game
         // Declaring a refresh rate of 30 frames per second [33.33ms] (1000ms / 30)
         public static int fps = 30;
         public static int refreshTime = 1000/fps;
+
+        Audio bgm = new Audio();
+
         public GameScreen()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             Size = new Size(1920, 1080);
+            bgm.playAudioBackgroud(bgm.audioBackgroundPhase1);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
