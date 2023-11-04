@@ -33,8 +33,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.2.2.1\lib\net472\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Asio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Asio.2.2.1\lib\netstandard2.0\NAudio.Asio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Core.2.2.1\lib\netstandard2.0\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Midi, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Midi.2.2.1\lib\netstandard2.0\NAudio.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Wasapi.2.2.1\lib\netstandard2.0\NAudio.Wasapi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinForms, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.WinForms.2.2.1\lib\net472\NAudio.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinMM, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.WinMM.2.2.1\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +79,13 @@
     <Compile Include="GameScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GameScreen.Designer.cs">
+      <DependentUpon>GameScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Audio.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Entity.cs" />
@@ -61,11 +98,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GameScreen.resx">
+      <DependentUpon>GameScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GameScreen.resx">
-      <DependentUpon>GameScreen.cs</DependentUpon>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -77,6 +117,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,6 +152,216 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\res\image\Main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\front2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottom_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottom_WaterTop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottomLeft_WaterTopRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottomRight_WaterTopLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassLeft_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassLeft_WaterRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassRight_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassRight_WaterLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTop_WaterAround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTop_WaterBottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTopLeft_WaterBottomRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTopRight_WaterBottomLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\water5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\prop\grass.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\BunnyFrontWalk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\left1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\left2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\left3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\left4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\right1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\right2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\right3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\right4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\back1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\back2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\back3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\back4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\back5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\back6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\front1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\bad_boss.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\down_tempo.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\fast.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\fast2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\game_menu.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\menu.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\menu_inverted.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\menu_outside.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\menu_slow.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\menu_strings.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\sound\bgm\up_down.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hero-walking-grass-side.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bad_boss.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_tempo.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game_menu.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_inverted.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_outside.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_slow.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_strings.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_down.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

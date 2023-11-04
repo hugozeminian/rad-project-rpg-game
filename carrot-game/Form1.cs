@@ -18,6 +18,8 @@ namespace carrot_game
     /// </summary>
     public partial class FormIntro : Form
     {
+        // Reads from config.ini
+        public static bool skipIntro = false;
         public FormIntro()
         {
             InitializeComponent();
@@ -31,7 +33,9 @@ namespace carrot_game
 
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+
             mediaIntro.Ctlcontrols.play();
+
 
             // Set this form to fullscreen 1920x1080 -
             // ToDO - Add exception handling if the display doesn't support chosen resolution.

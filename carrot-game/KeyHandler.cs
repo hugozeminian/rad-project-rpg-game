@@ -10,14 +10,50 @@ namespace carrot_game
     /// <summary>
     /// Handles keyboard inputs. Arrows and ASWD are used to move the caracter. E is used to interact. Spacebar is used to attack. Holding shift while walking makes the character run.
     /// </summary>
-    class KeyHandler
+    static class KeyHandler
     {
-        // This class has to be instantiated in the Main Method. It will constantly be running.
-        // Use a Switch to call different actions based on which screen we are currently on.
-        // Example: if current screen = main menu, up and down will move between the options
-        // If we are in game, up and down should move the character.
 
+        // Use this method to assign actions or behaviours when a key is pressed down.
+        public static void HandleKeyDown(KeyEventArgs e, Player p)
+        {
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            {
+                p.UpPressed = true;
+            }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            {
+                p.DownPressed = true;
+            }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            {
+                p.LeftPressed = true;
+            }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            {
+                p.RightPressed = true;
+            }
+        }
 
-        // This is the line of code I added
+        // Use this method to assign actions or behaviours when a key is pressed down.
+        public static void HandleKeyRelease(KeyEventArgs e, Player p)
+        {
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            {
+                p.UpPressed = false;
+            }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            {
+                p.DownPressed = false;
+            }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            {
+                p.LeftPressed = false;
+            }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            {
+                p.RightPressed = false;
+            }
+        }
+
     }
 }

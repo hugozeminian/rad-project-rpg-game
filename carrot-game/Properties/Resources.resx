@@ -121,4 +121,154 @@
   <data name="Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\image\Main.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="front2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\front2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\grass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grass1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\prop\grass.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassBottomLeft_WaterTopRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassBottomLeft_WaterTopRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassBottomRight_WaterTopLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassBottomRight_WaterTopLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassBottom_WaterAround" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassBottom_WaterAround.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassBottom_WaterTop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassBottom_WaterTop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassLeft_WaterAround" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassLeft_WaterAround.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassLeft_WaterRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassLeft_WaterRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassRight_WaterAround" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassRight_WaterAround.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassRight_WaterLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassRight_WaterLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassTopLeft_WaterBottomRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassTopLeft_WaterBottomRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassTopRight_WaterBottomLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassTopRight_WaterBottomLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassTop_WaterAround" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassTop_WaterAround.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrassTop_WaterBottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\GrassTop_WaterBottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\shadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\wall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\water1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\water2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\water3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\water4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\tiles\water5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\back1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\back2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\back3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\back4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\back5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\back6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BunnyFrontWalk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\BunnyFrontWalk.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="front1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\front1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\left1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\left2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\left3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\left4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\right1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\right2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\right3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\image\entity\character\right4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bad_boss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bad_boss.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="down_tempo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down_tempo.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fast.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fast2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fast2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="game_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game_menu.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hero_walking_grass_side" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hero-walking-grass-side.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_inverted.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_outside" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_outside.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_slow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_slow.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="menu_strings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu_strings.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="up_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\up_down.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

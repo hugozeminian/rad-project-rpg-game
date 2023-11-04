@@ -9,7 +9,7 @@ namespace carrot_game
     /// <summary>
     /// A monster is a computer-controlled entity that damages the player when they collide.
     /// </summary>
-    class Monster : Entity
+    class Monster //: Entity
     {
         // toDo
     }
