@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\carrot-game",
-    "\\carrot-game\\Resources"
+    "\\carrot-game"
   ],
-  "SelectedNode": "\\carrot-game\\carrot-game.sln",
+  "SelectedNode": "\\carrot-game\\KeyHandler.cs",
   "PreviewInSolutionExplorer": false
 }
