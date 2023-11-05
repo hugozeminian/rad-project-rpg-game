@@ -1,16 +1,29 @@
 Name="Player"
-MaxHealthPoints=10
+MaxHealthPoints=0
 CurrentHealthPoints=10
 ExperiencePoints=0
+ExpToNextLevel=100
+Level=1
 Attack=1
 Defense=0
 Speed=4
+<<<<<<< HEAD
 PosX=568
 PosY=496
 PosZ=0
 Direction="right"
+=======
+PosX=1044
+PosY=608
+PosZ=0
+Direction="left"
+>>>>>>> 5129139c0f9bf8e7fe0a21103e085fa9c4ff2d1a
 ImgPack=""
 Carrots=0
 Height=128
 Width=128
+<<<<<<< HEAD
 FrameCounter=7
+=======
+FrameCounter=4
+>>>>>>> 5129139c0f9bf8e7fe0a21103e085fa9c4ff2d1a

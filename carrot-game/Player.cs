@@ -13,39 +13,31 @@ namespace carrot_game
     /// </summary>
     class Player : Entity
     {
-        // Player's name.
         public override string Name { get; set; } = "Player";
-        // Player's health points.
-        public override int MaxHealthPoints { get; set; } = 10;
+        public override int MaxHealthPoints { get; set; }
         public override int CurrentHealthPoints { get; set; } = 10;
-        // Player's experience points.
         public override int ExperiencePoints { get; set; } = 0;
-        // Player's attack power.
+        public int ExpToNextLevel { get; set; } = 100;
+
+        public int Level { get; set; } = 1;
         public override int Attack { get; set; } = 1;
-        // Player's Defense points.
         public override int Defense { get; set; } = 0;
-        // Player's speed.
         public override int Speed { get; set; } = 5;
-        // Player's position in the X axis.
         public override int PosX { get; set; } = 100;
-        // Player's position in the Y axis.
         public override int PosY { get; set; } = 100;
-        // Player's position in the Z axis.
         public override int PosZ { get; set; } = 0;
-        // Player's sprite collection to animate movement:
         public override string Direction {get; set; } = "down";
-        // A 2D array, each level corresponding to a direction and their respective images:
-        // [up[], down[], left[], right[]]
+        // This is a placeholder to receive new outfits in the future:
         public string ImgPack { get; set; } = "";
 
+        // A 2D array, each level corresponding to a direction and their respective images:
+        // [up[], down[], left[], right[]]
         public Bitmap[,] SpriteImages;
 
         public Bitmap CurrentSprite;
-        // Player's quantity of owned carrots.
         public override int Carrots { get; set; } = 0;
         // Player character's size, in pixels.
         public override int Height { get; set; } = 128;
-        // Player character's size, in pixels.
         public override int Width { get; set; } = 128;
 
         // Controls the current sprite image, to avoid rapidly changing images.
@@ -74,7 +66,7 @@ namespace carrot_game
             CurrentSprite = Properties.Resources.front1;
         }
 
-        // This constructor is used to Load a character from a save file:
+        // This constructor is used to Load a character from a save file, given the save slot number:
         public Player(int save)
         {
             List<string> lines = new List<string>();

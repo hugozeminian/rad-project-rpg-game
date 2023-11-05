@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WhiteBunny.cs" />
     <Compile Include="GameScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,7 +268,9 @@
   <ItemGroup>
     <None Include="bin\Debug\res\image\entity\character\front1.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="bin\Debug\res\sound\bgm\bad_boss.wav" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +362,12 @@
     <None Include="Resources\up_down.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+=======
+    <None Include="Resources\WhiteBunny1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhiteBunny2.png" />
+>>>>>>> 5129139c0f9bf8e7fe0a21103e085fa9c4ff2d1a
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
