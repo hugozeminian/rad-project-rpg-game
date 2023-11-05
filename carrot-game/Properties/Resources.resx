@@ -235,7 +235,7 @@
   <data name="right4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\image\entity\character\right4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-<<<<<<< HEAD
+
   <data name="bad_boss" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bad_boss.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -271,12 +271,11 @@
   </data>
   <data name="up_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\up_down.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-=======
+  </data>
   <data name="WhiteBunny1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhiteBunny1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WhiteBunny2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhiteBunny2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
->>>>>>> 5129139c0f9bf8e7fe0a21103e085fa9c4ff2d1a
   </data>
 </root>
