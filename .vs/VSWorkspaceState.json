@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
+<<<<<<< HEAD
     "",
     "\\carrot-game"
   ],
   "SelectedNode": "\\carrot-game\\WhiteBunny.cs",
+=======
+    ""
+  ],
+>>>>>>> 346314b5003fcd9e818b52dc26f7b0c19889ea15
   "PreviewInSolutionExplorer": false
 }

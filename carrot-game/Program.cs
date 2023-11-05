@@ -16,9 +16,13 @@ namespace carrot_game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
             Application.Run(new FormIntro());
             Application.Run(new MainMenu());
 
+=======
+            Application.Run(new GameScreen());
+>>>>>>> 346314b5003fcd9e818b52dc26f7b0c19889ea15
             // initialize a KeyHandler
             // initialize GameScreen
             // Create a player character
