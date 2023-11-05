@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace carrot_game
     {
 
         // Use this method to assign actions or behaviours when a key is pressed down.
-        public static void HandleKeyDown(KeyEventArgs e, Player p)
+        public static void HandleKeyDown(KeyEventArgs e, Player p, GameScreen g)
         {
             if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
             {
@@ -32,10 +33,14 @@ namespace carrot_game
             {
                 p.RightPressed = true;
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                g.Close();
+            }
         }
 
         // Use this method to assign actions or behaviours when a key is pressed down.
-        public static void HandleKeyRelease(KeyEventArgs e, Player p)
+        public static void HandleKeyRelease(KeyEventArgs e, Player p, GameScreen g)
         {
             if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
             {

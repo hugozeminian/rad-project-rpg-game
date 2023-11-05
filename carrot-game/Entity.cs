@@ -14,7 +14,8 @@ namespace carrot_game
     abstract class Entity
     {
         public abstract string Name { get; set; }
-        public abstract int HealthPoints { get; set; }
+        public abstract int MaxHealthPoints { get; set; }
+        public abstract int CurrentHealthPoints { get; set; }
         public abstract int ExperiencePoints { get; set; }
         public abstract int Attack { get; set; }
         public abstract int Speed { get; set; }
@@ -23,7 +24,7 @@ namespace carrot_game
         public abstract int PosY { get; set; }
         public abstract int PosZ { get; set; }
         public abstract string Direction { get; set; }
-        public abstract Bitmap[,] SpriteImages { get; set; }
+        public Bitmap[,] SpriteImages;
         public abstract int Carrots { get; set; }
         public abstract int Width {  get; set; }
         public abstract int Height { get; set; }

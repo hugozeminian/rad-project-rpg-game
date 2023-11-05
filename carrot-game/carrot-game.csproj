@@ -157,9 +157,6 @@
     <None Include="bin\Debug\res\image\entity\character\front2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Image1.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="bin\Debug\res\image\shadow.png" />
   </ItemGroup>
   <ItemGroup>

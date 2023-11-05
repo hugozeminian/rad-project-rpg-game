@@ -1,6 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace carrot_game
 {
@@ -12,7 +16,8 @@ namespace carrot_game
         // Player's name.
         public override string Name { get; set; } = "Player";
         // Player's health points.
-        public override int HealthPoints { get; set; } = 1;
+        public override int MaxHealthPoints { get; set; } = 10;
+        public override int CurrentHealthPoints { get; set; } = 10;
         // Player's experience points.
         public override int ExperiencePoints { get; set; } = 0;
         // Player's attack power.
@@ -31,8 +36,11 @@ namespace carrot_game
         public override string Direction {get; set; } = "down";
         // A 2D array, each level corresponding to a direction and their respective images:
         // [up[], down[], left[], right[]]
-        public override Bitmap[,] SpriteImages { get; set; }
-        public Bitmap CurrentSprite { get; set; }
+        public string ImgPack { get; set; } = "";
+
+        public Bitmap[,] SpriteImages;
+
+        public Bitmap CurrentSprite;
         // Player's quantity of owned carrots.
         public override int Carrots { get; set; } = 0;
         // Player character's size, in pixels.
@@ -57,13 +65,52 @@ namespace carrot_game
         public Player()
         {
             Name = "Player";
-            Speed = 5;
+            Speed = 4;
             PosX = 100; // ToDo - Change to middle of the screen
             PosY = 100; // ToDo - Change to middle of the screen
             Width = 128;
             Height = 128;
-            SpriteImages = GetPlayerImages("");
+            SpriteImages = GetPlayerImages(ImgPack);
             CurrentSprite = Properties.Resources.front1;
+        }
+
+        // This constructor is used to Load a character from a save file:
+        public Player(int save)
+        {
+            List<string> lines = new List<string>();
+
+            using (StreamReader sr = new StreamReader(File.OpenRead($"save{save}.txt")))
+            {
+                while (sr.EndOfStream == false)
+                {
+                    string line = sr.ReadLine();
+                    if (line != null)
+                        lines.Add(line);
+                    else continue;
+                }
+                sr.Close();
+
+                // This obtains the list of properties from 'this' object (the instance of Player)
+                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
+
+                // for every line of our save-file
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    // We search the properties list using our property name, obtained from the save file.
+                    PropertyDescriptor myProperty = properties.Find($"{lines[i].Split('=')[0]}", false);
+
+                    // If it's a string, we can use the text file to directly assign the value:
+                    if (myProperty.PropertyType == typeof(string))
+                    myProperty.SetValue(this, lines[i].Split('=')[1]);
+
+                    // if it's not a string, then it's an int value, and we must parse the string to int:
+                    else
+                    myProperty.SetValue(this, Int32.Parse(lines[i].Split('=')[1]));
+                }
+                // Load the corresponding images
+                CurrentSprite = Properties.Resources.front1; // ToDo this will be displaying the default skin before the player moves. --should fix.
+                SpriteImages = GetPlayerImages(ImgPack);
+            }
         }
 
         // Changes the character's name.
