@@ -16,8 +16,13 @@ namespace carrot_game
 {
     public partial class GameScreen : Form
     {
+        // Define constants for the screen width and height
+        private const int ScreenWidth = 1920;
+        private const int ScreenHeight = 1080;
+
         Player heroCharacter = new Player();
         Monster m = new WhiteBunny();
+        Map gameMap = new Map(ScreenWidth, ScreenHeight);
 
         public int savePos;
         public GameScreen gs; 
@@ -33,9 +38,11 @@ namespace carrot_game
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
-            Size = new Size(1920, 1080);
+            Size = new Size(ScreenWidth, ScreenHeight);
             gs = this;
+
             bgm.playAudioBackgroud(bgm.audioBackgroundPhase1);
+
         }
         public GameScreen(int save) : this() 
         {
@@ -57,10 +64,6 @@ namespace carrot_game
             
         }
 
-        private void InitializeObjects()
-        {
-        }
-
         private void PaintObjects(object sender, PaintEventArgs e)
         {
             // Create a Graphics object to draw on the form
@@ -72,11 +75,21 @@ namespace carrot_game
             g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
         }
 
+        private void PaintMap(object sender, PaintEventArgs e)
+        {
+            List<Bitmap> grassSprites = gameMap.GetGrassSprites();
+            List<Point> grassPositions = gameMap.GetGrassPositions();
+
+            for (int i = 0; i < Math.Min(grassSprites.Count, grassPositions.Count); i++)
+            {
+                e.Graphics.DrawImage(grassSprites[i], grassPositions[i]);
+            }
+        }
+
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            InitializeObjects();
-
             // Add a Paint event handler
+            this.Paint += new PaintEventHandler(this.PaintMap);
             this.Paint += new PaintEventHandler(this.PaintObjects);
 
             // Start the timer for redrawing
