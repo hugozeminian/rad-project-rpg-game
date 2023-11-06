@@ -44,7 +44,6 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\Interop
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\AxInterop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot-game.csproj.ResolveComReference.cache
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot_game.GameScreen.resources
-C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot_game.FormIntro.resources
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot_game.MainMenu.resources
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot_game.Properties.Resources.resources
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot-game.csproj.GenerateResource.cache
@@ -84,3 +83,54 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resourc
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\menu_slow.wav
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\menu_strings.wav
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\up_down.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.AssemblyReference.cache
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.SuggestedBindingRedirects.cache
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\Interop.WMPLib.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\AxInterop.WMPLib.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.ResolveComReference.cache
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot_game.GameScreen.resources
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot_game.FormIntro.resources
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot_game.MainMenu.resources
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot_game.Properties.Resources.resources
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.GenerateResource.cache
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.CoreCompileInputs.cache
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.exe
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.pdb
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\hero-walking-grass-side.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\bad_boss.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\down_tempo.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\fast.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\fast2.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\game_menu.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\menu.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\menu_inverted.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\menu_outside.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\menu_slow.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\menu_strings.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Resources\up_down.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\carrot-game.exe.config
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\carrot-game.exe
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\carrot-game.pdb
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Asio.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Core.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Midi.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Wasapi.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.WinForms.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.WinMM.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\System.Security.AccessControl.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\System.Security.Principal.Windows.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Asio.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Core.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Midi.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.Wasapi.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.WinForms.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\NAudio.WinMM.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\System.Security.AccessControl.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\System.Security.Principal.Windows.xml
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Interop.WMPLib.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\AxInterop.WMPLib.dll
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.CopyComplete

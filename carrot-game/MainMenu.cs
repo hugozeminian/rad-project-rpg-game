@@ -24,6 +24,8 @@ namespace carrot_game
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private AxWMPLib.AxWindowsMediaPlayer mediaIntro;
+        private Timer timer;
         Audio bgm = new Audio();
         
 
@@ -53,13 +55,18 @@ namespace carrot_game
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.btnExit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnNewGame = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnLoadGame = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
+            this.mediaIntro = new AxWMPLib.AxWindowsMediaPlayer();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
@@ -163,12 +170,26 @@ namespace carrot_game
             this.btnOptions.MouseEnter += new System.EventHandler(this.btnHover);
             this.btnOptions.MouseLeave += new System.EventHandler(this.btnLeaveHover);
             // 
+            // mediaIntro
+            // 
+            this.mediaIntro.Enabled = true;
+            this.mediaIntro.Location = new System.Drawing.Point(12, 9);
+            this.mediaIntro.Name = "mediaIntro";
+            this.mediaIntro.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mediaIntro.OcxState")));
+            this.mediaIntro.Size = new System.Drawing.Size(204, 190);
+            this.mediaIntro.TabIndex = 3;
+            // 
+            // timer
+            // 
+            this.timer.Interval = 4200;
+            // 
             // MainMenu
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.BackgroundImage = global::carrot_game.Properties.Resources.Main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(852, 480);
+            this.Controls.Add(this.mediaIntro);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -178,6 +199,7 @@ namespace carrot_game
             this.TopMost = true;
             this.Load += new System.EventHandler(this.GameScreen_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +210,30 @@ namespace carrot_game
         {
             this.ClientSize = new System.Drawing.Size(1920, 1080);
 
+            //### PLAYER ###
+            // Assign our media player url to display our intro video
+            mediaIntro.settings.volume = 0;
+            mediaIntro.URL = "res\\video\\IntroCarrot.mp4";
+            mediaIntro.Dock = DockStyle.Fill;
+            mediaIntro.uiMode = "none";
+
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+            mediaIntro.Ctlcontrols.play();
+
+            // Set this form to fullscreen 1920x1080 -
+            // ToDO - Add exception handling if the display doesn't support chosen resolution.
+            // ToDo - Save resolution to a file and read it whenever we open the game
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1920, 1080);
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            mediaIntro.Enabled = false;
+            mediaIntro.Visible = false;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
