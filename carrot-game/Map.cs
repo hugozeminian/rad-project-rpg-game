@@ -7,47 +7,65 @@ namespace carrot_game
 {
     internal class Map
     {
-        private List<Bitmap> grassSprites;
-        private List<Point> grassPositions;
-        private int screenWidth;
-        private int screenHeight;
+ 
+        private List<Image> tileImages;
+        private int tileSize = 64; // Tile size in pixels
+        private int[,] mapData;
 
-        public Map(int width, int height)
+        public Map(int[,] mapData)
         {
-            grassSprites = new List<Bitmap>();
-            grassPositions = new List<Point>();
-            screenWidth = width;
-            screenHeight = height;
-
-            LoadGrassSprites();
+            this.mapData = mapData;
+            LoadTileImages();
         }
 
-        private void LoadGrassSprites()
+        // Load tile images from resources
+        private void LoadTileImages()
         {
-            int grassCount = 5; // Number of grass sprites
-            int margin = 50; // Margin from screen edge
-
-            for (int i = 0; i < grassCount; i++)
+            // Load tile images
+            tileImages = new List<Image>
             {
-                // Calculate grass sprite positions based on screen size and margin
-                int x = (i + 1) * (screenWidth - 2 * margin) / (grassCount + 1) + margin;
-                int y = screenHeight - margin;
+                Properties.Resources.grass1, //1
+            
+                Properties.Resources.water1, //2
+                Properties.Resources.water2, //3
+                Properties.Resources.water3, //4
+                Properties.Resources.water4, //5
+                Properties.Resources.water5, //6
 
-                Bitmap grassBitmap = new Bitmap(Properties.Resources.grass1);
-                grassSprites.Add(grassBitmap);
+                Properties.Resources.GrassBottomLeft_WaterTopRight, //7
+                Properties.Resources.GrassBottomRight_WaterTopLeft, //8
+                Properties.Resources.GrassBottom_WaterAround, //9
+                Properties.Resources.GrassBottom_WaterTop, //10
+                Properties.Resources.GrassLeft_WaterAround, //11
+                Properties.Resources.GrassLeft_WaterRight, //12
+                Properties.Resources.GrassRight_WaterAround, //13
+                Properties.Resources.GrassRight_WaterLeft, //14
+                Properties.Resources.GrassTopLeft_WaterBottomRight, //15
+                Properties.Resources.GrassTopRight_WaterBottomLeft, //16
+                Properties.Resources.GrassTop_WaterAround, //17
+                Properties.Resources.GrassTop_WaterBottom, //18
 
-                grassPositions.Add(new Point(x, y - grassBitmap.Height));
+                Properties.Resources.wall, //19
+            };
+        }
+
+        // Draw the map based on the mapData
+        public void Draw(Graphics g)
+        {
+            for (int row = 0; row < mapData.GetLength(0); row++)
+            {
+                for (int col = 0; col < mapData.GetLength(1); col++)
+                {
+                    int tileType = mapData[row, col];
+                    if (tileType >= 1 && tileType <= tileImages.Count)
+                    {
+                        // Draw the tile image at the specified position
+                        Image tileImage = tileImages[tileType - 1];
+                        g.DrawImage(tileImage, col * tileSize, row * tileSize, tileSize, tileSize);
+                    }
+                }
             }
         }
 
-        public List<Bitmap> GetGrassSprites()
-        {
-            return grassSprites;
-        }
-
-        public List<Point> GetGrassPositions()
-        {
-            return grassPositions;
-        }
     }
 }
