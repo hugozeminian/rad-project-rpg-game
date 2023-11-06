@@ -11,6 +11,8 @@ namespace carrot_game
 {
     class MainMenu : Form
     {
+        private bool skipIntro = true;
+
         private Button btnExit;
         private Button btnOptions;
         private Button btnContinue;
@@ -212,14 +214,17 @@ namespace carrot_game
 
             //### PLAYER ###
             // Assign our media player url to display our intro video
-            mediaIntro.settings.volume = 0;
-            mediaIntro.URL = "res\\video\\IntroCarrot.mp4";
-            mediaIntro.Dock = DockStyle.Fill;
-            mediaIntro.uiMode = "none";
+            if (!skipIntro)
+            {
+                mediaIntro.settings.volume = 0;
+                mediaIntro.URL = "res\\video\\IntroCarrot.mp4";
+                mediaIntro.Dock = DockStyle.Fill;
+                mediaIntro.uiMode = "none";
 
-            timer.Tick += new EventHandler(timer_Tick);
-            timer.Start();
-            mediaIntro.Ctlcontrols.play();
+                timer.Tick += new EventHandler(timer_Tick);
+                timer.Start();
+                mediaIntro.Ctlcontrols.play();
+            }
 
             // Set this form to fullscreen 1920x1080 -
             // ToDO - Add exception handling if the display doesn't support chosen resolution.
