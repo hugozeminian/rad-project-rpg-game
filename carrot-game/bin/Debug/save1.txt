@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-Name="""""""""""""""Player"""""""""""""""
-=======
-Name=""""""""""""""""Player""""""""""""""""
->>>>>>> 5129139c0f9bf8e7fe0a21103e085fa9c4ff2d1a
-MaxHealthPoints=10
+Name=""""""Player""""""
+MaxHealthPoints=0
 CurrentHealthPoints=10
 ExperiencePoints=0
 ExpToNextLevel=100
@@ -11,17 +7,12 @@ Level=1
 Attack=1
 Defense=0
 Speed=5
-PosX=640
-PosY=720
+PosX=835
+PosY=510
 PosZ=0
-<<<<<<< HEAD
-Direction=""right""
-ImgPack=""""""""""""""""""""""""""""""
-=======
-Direction="""right"""
-ImgPack=""""""""""""""""""""""""""""""""
->>>>>>> 5129139c0f9bf8e7fe0a21103e085fa9c4ff2d1a
+Direction=""""right""""
+ImgPack=""""""""""""
 Carrots=0
 Height=128
 Width=128
-FrameCounter=8
+FrameCounter=9

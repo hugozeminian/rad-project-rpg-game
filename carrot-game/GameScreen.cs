@@ -46,7 +46,7 @@ namespace carrot_game
             bgm.playAudioBackgroud(bgm.audioBackgroundPhase1);
 
             CreateMap();
-
+            Program.CurrentScreen = "Game Screen";
         }
         public GameScreen(int save) : this() 
         {
@@ -134,7 +134,9 @@ namespace carrot_game
 
         private void GameScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            bgm.stopAudioBackgroud();
+            MainMenu m = new MainMenu();
+            m.Show();
         }
 
         private void CreateMap()

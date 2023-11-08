@@ -71,34 +71,45 @@ namespace carrot_game
         {
             List<string> lines = new List<string>();
 
-            using (StreamReader sr = new StreamReader(File.OpenRead($"save{save}.txt")))
+            // This obtains the list of properties from 'this' object (the instance of Player)
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
+
+            try
             {
-                while (sr.EndOfStream == false)
+
+                using (StreamReader sr = new StreamReader(File.OpenRead($"save{save}.txt")))
                 {
-                    string line = sr.ReadLine();
-                    if (line != null)
-                        lines.Add(line);
-                    else continue;
+                    while (sr.EndOfStream == false)
+                    {
+                        string line = sr.ReadLine();
+                        if (line != null)
+                            lines.Add(line);
+                        else continue;
+                    }
+                    sr.Close();
+
+
+
+                    // for every line of our save-file
+                    for (int i = 0; i < lines.Count; i++)
+                    {
+                        // We search the properties list using our property name, obtained from the save file.
+                        PropertyDescriptor myProperty = properties.Find($"{lines[i].Split('=')[0]}", false);
+
+                        // If it's a string, we can use the text file to directly assign the value:
+                        if (myProperty.PropertyType == typeof(string))
+                        myProperty.SetValue(this, lines[i].Split('=')[1]);
+
+                        // if it's not a string, then it's an int value, and we must parse the string to int:
+                        else
+                        myProperty.SetValue(this, Int32.Parse(lines[i].Split('=')[1]));
+                    }
+
                 }
-                sr.Close();
-
-                // This obtains the list of properties from 'this' object (the instance of Player)
-                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
-
-                // for every line of our save-file
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    // We search the properties list using our property name, obtained from the save file.
-                    PropertyDescriptor myProperty = properties.Find($"{lines[i].Split('=')[0]}", false);
-
-                    // If it's a string, we can use the text file to directly assign the value:
-                    if (myProperty.PropertyType == typeof(string))
-                    myProperty.SetValue(this, lines[i].Split('=')[1]);
-
-                    // if it's not a string, then it's an int value, and we must parse the string to int:
-                    else
-                    myProperty.SetValue(this, Int32.Parse(lines[i].Split('=')[1]));
-                }
+            } catch (FileNotFoundException fnfEx)
+            {
+            } finally
+            {
                 // Load the corresponding images
                 CurrentSprite = Properties.Resources.front1; // ToDo this will be displaying the default skin before the player moves. --should fix.
                 SpriteImages = GetPlayerImages(ImgPack);

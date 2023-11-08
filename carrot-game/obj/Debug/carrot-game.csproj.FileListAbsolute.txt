@@ -7,7 +7,6 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\car
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.CoreCompileInputs.cache
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.exe
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.pdb
-D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot_game.formIntro.resources
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\Interop.WMPLib.dll
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\AxInterop.WMPLib.dll
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.ResolveComReference.cache
@@ -134,3 +133,36 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\De
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\Interop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\bin\Debug\AxInterop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App - Copy (2)\carrot-game\obj\Debug\carrot-game.csproj.CopyComplete
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\hero-walking-grass-side.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\bad_boss.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\down_tempo.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\fast.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\fast2.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\game_menu.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\menu.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\menu_inverted.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\menu_outside.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\menu_slow.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\menu_strings.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\up_down.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Microsoft.Win32.Registry.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Asio.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Core.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Midi.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Wasapi.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.WinForms.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.WinMM.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\System.Security.AccessControl.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\System.Security.Principal.Windows.dll
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Microsoft.Win32.Registry.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Asio.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Core.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Midi.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.Wasapi.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.WinForms.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAudio.WinMM.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\System.Security.AccessControl.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\System.Security.Principal.Windows.xml
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.CopyComplete

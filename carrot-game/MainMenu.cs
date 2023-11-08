@@ -48,6 +48,7 @@ namespace carrot_game
         {
             InitializeComponent();
             bgm.playAudioBackgroud(bgm.audioMenu);
+            Program.CurrentScreen = "Main Menu";
         }
 
         #region Windows Form Designer generated code
@@ -180,6 +181,7 @@ namespace carrot_game
             this.mediaIntro.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mediaIntro.OcxState")));
             this.mediaIntro.Size = new System.Drawing.Size(204, 190);
             this.mediaIntro.TabIndex = 3;
+            this.mediaIntro.Visible = false;
             // 
             // timer
             // 
@@ -199,23 +201,25 @@ namespace carrot_game
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Carrot-Game";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.GameScreen_Load);
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.FormClosed += new FormClosedEventHandler(Program.FormClosed);
 
         }
         #endregion
 
-        private void GameScreen_Load(object sender, EventArgs e)
+        private void MainMenu_Load(object sender, EventArgs e)
         {
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            ClientSize = new Size(1920, 1080);
 
             //### PLAYER ###
             // Assign our media player url to display our intro video
             if (!skipIntro)
             {
+                mediaIntro.Visible = true;
                 mediaIntro.settings.volume = 0;
                 mediaIntro.URL = "res\\video\\IntroCarrot.mp4";
                 mediaIntro.Dock = DockStyle.Fill;
@@ -229,9 +233,9 @@ namespace carrot_game
             // Set this form to fullscreen 1920x1080 -
             // ToDO - Add exception handling if the display doesn't support chosen resolution.
             // ToDo - Save resolution to a file and read it whenever we open the game
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.Size = new Size(1920, 1080);
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            Size = new Size(1920, 1080);
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -243,7 +247,7 @@ namespace carrot_game
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnOptions_Click(object sender, EventArgs e)
@@ -268,38 +272,22 @@ namespace carrot_game
            bgm.stopAudioBackgroud();
            bgm.Dispose();
            Form game = new GameScreen();
-           this.Hide();
            game.Show();
+           Close();
         }
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            Form game = new GameScreen(1);
-            this.Hide();
             bgm.stopAudioBackgroud();
+            bgm.Dispose();
+            Form game = new GameScreen(1);
             game.Show();
+            Close();
         }
 
         private void btnLoadGame_Click(object sender, EventArgs e)
         {
             btnContinue_Click(sender, e);
         }
-
-
-
-
-        // Create method Draw() that will display one tile of 64x64 pixels on the screen and work from there.
-        // Use a reference text file with a number matrix to create the game world. Example:
-
-        // Grass = 1, water = 2. 
-
-        // 1 1 1 1 1 1
-        // 1 1 1 1 1 1
-        // 1 1 2 2 1 1
-        // 1 1 1 1 1 1
-        // 1 1 1 1 1 1
-
-        // this should create a game screen with a small lake in the middle and grass around it.
-
     }
 }

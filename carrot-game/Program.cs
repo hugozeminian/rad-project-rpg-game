@@ -11,16 +11,26 @@ namespace carrot_game
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        internal static string CurrentScreen = "Main Menu";
+
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            var main = new MainMenu();
+            main.FormClosed += new FormClosedEventHandler(FormClosed);
+            main.Show();
+            Application.Run();
 
             // initialize a KeyHandler
             // initialize GameScreen
             // Create a player character
+        }
+
+        public static void FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.OpenForms.Count == 0) Application.ExitThread();
         }
     }
 }
