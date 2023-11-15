@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -56,6 +57,7 @@ namespace carrot_game
 
         public static bool showBoundingBox = true;
 
+
         public GameScreen()
         {
             InitializeComponent();
@@ -101,6 +103,7 @@ namespace carrot_game
 
         private void PaintObjects(object sender, PaintEventArgs e)
         {
+            Rectangle _pr = new Rectangle(heroCharacter.BoundingBox.Location.X - 5, heroCharacter.BoundingBox.Location.Y + heroCharacter.BoundingBox.Height - 20, heroCharacter.BoundingBox.Width + 10, 25);
             // Create a Graphics object to draw on the form
             Graphics g = e.Graphics;
 
@@ -108,6 +111,8 @@ namespace carrot_game
             DrawMonsters(g, 0);
             
             // Draw our Hero:
+            g.DrawEllipse(Pens.Black, _pr);
+            g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _pr);
             g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height);
             if (showBoundingBox == true)
             {
@@ -206,8 +211,12 @@ namespace carrot_game
 
             foreach (Monster m in Monster.SpawnedMonsters)
             {
+                Rectangle _r = new Rectangle(m.BoundingBox.Location.X - 5, m.BoundingBox.Location.Y + m.BoundingBox.Height - 20, m.BoundingBox.Width + 10, 25);
+
                 if (m.BoundingBox.Bottom >= heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height/2 && pos == 1) // 1 meaning draw on top of player
                 {
+                    g.DrawEllipse(Pens.Black, _r);
+                    g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _r);
                     g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
                     if (showBoundingBox == true)
                     {
@@ -219,9 +228,12 @@ namespace carrot_game
                         g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
                     }
                 }
-                if (m.BoundingBox.Top <= heroCharacter.BoundingBox.Top + heroCharacter.BoundingBox.Height / 2 && pos == 0) // 0 meaning draw under player
+                else if (m.BoundingBox.Top <= heroCharacter.BoundingBox.Top + heroCharacter.BoundingBox.Height / 2 && pos == 0) // 0 meaning draw under player
                 {
+                    g.DrawEllipse(Pens.Black, _r);
+                    g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _r);
                     g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
+
                     if (showBoundingBox == true)
                     {
                         g.DrawRectangle(Pens.Red, m.BoundingBox);
