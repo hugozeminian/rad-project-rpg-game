@@ -40,7 +40,7 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(PosX + Width/4, PosY+ 2*Height / 3, Width/2, Height / 3);
+                return new Rectangle(PosX + Width/3, PosY+ 2*Height / 3, Width/3, Height / 3);
             }
         }
 
@@ -72,10 +72,6 @@ namespace carrot_game
             SpriteImages = GetPlayerImages(ImgPack);
             CurrentSprite = Properties.Resources.front1;
             currentPlayer = this;
-
-            // Debugging features:
-            ShowBoundingBox = true;
-            ShowName = true;
         }
 
         // This constructor is used to Load a character from a save file, given the save slot number:

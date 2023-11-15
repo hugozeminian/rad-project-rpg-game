@@ -17,13 +17,13 @@ namespace carrot_game
 
         // Create AudioFileReader soundGame
         //public AudioFileReader audioIntro;
-        public AudioFileReader audioMenu { get; private set; } = new AudioFileReader("Resources\\menu.wav");
-        public AudioFileReader audioBackgroundPhase1 { get; private set; } = new AudioFileReader("Resources\\up_down.wav");
-        public AudioFileReader audioHeroWalkingInGrass { get; private set; } = new AudioFileReader("Resources\\hero-walking-grass-side.wav");
+        public AudioFileReader AudioMenu { get; private set; } = new AudioFileReader("Resources\\menu.wav");
+        public AudioFileReader AudioBackgroundPhase1 { get; private set; } = new AudioFileReader("Resources\\up_down.wav");
+        public AudioFileReader AudioHeroWalkingInGrass { get; private set; } = new AudioFileReader("Resources\\hero-walking-grass-side.wav");
 
         // Create a WaveOutEvent instance for audio playback
-        private WaveOutEvent waveOutBackground = new WaveOutEvent();
-        private WaveOutEvent waveOutHeroWalkingInGrass = new WaveOutEvent();
+        private WaveOutEvent WaveOutBackground = new WaveOutEvent();
+        private WaveOutEvent WaveOutHeroWalkingInGrass = new WaveOutEvent();
 
         // toDo
 
@@ -32,12 +32,12 @@ namespace carrot_game
 
         //Background music
         private bool isBackgroundAudioLooping = true;
-        public void playAudioBackgroud(AudioFileReader audio)
+        public void PlayAudioBackgroud(AudioFileReader audio)
         {
             audio.Volume = 1.0f;
-            waveOutBackground.Init(audio);
+            WaveOutBackground.Init(audio);
 
-            waveOutBackground.PlaybackStopped += (sender, e) => // Loop
+            WaveOutBackground.PlaybackStopped += (sender, e) => // Loop
             {
                 if (e.Exception != null) 
                 {
@@ -46,29 +46,29 @@ namespace carrot_game
                 else if(isBackgroundAudioLooping)
                 {
                     audio.CurrentTime = TimeSpan.Zero;
-                    waveOutBackground.Play();
+                    WaveOutBackground.Play();
                 }
             };
             isBackgroundAudioLooping = true;
-            waveOutBackground.Play();
+            WaveOutBackground.Play();
         }
-        public void stopAudioBackgroud()
+        public void StopAudioBackgroud()
         {
             isBackgroundAudioLooping = false;
-            waveOutBackground.Stop();
+            WaveOutBackground.Stop();
         }
 
 
         //All disposes
         public void Dispose()
         {
-            waveOutBackground.Dispose();
-            waveOutHeroWalkingInGrass.Dispose();
+            WaveOutBackground.Dispose();
+            WaveOutHeroWalkingInGrass.Dispose();
 
             //audioIntro.Dispose();
-            audioMenu.Dispose();
-            audioBackgroundPhase1.Dispose();
-            audioHeroWalkingInGrass.Dispose();
+            AudioMenu.Dispose();
+            AudioBackgroundPhase1.Dispose();
+            AudioHeroWalkingInGrass.Dispose();
         }
     }
 }

@@ -1,7 +1,7 @@
 ExpToNextLevel=100
 Level=1
 ImgPack=""
-BoundingBox={X=816,Y=629,Width=64,Height=42}
+BoundingBox={X=786,Y=645,Width=42,Height=42}
 Name="Player"
 MaxHealthPoints=10
 CurrentHealthPoints=10
@@ -9,13 +9,13 @@ ExperiencePoints=0
 Attack=1
 Speed=4
 Defense=0
-PosX=784
-PosY=544
+PosX=744
+PosY=560
 PosZ=1
 Direction="right"
 Carrots=0
 Width=128
 Height=128
-ShowBoundingBox=True
-ShowName=True
+ShowBoundingBox=False
+ShowName=False
 FrameCounter=4

@@ -77,7 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICollision.cs" />
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Map.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="WhiteBunny.cs" />
     <Compile Include="GameScreen.cs">
       <SubType>Form</SubType>

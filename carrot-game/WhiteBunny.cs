@@ -10,13 +10,13 @@ namespace carrot_game
 {
     internal class WhiteBunny : Monster
     {
-    public override Rectangle BoundingBox
-    {
-        get
+        public override Rectangle BoundingBox
         {
-            return new Rectangle(PosX, PosY, Width, Height);
+            get
+            {
+                return new Rectangle(PosX + Width / 4, PosY + Height / 2, 2 * Width / 3, Height / 2);
+            }
         }
-    }
         public WhiteBunny() {
             Name = "White Bunny";
             MaxHealthPoints = 5;

@@ -20,9 +20,6 @@ namespace carrot_game
         // Define constants for the screen width and height
         private const int ScreenWidth = 1920;
         private const int ScreenHeight = 1080;
-        private static StringFormat sf = new StringFormat();
-        private Font PlayerNameTag = new Font("Georgia", 14, FontStyle.Bold, GraphicsUnit.Point);
-        private Font MonsterNameTag = new Font("Georgia", 12, GraphicsUnit.Point);
 
         // This sets how much bigger entities are drawn on the GameScreen.
         public static int GlobalScale = 2;
@@ -49,6 +46,16 @@ namespace carrot_game
 
         Audio bgm = new Audio();
 
+        // Declaring the name tag variables:
+        public static bool showPlayerName = true;
+        public static bool showMonsterNames = true;
+
+        private static readonly StringFormat sf = new StringFormat();
+        private readonly Font PlayerNameTag = new Font("Georgia", 14, FontStyle.Bold, GraphicsUnit.Point);
+        private readonly Font MonsterNameTag = new Font("Georgia", 12, GraphicsUnit.Point);
+
+        public static bool showBoundingBox = true;
+
         public GameScreen()
         {
             InitializeComponent();
@@ -57,7 +64,7 @@ namespace carrot_game
             Size = new Size(ScreenWidth, ScreenHeight);
             gs = this;
 
-            bgm.playAudioBackgroud(bgm.audioBackgroundPhase1);
+            bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
 
             CreateMap();
             Program.CurrentScreen = "Game Screen";
@@ -102,11 +109,11 @@ namespace carrot_game
             
             // Draw our Hero:
             g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height);
-            if (P.ShowBoundingBox == true)
+            if (showBoundingBox == true)
             {
                 g.DrawRectangle(new Pen(Color.Magenta, 3f), P.BoundingBox);
             }
-            if (P.ShowName == true)
+            if (showPlayerName == true)
             {
                 Rectangle nameTag = new Rectangle(heroCharacter.PosX, heroCharacter.PosY - 20, heroCharacter.Width, 20);
                 g.DrawString(heroCharacter.Name, PlayerNameTag, Brushes.Black, nameTag, sf);
@@ -172,7 +179,7 @@ namespace carrot_game
 
         private void GameScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
-            bgm.stopAudioBackgroud();
+            bgm.StopAudioBackgroud();
             DisposeOfAssets();
             MainMenu m = new MainMenu();
             m.Show();
@@ -196,16 +203,17 @@ namespace carrot_game
             int nameTagTextGap = 5;
             int nameTagHeight = 20;
             int nameTagMaxWidth = 200;
+
             foreach (Monster m in Monster.SpawnedMonsters)
             {
                 if (m.BoundingBox.Bottom >= heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height/2 && pos == 1) // 1 meaning draw on top of player
                 {
                     g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
-                    if (m.ShowBoundingBox == true)
+                    if (showBoundingBox == true)
                     {
                         g.DrawRectangle(Pens.Red, m.BoundingBox);
                     }
-                    if (m.ShowName == true)
+                    if (showMonsterNames == true)
                     {
                         Rectangle nameTag = new Rectangle(m.PosX - (nameTagMaxWidth - m.Width)/2, m.PosY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
                         g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
@@ -214,11 +222,11 @@ namespace carrot_game
                 if (m.BoundingBox.Top <= heroCharacter.BoundingBox.Top + heroCharacter.BoundingBox.Height / 2 && pos == 0) // 0 meaning draw under player
                 {
                     g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
-                    if (m.ShowBoundingBox == true)
+                    if (showBoundingBox == true)
                     {
                         g.DrawRectangle(Pens.Red, m.BoundingBox);
                     }
-                    if (m.ShowName == true)
+                    if (showMonsterNames == true)
                     {
                             Rectangle nameTag = new Rectangle(m.PosX - (nameTagMaxWidth - m.Width) / 2, m.PosY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
                             g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
