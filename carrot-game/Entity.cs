@@ -13,24 +13,27 @@ namespace carrot_game
     /// </summary>
     abstract class Entity
     {
-        public abstract string Name { get; set; }
-        public abstract int MaxHealthPoints { get; set; }
-        public abstract int CurrentHealthPoints { get; set; }
-        public abstract int ExperiencePoints { get; set; }
-        public abstract int Attack { get; set; }
-        public abstract int Speed { get; set; }
-        public abstract int Defense { get; set; }
-        public abstract int PosX { get; set; }
-        public abstract int PosY { get; set; }
-        public abstract int PosZ { get; set; }
-        public abstract string Direction { get; set; }
+        public string Name { get; set; }
+        public int MaxHealthPoints { get; set; }
+        public int CurrentHealthPoints { get; set; }
+        public int ExperiencePoints { get; set; }
+        public int Attack { get; set; }
+        public int Speed { get; set; }
+        public int Defense { get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+        public int PosZ { get; set; }
+        public string Direction { get; set; }
         public Bitmap[,] SpriteImages;
-        public abstract int Carrots { get; set; }
-        public abstract int Width {  get; set; }
-        public abstract int Height { get; set; }
+        public int Carrots { get; set; }
+        public int Width {  get; set; }
+        public int Height { get; set; }
         public int Sprite = 0;
-
-        public abstract int FrameCounter { get; set; }
+        public bool ShowBoundingBox {get;set;} = false;
+        public bool ShowName { get;set;} = false;
+        public abstract Rectangle BoundingBox { get;}        
+        
+        public int FrameCounter { get; set; }
 
         public abstract void Move(int x, int y, int z);
 

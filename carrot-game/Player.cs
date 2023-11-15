@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
 
@@ -11,40 +12,37 @@ namespace carrot_game
     /// <summary>
     /// Player Character - 
     /// </summary>
-    class Player : Entity
+    class Player : Entity, ICollision
     {
-        public override string Name { get; set; } = "Player";
-        public override int MaxHealthPoints { get; set; }
-        public override int CurrentHealthPoints { get; set; } = 10;
-        public override int ExperiencePoints { get; set; } = 0;
+        // Defines the current player instance:
+        public static Player currentPlayer;
         public int ExpToNextLevel { get; set; } = 100;
-
         public int Level { get; set; } = 1;
-        public override int Attack { get; set; } = 1;
-        public override int Defense { get; set; } = 0;
-        public override int Speed { get; set; } = 5;
-        public override int PosX { get; set; } = 100;
-        public override int PosY { get; set; } = 100;
-        public override int PosZ { get; set; } = 0;
-        public override string Direction {get; set; } = "down";
+
         // This is a placeholder to receive new outfits in the future:
         public string ImgPack { get; set; } = "";
 
         // A 2D array, each level corresponding to a direction and their respective images:
         // [up[], down[], left[], right[]]
-        public Bitmap[,] SpriteImages;
 
         public Bitmap CurrentSprite;
-        public override int Carrots { get; set; } = 0;
-        // Player character's size, in pixels.
-        public override int Height { get; set; } = 128;
-        public override int Width { get; set; } = 128;
 
         // Controls the current sprite image, to avoid rapidly changing images.
-        public override int FrameCounter { get; set; } = 0;
+        public bool CanMoveUp = true;
+        public bool CanMoveRight = true;
+        public bool CanMoveDown = true;
+        public bool CanMoveLeft = true;
 
         // Controls wether or not action keys are pressed.
         public bool UpPressed, DownPressed, LeftPressed, RightPressed;
+
+        public override Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle(PosX + Width/4, PosY+ 2*Height / 3, Width/2, Height / 3);
+            }
+        }
 
         // Move the character on X, Y and Z axis.
         public override void Move(int x, int y, int z)
@@ -57,17 +55,31 @@ namespace carrot_game
         public Player()
         {
             Name = "Player";
+            MaxHealthPoints = 10;
+            CurrentHealthPoints = MaxHealthPoints;
+            ExperiencePoints = 0;
+            Attack = 1;
+            Defense = 0;
             Speed = 4;
             PosX = 100; // ToDo - Change to middle of the screen
             PosY = 100; // ToDo - Change to middle of the screen
-            Width = 128;
-            Height = 128;
+            PosZ = 1;
+            Direction = "down";
+            Carrots = 0;
+            Height = 64 * GameScreen.GlobalScale;
+            Width = 64 * GameScreen.GlobalScale;
+            FrameCounter = 0;
             SpriteImages = GetPlayerImages(ImgPack);
             CurrentSprite = Properties.Resources.front1;
+            currentPlayer = this;
+
+            // Debugging features:
+            ShowBoundingBox = true;
+            ShowName = true;
         }
 
         // This constructor is used to Load a character from a save file, given the save slot number:
-        public Player(int save)
+        public Player(int save) : base()
         {
             List<string> lines = new List<string>();
 
@@ -76,7 +88,6 @@ namespace carrot_game
 
             try
             {
-
                 using (StreamReader sr = new StreamReader(File.OpenRead($"save{save}.txt")))
                 {
                     while (sr.EndOfStream == false)
@@ -88,27 +99,42 @@ namespace carrot_game
                     }
                     sr.Close();
 
-
-
                     // for every line of our save-file
                     for (int i = 0; i < lines.Count; i++)
                     {
+                        List<string> prop = lines[i].Split('=').ToList();
+                        string propName = prop[0];
+                        prop.RemoveAt(0);
+                        string propValue = string.Join("=", prop);
+
                         // We search the properties list using our property name, obtained from the save file.
-                        PropertyDescriptor myProperty = properties.Find($"{lines[i].Split('=')[0]}", false);
+                        PropertyDescriptor myProperty = properties.Find($"{propName}", false);
 
-                        // If it's a string, we can use the text file to directly assign the value:
-                        if (myProperty.PropertyType == typeof(string))
-                        myProperty.SetValue(this, lines[i].Split('=')[1]);
+                            // If it's a string, we can use the text file to directly assign the value:
+                            if (myProperty.PropertyType == typeof(string))
+                            myProperty.SetValue(this, propValue);
 
-                        // if it's not a string, then it's an int value, and we must parse the string to int:
-                        else
-                        myProperty.SetValue(this, Int32.Parse(lines[i].Split('=')[1]));
+                            // if it's not a string, we must parse the string:
+                            else if (myProperty.PropertyType == typeof(int))
+                            myProperty.SetValue(this, Int32.Parse(propValue));
+                            else if (myProperty.PropertyType == typeof(bool))
+                            myProperty.SetValue(this, Boolean.Parse(propValue));
+                            else if (myProperty.PropertyType == typeof(Rectangle))
+                            {
+                            int x = Int32.Parse(propValue.Split(',')[0].Split('=')[1]);
+                            int y = Int32.Parse(propValue.Split(',')[1].Split('=')[1]);
+                            int w = Int32.Parse(propValue.Split(',')[2].Split('=')[1]);
+                            int h = Int32.Parse(propValue.Split(',')[3].Split('=')[1].Replace("}", ""));
+                            myProperty.SetValue(this, new Rectangle(x,y,w,h));
+                        }
                     }
-
                 }
             } catch (FileNotFoundException fnfEx)
             {
-            } finally
+                // Do nothing with the exception for now
+            } 
+
+            finally
             {
                 // Load the corresponding images
                 CurrentSprite = Properties.Resources.front1; // ToDo this will be displaying the default skin before the player moves. --should fix.
@@ -128,22 +154,22 @@ namespace carrot_game
             // if movement keys are pressed, move and change direction
             if (UpPressed || DownPressed || LeftPressed || RightPressed)
             {
-                if (UpPressed)
+                if (UpPressed && CanMoveUp)
                 {
                     Move(0, -Speed, 0);
                     Direction = "up";
                 }
-                if (DownPressed)
+                if (DownPressed && CanMoveDown)
                 {
                     Move(0, Speed, 0);
                     Direction = "down";
                 }
-                if (LeftPressed)
+                if (LeftPressed && CanMoveLeft)
                 {
                     Move(-Speed, 0, 0);
                     Direction = "left";
                 }
-                if (RightPressed)
+                if (RightPressed && CanMoveRight)
                 {
                     Move(Speed, 0, 0);
                     Direction = "right";
@@ -223,13 +249,69 @@ namespace carrot_game
             };
         }
 
+        public bool IsColliding(Entity e)
+        {
+            return  BoundingBox.Left <= e.BoundingBox.Right &&
+                    BoundingBox.Right >= e.BoundingBox.Left &&
+                    BoundingBox.Top <= e.BoundingBox.Bottom &&
+                    BoundingBox.Bottom >= e.BoundingBox.Top;
+        }
+
+        public void AllowMovement()
+        {
+            CanMoveDown = true;
+            CanMoveUp = true;
+            CanMoveLeft = true;
+            CanMoveRight = true;
+        }
+
+        public void RestrictMovement(Entity otherEntity)
+        {
+            // Check if there is collision to Top, checking the inner top-half of bounding box.
+            if (BoundingBox.Top + BoundingBox.Height/2 >= otherEntity.BoundingBox.Bottom)
+            {
+                if (BoundingBox.Left <= otherEntity.BoundingBox.Right &&
+                    BoundingBox.Right >= otherEntity.BoundingBox.Left)
+                    CanMoveUp = false;
+                else
+                    CanMoveUp = true;
+            }
+            // Check if there is collision to the Right, checking the inner half-right of bounding box.
+            if (BoundingBox.Right - BoundingBox.Width/2 <= otherEntity.BoundingBox.Left)
+            {
+                if (BoundingBox.Top <= otherEntity.BoundingBox.Bottom &&
+                    BoundingBox.Bottom >= otherEntity.BoundingBox.Top)
+                    CanMoveRight = false;
+                else
+                    CanMoveRight = true;
+            }
+            // Check if there is collision Down, checking the inner bottom-half of bounding box.
+            if (BoundingBox.Bottom - BoundingBox.Height/2 >= otherEntity.BoundingBox.Top)
+            {
+                if (BoundingBox.Left <= otherEntity.BoundingBox.Right &&
+                    BoundingBox.Right >= otherEntity.BoundingBox.Left)
+                    CanMoveDown = false;
+                else
+                    CanMoveDown = true;
+            }
+            // Check if there is collision to the left
+            if (BoundingBox.Left + BoundingBox.Width/2 >= otherEntity.BoundingBox.Right)
+            {
+                if (BoundingBox.Top <= otherEntity.BoundingBox.Bottom &&
+                    BoundingBox.Bottom >= otherEntity.BoundingBox.Top)
+                    CanMoveLeft = false;
+                else
+                    CanMoveLeft = true;
+            }
+        }
+        
         // Add method LevelUp
 
-        // add method gain exp
+            // add method gain exp
 
-        // add method attack
+            // add method attack
 
-        // add method interact
-        
+            // add method interact
+
     }
 }

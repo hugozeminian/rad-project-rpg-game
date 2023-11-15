@@ -19,8 +19,6 @@ namespace carrot_game
         private Button btnLoadGame;
         private Button btnNewGame;
         private Panel panel1;
-        private Player newPlayer;
-
 
         /// <summary>
         /// Required designer variable.
@@ -280,7 +278,7 @@ namespace carrot_game
         {
             bgm.stopAudioBackgroud();
             bgm.Dispose();
-            Form game = new GameScreen(1);
+            Form game = new GameScreen(0);
             game.Show();
             Close();
         }

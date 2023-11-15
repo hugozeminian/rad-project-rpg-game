@@ -20,10 +20,24 @@ namespace carrot_game
         // Define constants for the screen width and height
         private const int ScreenWidth = 1920;
         private const int ScreenHeight = 1080;
+        private static StringFormat sf = new StringFormat();
+        private Font PlayerNameTag = new Font("Georgia", 14, FontStyle.Bold, GraphicsUnit.Point);
+        private Font MonsterNameTag = new Font("Georgia", 12, GraphicsUnit.Point);
+
+        // This sets how much bigger entities are drawn on the GameScreen.
+        public static int GlobalScale = 2;
 
         private Map gameMap;
 
         Player heroCharacter = new Player();
+        internal static Player P
+        {
+            get
+            {
+                return Player.currentPlayer;
+            }
+        }
+
         Monster m = new WhiteBunny();
 
         public int savePos;
@@ -47,6 +61,10 @@ namespace carrot_game
 
             CreateMap();
             Program.CurrentScreen = "Game Screen";
+
+            // Adjusting name tag text and alignment:
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
         }
         public GameScreen(int save) : this() 
         {
@@ -58,12 +76,20 @@ namespace carrot_game
         {
             // Refresh redraws everything in the form.
             Refresh();
+
+            // Deal with collisions
+            heroCharacter.AllowMovement();
+            foreach (var m in Monster.SpawnedMonsters)
+            {
+                if (heroCharacter.IsColliding(m))
+                    heroCharacter.RestrictMovement(m);
+            }
             // updates the character's position and sprite image.
             heroCharacter.Update();
             if (Monster.Counter == 0)
             m = new WhiteBunny();
             m.FollowPlayer(heroCharacter);
-            m.Update();
+            UpdateMonsters(Monster.SpawnedMonsters);
         }
 
         private void PaintObjects(object sender, PaintEventArgs e)
@@ -71,10 +97,22 @@ namespace carrot_game
             // Create a Graphics object to draw on the form
             Graphics g = e.Graphics;
 
-            // Draw the image at the character's position (PosX, PosY)
-            g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height); 
-
-            g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
+            // Draw monsters with lower z-index:
+            DrawMonsters(g, 0);
+            
+            // Draw our Hero:
+            g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height);
+            if (P.ShowBoundingBox == true)
+            {
+                g.DrawRectangle(new Pen(Color.Magenta, 3f), P.BoundingBox);
+            }
+            if (P.ShowName == true)
+            {
+                Rectangle nameTag = new Rectangle(heroCharacter.PosX, heroCharacter.PosY - 20, heroCharacter.Width, 20);
+                g.DrawString(heroCharacter.Name, PlayerNameTag, Brushes.Black, nameTag, sf);
+            }
+            // Draw monsters with higher z-index:
+            DrawMonsters(g, 1);
         }
 
         private void PaintMap(object sender, PaintEventArgs e)
@@ -135,8 +173,58 @@ namespace carrot_game
         private void GameScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
             bgm.stopAudioBackgroud();
+            DisposeOfAssets();
             MainMenu m = new MainMenu();
             m.Show();
+        }
+
+        private void DisposeOfAssets()
+        {
+            Monster.SpawnedMonsters.Clear();
+        }
+
+        private void UpdateMonsters(List<Monster> monsters)
+        {
+            foreach (Monster m in monsters)
+            {
+                m.Update();
+            }
+        }
+
+        private void DrawMonsters(Graphics g, int pos)
+        {
+            int nameTagTextGap = 5;
+            int nameTagHeight = 20;
+            int nameTagMaxWidth = 200;
+            foreach (Monster m in Monster.SpawnedMonsters)
+            {
+                if (m.BoundingBox.Bottom >= heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height/2 && pos == 1) // 1 meaning draw on top of player
+                {
+                    g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
+                    if (m.ShowBoundingBox == true)
+                    {
+                        g.DrawRectangle(Pens.Red, m.BoundingBox);
+                    }
+                    if (m.ShowName == true)
+                    {
+                        Rectangle nameTag = new Rectangle(m.PosX - (nameTagMaxWidth - m.Width)/2, m.PosY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
+                        g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
+                    }
+                }
+                if (m.BoundingBox.Top <= heroCharacter.BoundingBox.Top + heroCharacter.BoundingBox.Height / 2 && pos == 0) // 0 meaning draw under player
+                {
+                    g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
+                    if (m.ShowBoundingBox == true)
+                    {
+                        g.DrawRectangle(Pens.Red, m.BoundingBox);
+                    }
+                    if (m.ShowName == true)
+                    {
+                            Rectangle nameTag = new Rectangle(m.PosX - (nameTagMaxWidth - m.Width) / 2, m.PosY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
+                            g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
+                    }
+                }
+            }
         }
 
         private void CreateMap()
