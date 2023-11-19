@@ -16,8 +16,13 @@ namespace carrot_game
     {
         internal static int Counter = 0;
         public static List<Monster> SpawnedMonsters = new List<Monster>();
+        public static List<int[]> damageNumbers = new List<int[]>();
         public string ImgPack { get; set; } = "";
         public Bitmap CurrentSprite;
+        private int _attackFrame = 0;
+        // seconds between attacks
+        private double _attackSpeed = 2;
+        // dictionary that will store "damage" as key and how many times it has been displayed as value
 
         public override Rectangle BoundingBox
         {
@@ -37,7 +42,7 @@ namespace carrot_game
             PosZ += z;
         }
 
-        public void FollowPlayer(Player p)
+        public void FollowPlayer(ref Player p)
         {
             // If player is to the left of the monster 
             if (BoundingBox.Left > p.BoundingBox.Right)
@@ -83,8 +88,25 @@ namespace carrot_game
             }
             
         }
+
+        public void ResolveAttack()
+        {
+            if (Player.currentPlayer.IsColliding(this))
+            {
+                _attackFrame++;
+                if (_attackFrame > GameScreen.fps*_attackSpeed)
+                {
+                    int attackDamage = Math.Max(this.Attack - Player.currentPlayer.Defense, 1);
+                    int[] arrayToAdd = { attackDamage, 0 };
+                    damageNumbers.Add(arrayToAdd);
+                    Player.currentPlayer.CurrentHealthPoints -= attackDamage;
+                    _attackFrame = 0;
+                }
+            }
+        }
         public void Update()
         {
+            ResolveAttack();
             if (UpPressed || DownPressed || LeftPressed || RightPressed)
             {
                 if (UpPressed)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Gui;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -97,8 +98,8 @@ namespace carrot_game
             heroCharacter.Update();
             if (Monster.Counter == 0)
             m = new WhiteBunny();
-            m.FollowPlayer(heroCharacter);
-            UpdateMonsters(Monster.SpawnedMonsters);
+            m.FollowPlayer(ref heroCharacter);
+            UpdateMonsters(ref Monster.SpawnedMonsters);
         }
 
         private void PaintObjects(object sender, PaintEventArgs e)
@@ -125,6 +126,9 @@ namespace carrot_game
             }
             // Draw monsters with higher z-index:
             DrawMonsters(g, 1);
+
+            // Draw damage numbers:
+            DrawDamage(g);
         }
 
         private void PaintMap(object sender, PaintEventArgs e)
@@ -195,7 +199,7 @@ namespace carrot_game
             Monster.SpawnedMonsters.Clear();
         }
 
-        private void UpdateMonsters(List<Monster> monsters)
+        private void UpdateMonsters(ref List<Monster> monsters)
         {
             foreach (Monster m in monsters)
             {
@@ -245,6 +249,40 @@ namespace carrot_game
                     }
                 }
             }
+        }
+
+
+        // Draws the damage numbers on top of the player
+        private void DrawDamage(Graphics g)
+        {
+            //TODO - add this condition to the whole function
+            //if (showDamageNumbers == true)
+            //{
+            //}
+
+            // We create a copy of the original list, because we will both iterate through and modify it:
+            List<int[]> _d = new List<int[]>(Monster.damageNumbers);
+
+            // This is the displacement value when we remove items from the list, to avoid out of bounds exception.
+            int _indxtra = 0;
+
+            // To avoid wasting processing power when we don't have any damage to display:
+            if (Monster.damageNumbers.Count > 0)
+                foreach (var dmg in _d)
+                {
+                    int _ind = _d.IndexOf(dmg) + _indxtra;
+                    Rectangle _dmgBox = new Rectangle(heroCharacter.PosX - 5, heroCharacter.PosY - dmg[1], heroCharacter.Width + 10, 25);
+
+                    g.DrawString(dmg[0].ToString(), PlayerNameTag, Brushes.Red, _dmgBox, sf);
+
+                    Monster.damageNumbers[_ind][1]++;
+
+                    if (Monster.damageNumbers[_ind][1] > fps*4)
+                    {
+                        Monster.damageNumbers.Remove(dmg);
+                        _indxtra--;
+                    }
+                }
         }
 
         private void CreateMap()
