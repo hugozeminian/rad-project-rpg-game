@@ -235,7 +235,6 @@
   <data name="right4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\image\entity\character\right4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-
   <data name="bad_boss" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bad_boss.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -277,5 +276,50 @@
   </data>
   <data name="WhiteBunny2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhiteBunny2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bat1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bat2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bat3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bat4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bat5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bat6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackBunny1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackBunny1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackBunny2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackBunny2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackBunny3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackBunny3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlackBunny4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackBunny4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spider1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spider1_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spider1_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spider1_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spider1_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spider1_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spider1_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spider1_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tree01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tree01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

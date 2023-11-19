@@ -265,7 +265,9 @@
   <ItemGroup>
     <None Include="bin\Debug\res\image\entity\character\front1.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\bat1.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\res\sound\bgm\bad_boss.wav" />
   </ItemGroup>
@@ -362,6 +364,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\WhiteBunny2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bat2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bat3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bat4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bat5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bat6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackBunny1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackBunny2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackBunny3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackBunny4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider1_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider1_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider1_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider1_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tree01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
