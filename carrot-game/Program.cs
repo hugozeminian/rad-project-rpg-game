@@ -19,7 +19,6 @@ namespace carrot_game
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var main = new MainMenu();
-            main.FormClosed += new FormClosedEventHandler(FormClosed);
             main.Show();
             Application.Run();
 

@@ -5,43 +5,27 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace carrot_game
 {
     /// <summary>
     /// A monster is a computer-controlled entity that damages the player when they collide.
     /// </summary>
-    class Monster : Entity
+    class Monster : Entity, ICollision
     {
         internal static int Counter = 0;
-        public override string Name { get; set; } = "Monster";
-        public override int MaxHealthPoints { get; set; }
-        public override int CurrentHealthPoints { get; set; } = 1;
-        public override int ExperiencePoints { get; set; } = 1;
-
-        public override int Attack { get; set; } = 1;
-        public override int Defense { get; set; } = 0;
-        public override int Speed { get; set; } = 3;
-        public override int PosX { get; set; } = 1000;
-        public override int PosY { get; set; } = 1000;
-        public override int PosZ { get; set; } = 0;
-        public override string Direction { get; set; } = "down";
-        // This is a placeholder to receive new outfits in the future:
+        public static List<Monster> SpawnedMonsters = new List<Monster>();
         public string ImgPack { get; set; } = "";
-
-        // A 2D array, each level corresponding to a direction and their respective images:
-        // [up[], down[], left[], right[]]
-        public Bitmap[,] SpriteImages;
-
         public Bitmap CurrentSprite;
-        public override int Carrots { get; set; } = 1;
-        // Player character's size, in pixels.
-        public override int Height { get; set; } = 64;
-        public override int Width { get; set; } = 64;
 
-        // Controls the current sprite image, to avoid rapidly changing images.
-        public override int FrameCounter { get; set; } = 0;
-
+        public override Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle(PosX, PosY, Width, Height);
+            }
+        }
         // Controls wether or not action keys are pressed.
         public bool UpPressed, DownPressed, LeftPressed, RightPressed;
 
@@ -55,32 +39,52 @@ namespace carrot_game
 
         public void FollowPlayer(Player p)
         {
-            if (p.PosX > this.PosX - Width)
+            // If player is to the left of the monster 
+            if (BoundingBox.Left > p.BoundingBox.Right)
             {
-                RightPressed = true;
+                    RightPressed = false;
+                    LeftPressed = true;
+            }
+            if(BoundingBox.Left <= p.BoundingBox.Right) 
+            {
                 LeftPressed = false;
             }
-            if (p.PosX + p.Width < this.PosX)
+            // If player is to the right of the monster
+            if (BoundingBox.Right < p.BoundingBox.Left)
             {
-                LeftPressed = true;
+                    RightPressed = true;
+                    LeftPressed = false;
+            }
+            if (BoundingBox.Right >= p.BoundingBox.Left)
+            {
                 RightPressed = false;
             }
-            if (p.PosY > this.PosY + Height)
+
+            // If player is to the top of the monster
+            if (BoundingBox.Top > p.BoundingBox.Bottom)
             {
-                DownPressed = true;
+                    DownPressed = false;
+                    UpPressed = true;
+            }
+            if (BoundingBox.Top <= p.BoundingBox.Bottom)
+            {
                 UpPressed = false;
-
             }
-            if (p.PosY + p.Height < this.PosY)
+
+            // If player is to the bottom of the monster
+            if (BoundingBox.Bottom < p.BoundingBox.Top)
             {
-                UpPressed = true;
-                DownPressed = false;
-
+                    DownPressed = true;
+                    UpPressed = false;
             }
+            if (BoundingBox.Bottom >= p.BoundingBox.Top)
+            {
+                DownPressed = false;
+            }
+            
         }
         public void Update()
         {
-            // if movement keys are pressed, move and change direction
             if (UpPressed || DownPressed || LeftPressed || RightPressed)
             {
                 if (UpPressed)
@@ -147,6 +151,20 @@ namespace carrot_game
                 }
             }
         }
+
+        public bool IsColliding(Entity player)
+        {
+            return  PosX < player.PosX + player.Width   &&
+                    PosX + Width > player.PosX          &&
+                    PosY < player.PosY + player.Height  &&
+                    PosY + Height > player.PosY;
+        }
+
+        public void Die()
+        {
+            SpawnedMonsters.Remove(this);
+        }
+
     }
     
 }
