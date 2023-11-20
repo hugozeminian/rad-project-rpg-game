@@ -31,12 +31,26 @@ namespace carrot_game
         public int Sprite = 0;
         public bool ShowBoundingBox {get;set;} = false;
         public bool ShowName { get;set;} = false;
+
+        public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
+        public bool UpPressed, DownPressed, LeftPressed, RightPressed;
+
         public abstract Rectangle BoundingBox { get;}        
         
         public int FrameCounter { get; set; }
 
         public abstract void Move(int x, int y, int z);
 
+        public void DisableMovement()
+        {
+            RightPressed = LeftPressed = UpPressed = DownPressed = false;
+            CanMoveDown = CanMoveLeft = CanMoveRight = CanMoveUp = false;
+        }
+
+        public void AllowMovement()
+        {
+            CanMoveDown = CanMoveLeft = CanMoveRight = CanMoveUp = true;
+        }
         //Entities are abstract classes as we won't have any instantiated Entities. What we will have are monsters and a player, which must implement this abstract class.
     }
 }

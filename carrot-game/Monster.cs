@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave.SampleProviders;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -15,7 +16,20 @@ namespace carrot_game
     class Monster : Entity, ICollision
     {
         internal static int Counter = 0;
+
+        public static Random Random = new Random();
+
         public static List<Monster> SpawnedMonsters = new List<Monster>();
+
+        private int _moveCounter = 0;
+
+        // A list of all monster types
+        public static List<Type> MonsterList = new List<Type>() {
+            typeof(WhiteBunny),
+            typeof(BlackBunny),
+            typeof(Spider1),
+            typeof(Bat)};
+
         public static List<int[]> damageNumbers = new List<int[]>();
         public string ImgPack { get; set; } = "";
         public Bitmap CurrentSprite;
@@ -31,9 +45,6 @@ namespace carrot_game
                 return new Rectangle(PosX, PosY, Width, Height);
             }
         }
-        // Controls wether or not action keys are pressed.
-        public bool UpPressed, DownPressed, LeftPressed, RightPressed;
-
         // Move the character on X, Y and Z axis.
         public override void Move(int x, int y, int z)
         {
@@ -42,53 +53,66 @@ namespace carrot_game
             PosZ += z;
         }
 
+        // This makes monsters follow the player.
         public void FollowPlayer(ref Player p)
         {
-            // If player is to the left of the monster 
-            if (BoundingBox.Left > p.BoundingBox.Right)
+            // This makes movement "in turns", to avoid movement being "too smooth". 
+            // Remove the _moveCounter if blocks to make movement smooth.
+            if (_moveCounter <= GameScreen.fps)
             {
+                DisableMovement();
+            }
+
+                if (_moveCounter > GameScreen.fps/Speed)
+            {
+                // If player is to the left of the monster 
+                if (BoundingBox.Left > p.BoundingBox.Right)
+                {
                     RightPressed = false;
                     LeftPressed = true;
-            }
-            if(BoundingBox.Left <= p.BoundingBox.Right) 
-            {
-                LeftPressed = false;
-            }
-            // If player is to the right of the monster
-            if (BoundingBox.Right < p.BoundingBox.Left)
-            {
+                }
+                if(BoundingBox.Left <= p.BoundingBox.Right) 
+                {
+                    LeftPressed = false;
+                }
+                // If player is to the right of the monster
+                if (BoundingBox.Right < p.BoundingBox.Left)
+                {
                     RightPressed = true;
                     LeftPressed = false;
-            }
-            if (BoundingBox.Right >= p.BoundingBox.Left)
-            {
-                RightPressed = false;
-            }
+                }
+                if (BoundingBox.Right >= p.BoundingBox.Left)
+                {
+                    RightPressed = false;
+                }
 
-            // If player is to the top of the monster
-            if (BoundingBox.Top > p.BoundingBox.Bottom)
-            {
+                // If player is to the top of the monster
+                if (BoundingBox.Top > p.BoundingBox.Bottom)
+                {
                     DownPressed = false;
                     UpPressed = true;
-            }
-            if (BoundingBox.Top <= p.BoundingBox.Bottom)
-            {
-                UpPressed = false;
-            }
+                }
+                if (BoundingBox.Top <= p.BoundingBox.Bottom)
+                {
+                    UpPressed = false;
+                }
 
-            // If player is to the bottom of the monster
-            if (BoundingBox.Bottom < p.BoundingBox.Top)
-            {
+                // If player is to the bottom of the monster
+                if (BoundingBox.Bottom < p.BoundingBox.Top)
+                {
                     DownPressed = true;
                     UpPressed = false;
+                }
+                if (BoundingBox.Bottom >= p.BoundingBox.Top)
+                {
+                    DownPressed = false;
+                }
+                if (_moveCounter > GameScreen.fps)
+                    _moveCounter = 0;
             }
-            if (BoundingBox.Bottom >= p.BoundingBox.Top)
-            {
-                DownPressed = false;
-            }
-            
         }
 
+        // Calculates monster attack damage and adds it to the damage displaying array.
         public void ResolveAttack()
         {
             if (Player.currentPlayer.IsColliding(this))
@@ -104,8 +128,11 @@ namespace carrot_game
                 }
             }
         }
+
+        // updates the monster's position, direction, sprite, and attacks if possible.
         public void Update()
         {
+            _moveCounter++;
             ResolveAttack();
             if (UpPressed || DownPressed || LeftPressed || RightPressed)
             {
@@ -186,7 +213,5 @@ namespace carrot_game
         {
             SpawnedMonsters.Remove(this);
         }
-
     }
-    
 }

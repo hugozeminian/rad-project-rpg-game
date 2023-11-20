@@ -76,13 +76,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Spider1.cs" />
+    <Compile Include="Entities\Bat.cs" />
+    <Compile Include="Entities\BlackBunny.cs" />
     <Compile Include="ICollision.cs" />
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Map.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="WhiteBunny.cs" />
+    <Compile Include="Entities\WhiteBunny.cs" />
     <Compile Include="GameScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -406,6 +409,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Tree01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\front3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\front4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

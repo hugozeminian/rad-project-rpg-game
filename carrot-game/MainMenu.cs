@@ -12,7 +12,7 @@ namespace carrot_game
     partial class MainMenu : Form
     {
         private bool skipIntro = true;
-
+        private static Color _menuGreen = Color.FromArgb(255, 0, 192, 0);
         private void MainMenu_Load(object sender, EventArgs e)
         {
             ClientSize = new Size(1920, 1080);
@@ -38,6 +38,20 @@ namespace carrot_game
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             Size = new Size(1920, 1080);
+            SetOptions();
+        }
+
+        private void SetOptions()
+        {
+            btnBgm.Text = Options.bgm ? "ON" : "OFF";
+            btnBoundingBoxes.Text = Options.showBoundingBox ? "ON" : "OFF";
+            btnPlayerName.Text = Options.showPlayerName ? "ON" : "OFF";
+            btnMonsterNames.Text = Options.showMonsterNames ? "ON" : "OFF";
+
+            btnMonsterNames.BackColor = btnMonsterNames.Text == "ON" ? _menuGreen : Color.Red;
+            btnBoundingBoxes.BackColor = btnBoundingBoxes.Text == "ON" ? _menuGreen : Color.Red;
+            btnBgm.BackColor = btnBgm.Text == "ON" ? _menuGreen : Color.Red;
+            btnBoundingBoxes.BackColor = btnBoundingBoxes.Text == "ON" ? _menuGreen : Color.Red;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -154,13 +168,13 @@ namespace carrot_game
             {
                 btnBoundingBoxes.Text = "OFF";
                 btnBoundingBoxes.BackColor = Color.Red;
-                GameScreen.showBoundingBox = false;
+                Options.showBoundingBox = false;
             }
             else if (btnBoundingBoxes.Text == "OFF")
             {
                 btnBoundingBoxes.Text = "ON";
                 btnBoundingBoxes.BackColor = Color.FromArgb(255, 0, 192, 0);
-                GameScreen.showBoundingBox = true;
+                Options.showBoundingBox = true;
             }
         }
     }

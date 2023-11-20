@@ -22,19 +22,11 @@ namespace carrot_game
         // This is a placeholder to receive new outfits in the future:
         public string ImgPack { get; set; } = "";
 
-        // A 2D array, each level corresponding to a direction and their respective images:
-        // [up[], down[], left[], right[]]
-
         public Bitmap CurrentSprite;
 
         // Controls the current sprite image, to avoid rapidly changing images.
-        public bool CanMoveUp = true;
-        public bool CanMoveRight = true;
-        public bool CanMoveDown = true;
-        public bool CanMoveLeft = true;
-
-        // Controls wether or not action keys are pressed.
-        public bool UpPressed, DownPressed, LeftPressed, RightPressed;
+        public bool IsAttacking = false;
+        public int attackFrame = -1;
 
         public override Rectangle BoundingBox
         {
@@ -141,15 +133,20 @@ namespace carrot_game
         // Changes the character's name.
         public void ChangeName(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         // Method to handle character changes: Movement, direction and current sprite.
         public void Update()
         {
             // if movement keys are pressed, move and change direction
-            if (UpPressed || DownPressed || LeftPressed || RightPressed)
+            if (UpPressed || DownPressed || LeftPressed || RightPressed || IsAttacking)
             {
+                if (IsAttacking)
+                {
+                    attackFrame++;
+                    PlayerAttack();
+                }
                 if (UpPressed && CanMoveUp)
                 {
                     Move(0, -Speed, 0);
@@ -175,7 +172,7 @@ namespace carrot_game
                 FrameCounter++;
 
                 // once we reach this threshold, we change the image to the next available in the array.
-                if (FrameCounter > 9)
+                if (FrameCounter > 9 && !IsAttacking)
                 {
                     if (Sprite == 0)
                     {
@@ -195,23 +192,62 @@ namespace carrot_game
                     }
                     FrameCounter = 0;
                 }
-
-                // this defines the image to be displayed
-                switch(Direction)
+                else if (attackFrame > 9 && IsAttacking)
                 {
-                    case "up":
-                        CurrentSprite = SpriteImages[0, Sprite];
-                        break;
-                    case "down":
-                        CurrentSprite = SpriteImages[1, Sprite];
-                        break;
-                    case "left":
-                        CurrentSprite = SpriteImages[2, Sprite];
-                        break;
-                    case "right":
-                        CurrentSprite = SpriteImages[3, Sprite];
-                        break;
+                    if (Sprite == 0)
+                    {
+                        Sprite = 1;
+                    }
+                    else if (Sprite == 1)
+                    {
+                        Sprite = 2;
+                    }
+                    else if (Sprite == 2)
+                    {
+                        Sprite = 3;
+                    }
+                    else if (Sprite == 3)
+                    {
+                        Sprite = 0;
+                        attackFrame = -1;
+                        IsAttacking = false;
+                        AllowMovement();
+                    }
                 }
+
+                // this defines the image to be displayed if not attacking
+                if (!IsAttacking)
+                    switch(Direction)
+                    {
+                        case "up":
+                            CurrentSprite = SpriteImages[0, Sprite];
+                        break;
+                        case "down":
+                            CurrentSprite = SpriteImages[1, Sprite];
+                        break;
+                        case "left":
+                            CurrentSprite = SpriteImages[2, Sprite];
+                        break;
+                        case "right":
+                            CurrentSprite = SpriteImages[3, Sprite];
+                        break;
+                    }
+                else if (IsAttacking)
+                    switch (Direction)
+                    {
+                        case "up":
+                            CurrentSprite = SpriteImages[4, Sprite];
+                        break;
+                        case "down":
+                            CurrentSprite = SpriteImages[5, Sprite];
+                        break;
+                        case "left":
+                            CurrentSprite = SpriteImages[6, Sprite];
+                        break;
+                        case "right":
+                            CurrentSprite = SpriteImages[7, Sprite];
+                        break;
+                    }
             }
         }
 
@@ -224,8 +260,8 @@ namespace carrot_game
             Bitmap up4 = Properties.Resources.back4;
             Bitmap down1 = Properties.Resources.front1;
             Bitmap down2 = Properties.Resources.front2;
-            Bitmap down3 = Properties.Resources.front1;
-            Bitmap down4 = Properties.Resources.front2;
+            Bitmap down3 = Properties.Resources.front3;
+            Bitmap down4 = Properties.Resources.front4;
             Bitmap left1 = Properties.Resources.left1;
             Bitmap left2 = Properties.Resources.left2;
             Bitmap left3 = Properties.Resources.left3;
@@ -234,6 +270,23 @@ namespace carrot_game
             Bitmap right2 = Properties.Resources.right2;
             Bitmap right3 = Properties.Resources.right3;
             Bitmap right4 = Properties.Resources.right4;
+            //Attacking:
+            Bitmap atk_up1 = Properties.Resources.back1;
+            Bitmap atk_up2 = Properties.Resources.back2;
+            Bitmap atk_up3 = Properties.Resources.back3;
+            Bitmap atk_up4 = Properties.Resources.back4;
+            Bitmap atk_down1 = Properties.Resources.atk_down1;
+            Bitmap atk_down2 = Properties.Resources.atk_down2;
+            Bitmap atk_down3 = Properties.Resources.atk_down3;
+            Bitmap atk_down4 = Properties.Resources.atk_down4;
+            Bitmap atk_left1 = Properties.Resources.left1;
+            Bitmap atk_left2 = Properties.Resources.left2;
+            Bitmap atk_left3 = Properties.Resources.left3;
+            Bitmap atk_left4 = Properties.Resources.left4;
+            Bitmap atk_right1 = Properties.Resources.right1;
+            Bitmap atk_right2 = Properties.Resources.right2;
+            Bitmap atk_right3 = Properties.Resources.right3;
+            Bitmap atk_right4 = Properties.Resources.right4;
 
             // A 2D array, each level corresponding to a direction and their respective images:
             // [up[], down[], left[], right[]]
@@ -241,7 +294,11 @@ namespace carrot_game
                 { up1, up2, up3, up4 },
                 { down1, down2, down3, down4 },
                 { left1, left2, left3, left4 },
-                { right1, right2, right3, right4 }
+                { right1, right2, right3, right4 },
+                { atk_up1, atk_up2, atk_up3, atk_up4 },
+                { atk_down1, atk_down2, atk_down3, atk_down4 },
+                { atk_left1, atk_left2, atk_left3, atk_left4 },
+                { atk_right1, atk_right2, atk_right3, atk_right4 }
             };
         }
 
@@ -253,21 +310,13 @@ namespace carrot_game
                     BoundingBox.Bottom >= e.BoundingBox.Top;
         }
 
-        public void AllowMovement()
-        {
-            CanMoveDown = true;
-            CanMoveUp = true;
-            CanMoveLeft = true;
-            CanMoveRight = true;
-        }
-
         public void RestrictMovement(Entity otherEntity)
         {
             // Check if there is collision to Top, checking the inner top-half of bounding box.
             if (BoundingBox.Top + BoundingBox.Height/2 >= otherEntity.BoundingBox.Bottom)
             {
-                if (BoundingBox.Left <= otherEntity.BoundingBox.Right &&
-                    BoundingBox.Right >= otherEntity.BoundingBox.Left)
+                if (BoundingBox.Left + BoundingBox.Width / 2 <= otherEntity.BoundingBox.Right &&
+                    BoundingBox.Right - BoundingBox.Width / 2 >= otherEntity.BoundingBox.Left)
                     CanMoveUp = false;
                 else
                     CanMoveUp = true;
@@ -275,26 +324,26 @@ namespace carrot_game
             // Check if there is collision to the Right, checking the inner half-right of bounding box.
             if (BoundingBox.Right - BoundingBox.Width/2 <= otherEntity.BoundingBox.Left)
             {
-                if (BoundingBox.Top <= otherEntity.BoundingBox.Bottom &&
-                    BoundingBox.Bottom >= otherEntity.BoundingBox.Top)
+                if (BoundingBox.Top + BoundingBox.Height / 2 <= otherEntity.BoundingBox.Bottom &&
+                    BoundingBox.Bottom - BoundingBox.Height / 2 >= otherEntity.BoundingBox.Top)
                     CanMoveRight = false;
                 else
                     CanMoveRight = true;
             }
             // Check if there is collision Down, checking the inner bottom-half of bounding box.
-            if (BoundingBox.Bottom - BoundingBox.Height/2 >= otherEntity.BoundingBox.Top)
+            if (BoundingBox.Bottom - BoundingBox.Height / 2 >= otherEntity.BoundingBox.Top)
             {
-                if (BoundingBox.Left <= otherEntity.BoundingBox.Right &&
-                    BoundingBox.Right >= otherEntity.BoundingBox.Left)
+                if (BoundingBox.Left + BoundingBox.Width / 2 <= otherEntity.BoundingBox.Right &&
+                    BoundingBox.Right - BoundingBox.Width / 2 >= otherEntity.BoundingBox.Left)
                     CanMoveDown = false;
                 else
                     CanMoveDown = true;
             }
             // Check if there is collision to the left
-            if (BoundingBox.Left + BoundingBox.Width/2 >= otherEntity.BoundingBox.Right)
+            if (BoundingBox.Left + BoundingBox.Width / 2 >= otherEntity.BoundingBox.Right)
             {
-                if (BoundingBox.Top <= otherEntity.BoundingBox.Bottom &&
-                    BoundingBox.Bottom >= otherEntity.BoundingBox.Top)
+                if (BoundingBox.Top + BoundingBox.Height / 2 <= otherEntity.BoundingBox.Bottom &&
+                    BoundingBox.Bottom - BoundingBox.Height / 2 >= otherEntity.BoundingBox.Top)
                     CanMoveLeft = false;
                 else
                     CanMoveLeft = true;
@@ -303,11 +352,23 @@ namespace carrot_game
         
         // Add method LevelUp
 
-            // add method gain exp
+        // add method gain exp
 
-            // add method attack
-
-            // add method interact
+        // add method attack
+        public void PlayerAttack()
+        {
+            if (attackFrame == 0)
+            {
+                Sprite = 0;
+                DisableMovement();
+            }
+            if (attackFrame == -1)
+            {
+                IsAttacking = false;
+                AllowMovement();
+            }
+        }
+        // add method interact
 
     }
 }
