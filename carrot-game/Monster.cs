@@ -23,21 +23,29 @@ namespace carrot_game
 
         private int _moveCounter = 0;
 
-        // A list of all monster types
+        // A list of all monster types. Whenever a new monster class is created, it should be added to this list.
+        // This is used to spawn monsters at random. We can later implement different difficulties monster lists or even environment-specific lists. Ex.: Cave monsters, Grass monsters, water, etc.
         public static List<Type> MonsterList = new List<Type>() {
             typeof(WhiteBunny),
             typeof(BlackBunny),
             typeof(Spider1),
             typeof(Bat)};
 
+        // This is the list that stores the damage values the player received and their relative position on top of the player. [dmg, pos].
+        // Damage values are added by ResolveAttack and removed after their position reaches a treshold.
         public static List<int[]> damageNumbers = new List<int[]>();
+
+        // A placeholder to receive extra outfits.
         public string ImgPack { get; set; } = "";
         public Bitmap CurrentSprite;
+
+        // Control attack animation
         private int _attackFrame = 0;
+
         // seconds between attacks
         private double _attackSpeed = 2;
-        // dictionary that will store "damage" as key and how many times it has been displayed as value
 
+        /// Adjust this according to the Monster's geometry.
         public override Rectangle BoundingBox
         {
             get
@@ -115,17 +123,20 @@ namespace carrot_game
         // Calculates monster attack damage and adds it to the damage displaying array.
         public void ResolveAttack()
         {
-            if (Player.currentPlayer.IsColliding(this))
+            _attackFrame++;
+            // If the monster spent enough time by the player's side, attack:
+            if (_attackFrame > GameScreen.fps*_attackSpeed)
             {
-                _attackFrame++;
-                if (_attackFrame > GameScreen.fps*_attackSpeed)
-                {
-                    int attackDamage = Math.Max(this.Attack - Player.currentPlayer.Defense, 1);
-                    int[] arrayToAdd = { attackDamage, 0 };
-                    damageNumbers.Add(arrayToAdd);
-                    Player.currentPlayer.CurrentHealthPoints -= attackDamage;
-                    _attackFrame = 0;
-                }
+                // Damage is mitigated by defense and Monsters always deal a minimum of 1 damage.
+                int attackDamage = Math.Max(Attack - Player.currentPlayer.Defense, 1);
+
+                // Add damage to damage displaying array
+                int[] arrayToAdd = { attackDamage, 0 };
+                damageNumbers.Add(arrayToAdd);
+
+                // Deal damage to the player and resets attack animation.
+                Player.currentPlayer.CurrentHealthPoints -= attackDamage;
+                _attackFrame = 0;
             }
         }
 
@@ -133,7 +144,10 @@ namespace carrot_game
         public void Update()
         {
             _moveCounter++;
-            ResolveAttack();
+
+            if (Player.currentPlayer.IsColliding(this))
+                ResolveAttack();
+
             if (UpPressed || DownPressed || LeftPressed || RightPressed)
             {
                 if (UpPressed)
@@ -201,6 +215,7 @@ namespace carrot_game
             }
         }
 
+        // Check if the monster is colliding with the player.
         public bool IsColliding(Entity player)
         {
             return  PosX < player.PosX + player.Width   &&

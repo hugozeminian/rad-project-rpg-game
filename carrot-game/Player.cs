@@ -354,7 +354,6 @@ namespace carrot_game
 
         // add method gain exp
 
-        // add method attack
         public void PlayerAttack()
         {
             if (attackFrame == 0)
