@@ -12,7 +12,6 @@ namespace carrot_game
         public static int bgmVolume = 100;
         public static bool showPlayerName = true;
         public static bool showMonsterNames = true;
-
-
+        public static bool showBoundingBox = false;
     }
 }

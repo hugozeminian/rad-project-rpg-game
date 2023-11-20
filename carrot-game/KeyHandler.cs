@@ -33,6 +33,10 @@ namespace carrot_game
             {
                 p.RightPressed = true;
             }
+            if (e.KeyCode == Keys.F)
+            {
+                p.IsAttacking = true;
+            }
             else if (e.KeyCode == Keys.Escape)
             {
                 if (Program.CurrentScreen == "Game Screen")

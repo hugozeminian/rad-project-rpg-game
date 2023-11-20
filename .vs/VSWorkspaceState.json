@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\carrot-game"
+    "\\carrot-game",
+    "\\carrot-game\\Resources"
   ],
   "SelectedNode": "\\carrot-game\\carrot-game.sln",
   "PreviewInSolutionExplorer": false

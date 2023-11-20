@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace carrot_game
 {
@@ -61,6 +62,8 @@ namespace carrot_game
         /// </summary>
         private void InitializeComponent()
         {
+
+
             this.FormClosed += new FormClosedEventHandler(Program.FormClosed);
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));

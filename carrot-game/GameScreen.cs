@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Gui;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,9 @@ namespace carrot_game
         // This sets how much bigger entities are drawn on the GameScreen.
         public static int GlobalScale = 2;
 
+        // Limits the number of monsters
+        private static int _monsterLimit = 3;
+
         private Map gameMap;
 
         Player heroCharacter = new Player();
@@ -36,14 +40,13 @@ namespace carrot_game
             }
         }
 
-        Monster m = new WhiteBunny();
-
         public int savePos;
         public GameScreen gs; 
 
         // Declaring a refresh rate of 30 frames per second [33.33ms] (1000ms / 30)
         public static int fps = 30;
         public static int refreshTime = 1000/fps;
+        public static int monsterSpawnTimer = 0;
 
         Audio bgm = new Audio();
 
@@ -55,9 +58,6 @@ namespace carrot_game
         private readonly Font PlayerNameTag = new Font("Georgia", 14, FontStyle.Bold, GraphicsUnit.Point);
         private readonly Font MonsterNameTag = new Font("Georgia", 12, GraphicsUnit.Point);
 
-        public static bool showBoundingBox = true;
-
-
         public GameScreen()
         {
             InitializeComponent();
@@ -66,6 +66,7 @@ namespace carrot_game
             Size = new Size(ScreenWidth, ScreenHeight);
             gs = this;
 
+            if(Options.bgm)
             bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
 
             CreateMap();
@@ -95,10 +96,18 @@ namespace carrot_game
             }
             // updates the character's position and sprite image.
             heroCharacter.Update();
-            if (Monster.Counter == 0)
-            m = new WhiteBunny();
-            m.FollowPlayer(heroCharacter);
-            UpdateMonsters(Monster.SpawnedMonsters);
+            SpawnMonsters();
+            //m.FollowPlayer(ref heroCharacter);
+            AnimateMonsters();
+            UpdateMonsters(ref Monster.SpawnedMonsters);
+        }
+
+        private void AnimateMonsters()
+        {
+            foreach (Monster _m in  Monster.SpawnedMonsters)
+            {
+                _m.FollowPlayer(ref heroCharacter);
+            }
         }
 
         private void PaintObjects(object sender, PaintEventArgs e)
@@ -109,12 +118,13 @@ namespace carrot_game
 
             // Draw monsters with lower z-index:
             DrawMonsters(g, 0);
-            
-            // Draw our Hero:
+
+            // Draw our Hero's Shadow:
             g.DrawEllipse(Pens.Black, _pr);
             g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _pr);
+            // Draw our Hero:
             g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height);
-            if (showBoundingBox == true)
+            if (Options.showBoundingBox == true)
             {
                 g.DrawRectangle(new Pen(Color.Magenta, 3f), P.BoundingBox);
             }
@@ -125,6 +135,9 @@ namespace carrot_game
             }
             // Draw monsters with higher z-index:
             DrawMonsters(g, 1);
+
+            // Draw damage numbers:
+            DrawDamage(g);
         }
 
         private void PaintMap(object sender, PaintEventArgs e)
@@ -193,9 +206,10 @@ namespace carrot_game
         private void DisposeOfAssets()
         {
             Monster.SpawnedMonsters.Clear();
+            Monster.Counter = 0;
         }
 
-        private void UpdateMonsters(List<Monster> monsters)
+        private void UpdateMonsters(ref List<Monster> monsters)
         {
             foreach (Monster m in monsters)
             {
@@ -215,10 +229,9 @@ namespace carrot_game
 
                 if (m.BoundingBox.Bottom >= heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height/2 && pos == 1) // 1 meaning draw on top of player
                 {
-                    g.DrawEllipse(Pens.Black, _r);
                     g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _r);
                     g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
-                    if (showBoundingBox == true)
+                    if (Options.showBoundingBox == true)
                     {
                         g.DrawRectangle(Pens.Red, m.BoundingBox);
                     }
@@ -228,13 +241,12 @@ namespace carrot_game
                         g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
                     }
                 }
-                else if (m.BoundingBox.Top <= heroCharacter.BoundingBox.Top + heroCharacter.BoundingBox.Height / 2 && pos == 0) // 0 meaning draw under player
+                else if (m.BoundingBox.Bottom < heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height /2 && pos == 0) // 0 meaning draw under player
                 {
-                    g.DrawEllipse(Pens.Black, _r);
                     g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _r);
                     g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
 
-                    if (showBoundingBox == true)
+                    if (Options.showBoundingBox == true)
                     {
                         g.DrawRectangle(Pens.Red, m.BoundingBox);
                     }
@@ -244,6 +256,50 @@ namespace carrot_game
                             g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
                     }
                 }
+            }
+        }
+
+
+        // Draws the damage numbers on top of the player
+        private void DrawDamage(Graphics g)
+        {
+            //TODO - add this condition to the whole function
+            //if (showDamageNumbers == true)
+            //{
+            //}
+
+            // We create a copy of the original list, because we will both iterate through and modify it:
+            List<int[]> _d = new List<int[]>(Monster.damageNumbers);
+
+            // This is the displacement value when we remove items from the list, to avoid out of bounds exception.
+            int _indxtra = 0;
+
+            // To avoid wasting processing power when we don't have any damage to display:
+            if (Monster.damageNumbers.Count > 0)
+                foreach (var dmg in _d)
+                {
+                    int _ind = _d.IndexOf(dmg) + _indxtra;
+                    Rectangle _dmgBox = new Rectangle(heroCharacter.PosX - 5, heroCharacter.PosY - dmg[1], heroCharacter.Width + 10, 25);
+
+                    g.DrawString(dmg[0].ToString(), PlayerNameTag, Brushes.Red, _dmgBox, sf);
+
+                    Monster.damageNumbers[_ind][1]++;
+
+                    if (Monster.damageNumbers[_ind][1] > fps*4)
+                    {
+                        Monster.damageNumbers.Remove(dmg);
+                        _indxtra--;
+                    }
+                }
+        }
+
+        private static void SpawnMonsters()
+        {
+            var _r = new Random();
+            if (Monster.Counter < _monsterLimit)
+            {
+            Type _t = Monster.MonsterList[_r.Next(Monster.MonsterList.Count)];
+                object m = Activator.CreateInstance(_t);
             }
         }
 

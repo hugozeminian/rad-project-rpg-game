@@ -25,18 +25,14 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 3;
-            PosX = 1000;
-            PosY = 1000;
+            PosX = Random.Next(-200, 2200);
+            PosY = 1200;
             PosZ = 1;
             Direction = "down";
             Carrots = 1;
             FrameCounter = 0;
             Width = 38 * GameScreen.GlobalScale;
             Height = 26 * GameScreen.GlobalScale;
-
-            // Debugging
-            ShowBoundingBox = true;
-            ShowName = true;
 
             Counter++;
             Bitmap up1 = Properties.Resources.WhiteBunny1;
@@ -52,9 +48,13 @@ namespace carrot_game
             Bitmap left3 = Properties.Resources.WhiteBunny1;
             Bitmap left4 = Properties.Resources.WhiteBunny2;
             Bitmap right1 = Properties.Resources.WhiteBunny1;
+            right1.RotateFlip(RotateFlipType.RotateNoneFlipX);
             Bitmap right2 = Properties.Resources.WhiteBunny2;
+            right2.RotateFlip(RotateFlipType.RotateNoneFlipX);
             Bitmap right3 = Properties.Resources.WhiteBunny1;
+            right3.RotateFlip(RotateFlipType.RotateNoneFlipX);
             Bitmap right4 = Properties.Resources.WhiteBunny2;
+            right4.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
 
             CurrentSprite = Properties.Resources.WhiteBunny1;
