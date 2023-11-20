@@ -600,6 +600,78 @@ namespace carrot_game.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_body_punch_quick_hit_2153 {
+            get {
+                return ResourceManager.GetStream("mixkit_body_punch_quick_hit_2153", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_cartoon_punch_2149 {
+            get {
+                return ResourceManager.GetStream("mixkit_cartoon_punch_2149", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_falling_on_undergrowth_390 {
+            get {
+                return ResourceManager.GetStream("mixkit_falling_on_undergrowth_390", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_golf_ball_hard_hit_2120 {
+            get {
+                return ResourceManager.GetStream("mixkit_golf_ball_hard_hit_2120", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_hard_and_quick_punch_2143 {
+            get {
+                return ResourceManager.GetStream("mixkit_hard_and_quick_punch_2143", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_karate_fighter_hit_2154 {
+            get {
+                return ResourceManager.GetStream("mixkit_karate_fighter_hit_2154", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_long_hit_swoosh_1473 {
+            get {
+                return ResourceManager.GetStream("mixkit_long_hit_swoosh_1473", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_martial_arts_fast_punch_2047 {
+            get {
+                return ResourceManager.GetStream("mixkit_martial_arts_fast_punch_2047", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap right1 {

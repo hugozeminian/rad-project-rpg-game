@@ -1,4 +1,5 @@
-﻿using NAudio.Wave.SampleProviders;
+﻿using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,6 +23,9 @@ namespace carrot_game
         public static List<Monster> SpawnedMonsters = new List<Monster>();
 
         private int _moveCounter = 0;
+
+        //Player sounds
+        Audio MonsterSoundEffect = new Audio();
 
         // A list of all monster types
         public static List<Type> MonsterList = new List<Type>() {
@@ -125,6 +129,26 @@ namespace carrot_game
                     damageNumbers.Add(arrayToAdd);
                     Player.currentPlayer.CurrentHealthPoints -= attackDamage;
                     _attackFrame = 0;
+
+
+                    // Monster Sounds Attack based on the monster type
+                    var monsterType = this.GetType();
+                    if (monsterType == typeof(Bat))
+                    {
+                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterBatAttack);
+                    }
+                    else if (monsterType == typeof(Spider1))
+                    {
+                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterSpiderAttack);
+                    }
+                    else if (monsterType == typeof(WhiteBunny))
+                    {
+                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterBunnyAttack);
+                    }
+                    else if (monsterType == typeof(BlackBunny))
+                    {
+                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterBlackBunnyAttack);
+                    }
                 }
             }
         }

@@ -28,6 +28,9 @@ namespace carrot_game
         public bool IsAttacking = false;
         public int attackFrame = -1;
 
+        //Player sounds
+        Audio pSoundEffect = new Audio();
+
         public override Rectangle BoundingBox
         {
             get
@@ -361,6 +364,7 @@ namespace carrot_game
             {
                 Sprite = 0;
                 DisableMovement();
+                pSoundEffect.PlayHeroAttackSoundEffect(pSoundEffect.AudioHeroAttack);
             }
             if (attackFrame == -1)
             {

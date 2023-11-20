@@ -38,7 +38,6 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\carrot-
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Interop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\AxInterop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot-game.csproj.AssemblyReference.cache
-C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot-game.csproj.SuggestedBindingRedirects.cache
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\Interop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\AxInterop.WMPLib.dll
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\obj\Debug\carrot-game.csproj.ResolveComReference.cache
@@ -166,3 +165,11 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\NAu
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\System.Security.AccessControl.xml
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\System.Security.Principal.Windows.xml
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\obj\Debug\carrot-game.csproj.CopyComplete
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-body-punch-quick-hit-2153.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-cartoon-punch-2149.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-falling-on-undergrowth-390.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-golf-ball-hard-hit-2120.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-hard-and-quick-punch-2143.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-karate-fighter-hit-2154.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-long-hit-swoosh-1473.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-martial-arts-fast-punch-2047.wav
