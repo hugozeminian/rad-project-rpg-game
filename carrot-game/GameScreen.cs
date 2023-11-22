@@ -31,6 +31,8 @@ namespace carrot_game
 
         private Map gameMap;
 
+        UIPlayer uIPlayer = new UIPlayer();
+
         Player heroCharacter = new Player();
         internal static Player P
         {
@@ -145,11 +147,19 @@ namespace carrot_game
             gameMap.Draw(e.Graphics);
         }
 
+        private void PaintUIPlayer(object sender, PaintEventArgs e)
+        {
+            uIPlayer.DrawCircularProgressBar(e.Graphics);
+            uIPlayer.DrawLinearProgressBar(e.Graphics);
+            uIPlayer.DrawCarrot(e.Graphics);
+        }
+
         private void GameScreen_Load(object sender, EventArgs e)
         {
             // Add a Paint event handler
             this.Paint += new PaintEventHandler(this.PaintMap);
             this.Paint += new PaintEventHandler(this.PaintObjects);
+            this.Paint += new PaintEventHandler(this.PaintUIPlayer);
 
             // Start the timer for redrawing
             timer1.Start();

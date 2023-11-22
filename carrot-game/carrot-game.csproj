@@ -83,6 +83,9 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIPlayer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Map.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Entities\WhiteBunny.cs" />
@@ -467,6 +470,9 @@
     <None Include="Resources\mixkit-martial-arts-fast-punch-2047.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carrot.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
