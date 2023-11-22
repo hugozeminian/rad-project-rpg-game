@@ -352,10 +352,31 @@ namespace carrot_game
                     CanMoveLeft = true;
             }
         }
-        
-        // Add method LevelUp
 
-        // add method gain exp
+        // LevelUp
+        private void LevelUp()
+        {
+            Level++;
+            ExperiencePoints = ExperiencePoints - ExpToNextLevel;
+            ExpToNextLevel = (int)(ExpToNextLevel * 1.2);
+
+            MaxHealthPoints += 2;
+            CurrentHealthPoints = MaxHealthPoints;
+            Attack += 2;
+            Defense += 1;
+            Speed += 1;
+        }
+
+        // Gain exp
+        public void GainExperience(int experience)
+        {
+            ExperiencePoints += experience;
+
+            if (ExperiencePoints >= ExpToNextLevel)
+            {
+                LevelUp();
+            }
+        }
 
         // add method attack
         public void PlayerAttack()

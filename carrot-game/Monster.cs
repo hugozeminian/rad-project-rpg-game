@@ -236,6 +236,36 @@ namespace carrot_game
         public void Die()
         {
             SpawnedMonsters.Remove(this);
+
+            // Earn experience points based on monster type
+            int experiencePointsEarned = GetExperiencePointsForMonster();
+            Player.currentPlayer.GainExperience(experiencePointsEarned);
+        }
+
+        private int GetExperiencePointsForMonster()
+        {
+            var monsterType = this.GetType();
+
+            int experiencePoints = 0;
+
+            if (monsterType == typeof(Bat))
+            {
+                experiencePoints = 5; 
+            }
+            else if (monsterType == typeof(Spider1))
+            {
+                experiencePoints = 5; 
+            }
+            else if (monsterType == typeof(WhiteBunny))
+            {
+                experiencePoints = 10; 
+            }
+            else if (monsterType == typeof(BlackBunny))
+            {
+                experiencePoints = 15; 
+            }
+
+            return experiencePoints;
         }
     }
 }
