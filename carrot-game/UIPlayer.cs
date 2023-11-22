@@ -10,20 +10,18 @@ namespace carrot_game
     {
         private int _maximum = 100;
         private int _minimum = 0;
-        private int _value = 50;
         private int _linearProgressBarHeight = 30;
+
 
         // Properties Carrot
         public Image carrot = Properties.Resources.carrot;
-        public int carrotAmount { get; set; } = 0;
 
-        // Properties LVL
-        public int playerLevel { get; set; } = 1;
 
         // Properties for circular progress bar (XP)
         public Point CircularProgressBarLocation { get; set; } = new Point(20, 1220);
         public Size CircularProgressBarSize { get; set; } = new Size(200, 200);
         public int xpCurrentValue { get; set; } = 0;
+
 
         // Properties for linear progress bar (HP)
         public Point LinearProgressBarLocation { get; set; } = new Point(20, 40);
@@ -32,6 +30,7 @@ namespace carrot_game
 
         public UIPlayer()
         {
+
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -47,14 +46,14 @@ namespace carrot_game
             Brush backgroundBrush = new SolidBrush(Color.Gray);
             Brush fillBrush = new SolidBrush(Color.Green);
 
-            float angle = 360f * (xpCurrentValue - _minimum) / (_maximum - _minimum);
+            float angle = 360f * (Player.currentPlayer.ExperiencePoints) / (Player.currentPlayer.ExpToNextLevel);
 
             // CircularProgressBarLocation and CircularProgressBarSize properties
             g.FillEllipse(backgroundBrush, CircularProgressBarLocation.X, CircularProgressBarLocation.Y, CircularProgressBarSize.Width, CircularProgressBarSize.Height);
             g.FillPie(fillBrush, CircularProgressBarLocation.X, CircularProgressBarLocation.Y, CircularProgressBarSize.Width, CircularProgressBarSize.Height, -90, angle);
 
             // Draw the level label
-            string levelText = "LVL " + playerLevel.ToString();
+            string levelText = "LVL " + Player.currentPlayer.Level.ToString();
             Font levelFont = new Font("Arial", 24, FontStyle.Bold);
             Brush levelBrush = new SolidBrush(Color.White);
             SizeF levelSize = g.MeasureString(levelText, levelFont);
@@ -67,17 +66,22 @@ namespace carrot_game
             Brush backgroundBrush = new SolidBrush(Color.Gray);
             Brush fillBrush = new SolidBrush(Color.Blue);
 
-            int fillWidth = (int)((float)(hpCurrentValue - _minimum) / (_maximum - _minimum) * LinearProgressBarSize.Width);
+            int fillWidth = (int)((float)(Player.currentPlayer.CurrentHealthPoints) / (Player.currentPlayer.MaxHealthPoints) * LinearProgressBarSize.Width);
+
+            // Draw the HP label
+            Font labelFont = new Font("Arial", 18, FontStyle.Bold); 
+            Brush labelBrush = new SolidBrush(Color.Black);
+            g.DrawString("HP:", labelFont, labelBrush, LinearProgressBarLocation.X, LinearProgressBarLocation.Y);
 
             // LinearProgressBarLocation and LinearProgressBarSize properties
-            g.FillRectangle(backgroundBrush, LinearProgressBarLocation.X, LinearProgressBarLocation.Y, LinearProgressBarSize.Width, LinearProgressBarSize.Height);
-            g.FillRectangle(fillBrush, LinearProgressBarLocation.X, LinearProgressBarLocation.Y + LinearProgressBarSize.Height - _linearProgressBarHeight, fillWidth, _linearProgressBarHeight);
+            g.FillRectangle(backgroundBrush, LinearProgressBarLocation.X + labelFont.SizeInPoints * 3, LinearProgressBarLocation.Y, LinearProgressBarSize.Width, LinearProgressBarSize.Height);
+            g.FillRectangle(fillBrush, LinearProgressBarLocation.X + labelFont.SizeInPoints * 3, LinearProgressBarLocation.Y + LinearProgressBarSize.Height - _linearProgressBarHeight, fillWidth, _linearProgressBarHeight);
         }
 
         public void DrawCarrot(Graphics g)
         {
             // Calculate carrot position based on LinearProgressBarLocation and LinearProgressBarSize
-            int carrotX = LinearProgressBarLocation.X + 320;
+            int carrotX = LinearProgressBarLocation.X + 360;
             int carrotY = LinearProgressBarLocation.Y + (LinearProgressBarSize.Height - 80) / 2;
 
             int carrotWidth = 80;
@@ -86,7 +90,7 @@ namespace carrot_game
             g.DrawImage(carrot, new Rectangle(carrotX, carrotY, carrotWidth, carrotHeight));
 
             // Draw the carrot label
-            string label = "x " + carrotAmount.ToString();
+            string label = "x " + Player.currentPlayer.Carrots.ToString();
             Font labelFont = new Font("Arial", 14, FontStyle.Bold);
             Brush labelBrush = new SolidBrush(Color.Black);
             SizeF labelSize = g.MeasureString(label, labelFont);

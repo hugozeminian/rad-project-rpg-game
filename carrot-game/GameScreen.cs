@@ -68,7 +68,7 @@ namespace carrot_game
             Size = new Size(ScreenWidth, ScreenHeight);
             gs = this;
 
-            if(Options.bgm)
+            if (Options.bgm)
             bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
 
             CreateMap();
@@ -76,7 +76,7 @@ namespace carrot_game
 
             // Adjusting name tag text and alignment:
             sf.Alignment = StringAlignment.Center;
-            sf.LineAlignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;  
         }
         public GameScreen(int save) : this() 
         {
