@@ -682,6 +682,15 @@ namespace carrot_game.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_player_jumping_in_a_video_game_2043 {
+            get {
+                return ResourceManager.GetStream("mixkit_player_jumping_in_a_video_game_2043", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap right1 {

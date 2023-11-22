@@ -83,6 +83,7 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item.cs" />
     <Compile Include="UIPlayer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -473,6 +474,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\carrot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mixkit-player-jumping-in-a-video-game-2043.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

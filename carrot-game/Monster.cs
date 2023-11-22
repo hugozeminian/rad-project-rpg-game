@@ -139,15 +139,15 @@ namespace carrot_game
                     }
                     else if (monsterType == typeof(Spider1))
                     {
-                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterSpiderAttack);
+                        MonsterSoundEffect.PlayMonsterSpiderAttackSoundEffect(MonsterSoundEffect.AudioMonsterSpiderAttack);
                     }
                     else if (monsterType == typeof(WhiteBunny))
                     {
-                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterBunnyAttack);
+                        MonsterSoundEffect.PlayMonsterBunnyAttackSoundEffect(MonsterSoundEffect.AudioMonsterBunnyAttack);
                     }
                     else if (monsterType == typeof(BlackBunny))
                     {
-                        MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterBlackBunnyAttack);
+                        MonsterSoundEffect.PlayMonsterBlackBunnyAttackSoundEffect(MonsterSoundEffect.AudioMonsterBlackBunnyAttack);
                     }
                 }
             }
