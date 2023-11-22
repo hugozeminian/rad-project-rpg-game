@@ -174,3 +174,12 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resourc
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-long-hit-swoosh-1473.wav
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-martial-arts-fast-punch-2047.wav
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-player-jumping-in-a-video-game-2043.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-body-punch-quick-hit-2153.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-cartoon-punch-2149.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-falling-on-undergrowth-390.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-golf-ball-hard-hit-2120.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-hard-and-quick-punch-2143.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-karate-fighter-hit-2154.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-long-hit-swoosh-1473.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-martial-arts-fast-punch-2047.wav
+D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-player-jumping-in-a-video-game-2043.wav

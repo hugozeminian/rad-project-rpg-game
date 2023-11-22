@@ -49,6 +49,7 @@ namespace carrot_game
                 Properties.Resources.GrassTop_WaterBottom, //18
 
                 Properties.Resources.wall, //19
+                Properties.Resources.House, //20
             };
         }
 
@@ -64,7 +65,12 @@ namespace carrot_game
                     {
                         // Draw the tile image at the specified position
                         Image tileImage = tileImages[tileType - 1];
-                        g.DrawImage(tileImage, col * tileSize, row * tileSize, tileSize, tileSize);
+                        if(tileType == 20)
+                        {
+                            g.DrawImage(tileImage, col * tileSize, -tileSize, tileSize*4, tileSize*4);
+                        }
+                        else
+                            g.DrawImage(tileImage, col * tileSize, row * tileSize, tileSize, tileSize);
                     }
                 }
             }
