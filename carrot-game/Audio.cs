@@ -29,6 +29,9 @@ namespace carrot_game
         public AudioFileReader AudioMonsterBunnyAttack { get; private set; } = new AudioFileReader("Resources\\mixkit-body-punch-quick-hit-2153.wav");
         public AudioFileReader AudioMonsterBlackBunnyAttack { get; private set; } = new AudioFileReader("Resources\\mixkit-martial-arts-fast-punch-2047.wav");
 
+        public AudioFileReader AudioItemCarrotCollected { get; private set; } = new AudioFileReader("Resources\\mixkit-player-jumping-in-a-video-game-2043.wav");
+
+
 
         // Create a WaveOutEvent instance for audio playback
         private WaveOutEvent WaveOutBackground = new WaveOutEvent();
@@ -41,7 +44,8 @@ namespace carrot_game
         private WaveOutEvent WaveOutMonsterBunnyAttack = new WaveOutEvent();
         private WaveOutEvent WaveOutMonsterBlackBunnyAttack = new WaveOutEvent();
 
-        // toDo
+        private WaveOutEvent WaveOutItemCarrotCollected = new WaveOutEvent();
+
 
 
         // ############### AUDIO FUNCTIONS ###############
@@ -124,6 +128,10 @@ namespace carrot_game
             PlaySoundEffect(WaveOutMonsterBlackBunnyAttack, audioEffect);
         }
 
+        public void PlayItemCarrotCollectedSoundEffect(AudioFileReader audioEffect)
+        {
+            PlaySoundEffect(WaveOutItemCarrotCollected, audioEffect);
+        }
 
 
         //All disposes
@@ -136,6 +144,7 @@ namespace carrot_game
             WaveOutMonsterSpiderAttack.Dispose();
             WaveOutMonsterBunnyAttack.Dispose();
             WaveOutMonsterBlackBunnyAttack.Dispose();
+            WaveOutItemCarrotCollected.Dispose();
 
             AudioMenu.Dispose();
             AudioBackgroundPhase1.Dispose();

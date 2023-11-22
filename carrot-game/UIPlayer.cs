@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace carrot_game
 {
+    /// <summary>
+    /// UI Player - 
+    /// </summary>
     internal class UIPlayer : Control
     {
         private int _maximum = 100;

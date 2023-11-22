@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace carrot_game
 {
+    /// <summary>
+    /// Map - 
+    /// </summary>
     internal class Map
     {
  

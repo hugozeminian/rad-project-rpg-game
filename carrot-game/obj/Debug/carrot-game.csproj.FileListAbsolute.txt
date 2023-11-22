@@ -173,3 +173,4 @@ C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resourc
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-karate-fighter-hit-2154.wav
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-long-hit-swoosh-1473.wav
 C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-martial-arts-fast-punch-2047.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-player-jumping-in-a-video-game-2043.wav

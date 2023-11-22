@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace carrot_game
 {
@@ -28,6 +29,10 @@ namespace carrot_game
 
         // Limits the number of monsters
         private static int _monsterLimit = 3;
+
+        // List of items carrots
+        private List<Item> carrots = new List<Item>();
+        private static int _carrotsLimit = 3;
 
         private Map gameMap;
 
@@ -102,6 +107,16 @@ namespace carrot_game
             //m.FollowPlayer(ref heroCharacter);
             AnimateMonsters();
             UpdateMonsters(ref Monster.SpawnedMonsters);
+
+            // Spawn a new carrot every x seconds
+            monsterSpawnTimer++;
+            if (monsterSpawnTimer % (fps * 10) == 0 )
+            {
+                SpawnCarrot();
+            }
+
+            // Check and update carrot collection
+            CollectCarrots();
         }
 
         private void AnimateMonsters()
@@ -117,6 +132,15 @@ namespace carrot_game
             Rectangle _pr = new Rectangle(heroCharacter.BoundingBox.Location.X - 5, heroCharacter.BoundingBox.Location.Y + heroCharacter.BoundingBox.Height - 20, heroCharacter.BoundingBox.Width + 10, 25);
             // Create a Graphics object to draw on the form
             Graphics g = e.Graphics;
+
+            // Draw carrots
+            foreach (var c in carrots)
+            {
+                if (!c.IsCollected)
+                {
+                    g.DrawImage(c.CarrotImage, c.PosX, c.PosY, c.Width, c.Height);
+                }
+            }
 
             // Draw monsters with lower z-index:
             DrawMonsters(g, 0);
@@ -310,6 +334,30 @@ namespace carrot_game
             {
             Type _t = Monster.MonsterList[_r.Next(Monster.MonsterList.Count)];
                 object m = Activator.CreateInstance(_t);
+            }
+        }
+
+        private void SpawnCarrot()
+        {
+            if (carrots.Count < _carrotsLimit)
+            {
+                Item newCarrot = Item.SpawnCarrot(ScreenWidth, ScreenHeight);
+                carrots.Add(newCarrot);
+            }
+        }
+
+        public void CollectCarrots()
+        {
+            Rectangle playerBoundingBox = heroCharacter.BoundingBox;
+
+            foreach (var carrot in carrots)
+            {
+                if (!carrot.IsCollected && playerBoundingBox.IntersectsWith(carrot.BoundingBox))
+                {
+                    carrot.IsCollected = true;
+                    Player.currentPlayer.Carrots += 1;
+                    carrot.ItemCarrotCollected();
+                }
             }
         }
 
