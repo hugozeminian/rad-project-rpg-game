@@ -62,9 +62,6 @@ namespace carrot_game
         /// </summary>
         private void InitializeComponent()
         {
-
-
-            this.FormClosed += new FormClosedEventHandler(Program.FormClosed);
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.btnExit = new System.Windows.Forms.Button();
