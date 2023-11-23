@@ -1,16 +1,28 @@
 ExpToNextLevel=100
 Level=1
 ImgPack=""
+<<<<<<< HEAD
 BoundingBox={X=1210,Y=389,Width=42,Height=42}
 Name="Player"
 MaxHealthPoints=10
 CurrentHealthPoints=4
+=======
+BoundingBox={X=886,Y=665,Width=42,Height=42}
+Name="Player"
+MaxHealthPoints=10
+CurrentHealthPoints=-695
+>>>>>>> 9ae75f8f91aec0d120750e9b50e49ac62124bbea
 ExperiencePoints=0
 Attack=1
 Speed=4
 Defense=0
+<<<<<<< HEAD
 PosX=1168
 PosY=304
+=======
+PosX=844
+PosY=580
+>>>>>>> 9ae75f8f91aec0d120750e9b50e49ac62124bbea
 PosZ=1
 Direction="left"
 Carrots=3
@@ -18,4 +30,8 @@ Width=128
 Height=128
 ShowBoundingBox=False
 ShowName=False
+<<<<<<< HEAD
 FrameCounter=30
+=======
+FrameCounter=0
+>>>>>>> 9ae75f8f91aec0d120750e9b50e49ac62124bbea
