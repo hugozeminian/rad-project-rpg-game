@@ -29,12 +29,13 @@ namespace carrot_game
         public int Width {  get; set; }
         public int Height { get; set; }
         public int Sprite = 0;
-        public bool ShowBoundingBox {get;set;} = false;
-        public bool ShowName { get;set;} = false;
 
         public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
         public bool UpPressed, DownPressed, LeftPressed, RightPressed;
 
+        /// <summary>
+        /// Adjust this according to the <see cref="Monster"/ or <see cref="Player"/'s geometry.>>
+        /// </summary>
         public abstract Rectangle BoundingBox { get;}        
         
         public int FrameCounter { get; set; }
