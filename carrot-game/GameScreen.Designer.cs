@@ -31,11 +31,6 @@ namespace carrot_game
         /// </summary>
         private void InitializeComponent()
         {
-            // ----- Manually added rows:
-
-
-            // ----- End of added rows;
-
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -61,7 +56,6 @@ namespace carrot_game
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
             this.ResumeLayout(false);
-
 
         }
 
