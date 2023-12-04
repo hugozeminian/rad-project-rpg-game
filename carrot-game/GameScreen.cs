@@ -65,6 +65,14 @@ namespace carrot_game
         private readonly Font PlayerNameTag = new Font("Georgia", 7 * GlobalScale, FontStyle.Bold, GraphicsUnit.Point);
         private readonly Font MonsterNameTag = new Font("Georgia", 6 * GlobalScale, GraphicsUnit.Point);
 
+        //Text box and conversations variables
+        private ConversationTextBox conversationTextBox;
+        private (string Speaker, string Message)[] conversations;
+        private int messageCurrentIndex;
+        private int messagefinalIndex;
+        private bool messageSent;
+        private System.Windows.Forms.Timer timerCheckMessage;
+
         public GameScreen()
         {
             InitializeComponent();
@@ -83,12 +91,93 @@ namespace carrot_game
             if (Options.bgm)
                 bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
             Program.CurrentScreen = "Game Screen";
+  
+
+            // ConversationTextBox
+            conversationTextBox = new ConversationTextBox(ScreenWidth, ScreenHeight);
+            Controls.Add(conversationTextBox);
+            conversationTextBox.HideConversation();
+            conversations = conversationTextBox.GetConversations();
+
+            // Set KeyPreview to true
+            this.KeyPreview = true;
+
+            // Hook up the KeyPress event handler
+            this.KeyPress += GameScreen_KeyPress;
+
         }
         public GameScreen(int save) : this() 
         {
             savePos = save;
             player = new Player(save);
         }
+
+        private void GameScreen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Check which key was pressed
+            if (e.KeyChar == 'p' || e.KeyChar == 'P') //test message
+            {
+                DisplayMessages(0, 0); // initial index, final index
+            }
+            else if (e.KeyChar == 'o' || e.KeyChar == 'O') //test message
+            {
+                DisplayMessages(1, 3);
+            }
+            
+            // Next message inside the array message
+            if (e.KeyChar == 'l' || e.KeyChar == 'L')
+            {
+                // Prevent the key from being processed further
+                e.Handled = true;
+
+                messageSent = false;
+                messageCurrentIndex++;
+                conversationTextBox.ClearConversation();
+            }
+        }
+
+        private void DisplayMessages(int startIndex, int endIndex)
+        {
+            messageCurrentIndex = startIndex;
+            messagefinalIndex = endIndex;
+            messageSent = false;
+
+            // Message box behaivor
+            timer1.Stop();
+            conversationTextBox.ShowConversation();
+            conversationTextBox.Focus();
+
+            // Timer check next message
+            timerCheckMessage = new System.Windows.Forms.Timer();
+            timerCheckMessage.Interval = 10;
+            timerCheckMessage.Tick += Timer_Tick;
+
+            timerCheckMessage.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Check if messageCurrentIndex is equal to or greater than messagefinalIndex
+            if (messageCurrentIndex > messagefinalIndex)
+            {
+                // Stop the timer
+                timerCheckMessage.Stop();
+
+                // Hide conversationTextBox, set focus to the main form, and start the main timer
+                conversationTextBox.HideConversation();
+                this.Focus();
+                timer1.Start();
+
+            }
+            else if (!messageSent)
+            {
+                // Display the message and update the state
+                conversationTextBox.AddMessage(conversations[messageCurrentIndex]);
+                messageSent = true;
+            }
+        }
+
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
