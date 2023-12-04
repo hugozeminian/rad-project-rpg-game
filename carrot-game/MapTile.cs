@@ -20,18 +20,18 @@ namespace carrot_game
             InitializeTileSet();
         }
 
-        public MapTile(bool collision, Image img) : base()
+        public MapTile()
+        {
+        }
+        public MapTile(bool collision, Image img) : this()
         {
             this.collision = collision;
             this.img = img;
         }
-        public MapTile()
-        {
-        }
 
         private static void InitializeTileSet()
         {
-            TileSet = new MapTile[20]
+            TileSet = new MapTile[32]
             {
             new MapTile { img = Properties.Resources.grass },   // 0
             new MapTile { img = Properties.Resources.water1 },  // 1
@@ -54,7 +54,24 @@ namespace carrot_game
             new MapTile { img = Properties.Resources.GrassTop_WaterBottom },            // 17
 
             new MapTile { img = Properties.Resources.wall },                            // 18
-            new MapTile { img = Properties.Resources.House }                            // 19
+            new MapTile { img = Properties.Resources.grass },                           // 19 grass with collision
+
+            new MapTile { img = Properties.Resources.fence_top },                   // 20
+            new MapTile { img = Properties.Resources.fence_right },                 // 21
+            new MapTile { img = Properties.Resources.fence_bottom },                // 22
+            new MapTile { img = Properties.Resources.fence_left },                  // 23
+            new MapTile { img = Properties.Resources.fence_top_left },              // 24
+            new MapTile { img = Properties.Resources.fence_top_right },             // 25
+            new MapTile { img = Properties.Resources.fence_bottom_right },          // 26
+            new MapTile { img = Properties.Resources.fence_bottom_left },           // 27
+
+            new MapTile { img = Properties.Resources.Tree_02 },             // 28
+
+            new MapTile { img = Properties.Resources.mountain1 },           // 29
+            new MapTile { img = Properties.Resources.mountain2 },           // 30
+            new MapTile { img = Properties.Resources.mountain3 },           // 31
+
+
             };
 
             for (int i = 0; i < TileSet.Length; i++)
@@ -74,6 +91,15 @@ namespace carrot_game
                 case 5:
                 case 18:
                 case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
                     return true;
                 default: return false;
             }

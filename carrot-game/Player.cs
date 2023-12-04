@@ -58,8 +58,8 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 4;
-            ScreenX = 100; // ToDo - Change to middle of the screen
-            ScreenY = 100; // ToDo - Change to middle of the screen
+            WorldX = 150 + MapTile.tileSize*13;
+            WorldY = 230;
             PosZ = 1;
             Direction = "down";
             Carrots = 0;
@@ -152,26 +152,39 @@ namespace carrot_game
                     attackFrame++;
                     PlayerAttack();
                 }
-                if (UpPressed && CanMoveUp)
+                if (UpPressed)
                 {
-                    Move(0, -Speed, 0);
                     Direction = "up";
                 }
-                if (DownPressed && CanMoveDown)
+                if (DownPressed)
                 {
-                    Move(0, Speed, 0);
                     Direction = "down";
                 }
-                if (LeftPressed && CanMoveLeft)
+                if (LeftPressed)
                 {
-                    Move(-Speed, 0, 0);
                     Direction = "left";
                 }
-                if (RightPressed && CanMoveRight)
+                if (RightPressed)
                 {
-                    Move(Speed, 0, 0);
                     Direction = "right";
                 }
+
+                // Checking for any tile collision
+                isColliding = false;
+                GameScreen.gs.cChecker.CheckCollision(this);
+
+                // Allow movement if no collision:
+                 if (!isColliding)
+                 {
+                    if (LeftPressed)
+                        Move(-Speed, 0, 0);
+                    if (RightPressed)
+                        Move(Speed, 0, 0);
+                    if (UpPressed)
+                        Move(0, -Speed, 0);
+                    if (DownPressed)
+                        Move(0, Speed, 0);
+                 }
 
                 // adds a counter to our movement frame counter
                 FrameCounter++;

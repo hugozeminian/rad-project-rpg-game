@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace carrot_game
 {
@@ -14,20 +16,22 @@ namespace carrot_game
 
         public ConversationTextBox(int screenWidth, int screenHeight)
         {
-            this.Size = new Size(600, 100);
-            this.Location = new Point(900, 20);
-            this.Multiline = true;
-            this.ReadOnly = true;
-            this.Enabled = false;
-            this.ScrollBars = ScrollBars.None;
-            this.WordWrap = true;
-            this.BorderStyle = BorderStyle.FixedSingle;
-            this.BackColor = SystemColors.Control;
-            this.ForeColor = SystemColors.ControlText;
-            this.Font = new Font("Comic Sans MS", 16, FontStyle.Bold);
+            Screen screen = Screen.FromControl(this);
+            Rectangle workingArea = screen.WorkingArea;
+            Size = new Size(600, 100);
+            Location = new Point(workingArea.X + (workingArea.Width) / 2 - Size.Width/2, workingArea.Y + workingArea.Height - 160);
+            Multiline = true;
+            ReadOnly = true;
+            Enabled = false;
+            ScrollBars = ScrollBars.None;
+            WordWrap = true;
+            BorderStyle = BorderStyle.FixedSingle;
+            BackColor = SystemColors.Control;
+            ForeColor = SystemColors.ControlText;
+            Font = new Font("Comic Sans MS", 16, FontStyle.Bold);
 
             // Subscribe to the HandleCreated event
-            this.HandleCreated += ConversationTextBox_HandleCreated;
+            HandleCreated += ConversationTextBox_HandleCreated;
         }
 
         private void ConversationTextBox_HandleCreated(object sender, EventArgs e)
@@ -39,10 +43,10 @@ namespace carrot_game
             hintTextLabel.Size = new Size(70, 25);
             hintTextLabel.BackColor = SystemColors.Control;
             hintTextLabel.ForeColor = Color.Black;
-            hintTextLabel.Location = new Point(this.Right - hintTextLabel.Width - 2, this.Bottom - hintTextLabel.Bottom - 2);
+            hintTextLabel.Location = new Point(Right - hintTextLabel.Width - 2, Bottom - hintTextLabel.Bottom - 2);
 
             // Add the label to the form and bring to the front
-            this.Parent.Controls.Add(hintTextLabel);
+            Parent.Controls.Add(hintTextLabel);
             hintTextLabel.BringToFront();
 
             // Initialize and start the blinking timer
@@ -62,17 +66,17 @@ namespace carrot_game
         {
             if (string.IsNullOrEmpty(conversation.Speaker))
             {
-                this.AppendText($"{conversation.Message}{Environment.NewLine}");
+                AppendText($"{conversation.Message}{Environment.NewLine}");
             }
             else
             {
-                this.AppendText($"{conversation.Speaker}: {conversation.Message}{Environment.NewLine}");
+                AppendText($"{conversation.Speaker}: {conversation.Message}{Environment.NewLine}");
             }
         }
 
         public void ClearConversation()
         {
-            this.Clear();
+            Clear();
         }
 
         public void HideConversation()
@@ -87,7 +91,7 @@ namespace carrot_game
                 hintTextLabel.Visible = false;
             }
 
-            this.Hide();
+            Hide();
         }
 
         public void ShowConversation()
@@ -101,7 +105,7 @@ namespace carrot_game
             {
                 hintTextLabel.Visible = true;
             }
-            this.Show();
+            Show();
         }
 
         // Get the array of conversations
@@ -110,7 +114,7 @@ namespace carrot_game
             return new[]
             {
                 //0
-                ("", "Hello, this is the carrot game"),
+                ("Mom:", $"Good morning, {GameScreen.gs.player.Name}...Could you go outside and play? Mom and dad are busy today."),
                 
                 //1-3
                 ("NPC", "Hi there! How can I help you?"),

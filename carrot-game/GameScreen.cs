@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Security.Policy;
 using System.Text;
@@ -32,6 +33,7 @@ namespace carrot_game
 
         // List of items carrots
         private List<Item> carrots = new List<Item>();
+        private List<Item> items = new List<Item>();
         private static int _carrotsLimit = 3;
 
         internal Map gameMap = new Map();
@@ -48,7 +50,11 @@ namespace carrot_game
         }
 
         public int savePos;
-        public static GameScreen gs; 
+        public static GameScreen gs;
+        internal CollisionChecker cChecker;
+
+        // To allow drawing the player character:
+        public static bool drawHero = false;
 
         // Declaring a refresh rate of 30 frames per second [33.33ms] (1000ms / 30)
         public static int fps = 30;
@@ -105,6 +111,17 @@ namespace carrot_game
             // Hook up the KeyPress event handler
             this.KeyPress += GameScreen_KeyPress;
 
+            // Start the collision checker
+            cChecker = new CollisionChecker(gs);
+
+            // Draw the house
+            Item house = new Item(MapTile.tileSize * 14, MapTile.tileSize * 0, Properties.Resources.House, MapTile.tileSize * 4, MapTile.tileSize * 4);
+            items.Add(house);
+
+            // Draw the welcome message:
+            DisplayMessages(0, 0);
+            player.DisableMovement();
+
         }
         public GameScreen(int save) : this() 
         {
@@ -114,12 +131,7 @@ namespace carrot_game
 
         private void GameScreen_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Check which key was pressed
-            if (e.KeyChar == 'p' || e.KeyChar == 'P') //test message
-            {
-                DisplayMessages(0, 0); // initial index, final index
-            }
-            else if (e.KeyChar == 'o' || e.KeyChar == 'O') //test message
+            if (e.KeyChar == 'o' || e.KeyChar == 'O') //test message
             {
                 DisplayMessages(1, 3);
             }
@@ -129,7 +141,18 @@ namespace carrot_game
             {
                 // Prevent the key from being processed further
                 e.Handled = true;
-
+                if (!drawHero)
+                {
+                    Task.Run(async () =>
+                    {
+                        drawHero = true;
+                        player.AllowMovement();
+                        player.DownPressed = true;
+                        player.Move(0, player.Speed, 0);
+                        await Task.Delay(100);
+                        player.DownPressed =  false;
+                    });
+                }
                 messageSent = false;
                 messageCurrentIndex++;
                 conversationTextBox.ClearConversation();
@@ -185,7 +208,6 @@ namespace carrot_game
             Refresh();
 
             // Deal with collisions
-            player.AllowMovement();
             foreach (var m in Monster.SpawnedMonsters)
             {
                 if (player.IsColliding(m))
@@ -237,26 +259,40 @@ namespace carrot_game
             {
                 if (!c.IsCollected)
                 {
-                    g.DrawImage(c.CarrotImage, c.ScreenX, c.ScreenY, c.Width, c.Height);
+                    g.DrawImage(c.img, c.ScreenX, c.ScreenY, c.Width, c.Height);
+                }
+            }
+
+            // Draw itesms
+            foreach (var i in items)
+            {
+                if (!i.IsCollected)
+                {
+                    g.DrawImage(i.img, i.ScreenX, i.ScreenY, i.Width, i.Height);
                 }
             }
 
             // Draw monsters with lower z-index:
             DrawMonsters(g, 0);
 
-            // Draw our Hero's Shadow:
-            g.FillEllipse(new SolidBrush(Color.FromArgb(120, 40, 40, 40)), _pr);
             // Draw our Hero:
-            g.DrawImage(player.CurrentSprite, player.ScreenX, player.ScreenY, player.Width, player.Height);
-            if (Options.showBoundingBox == true)
+            if (drawHero)
             {
-                g.DrawRectangle(new Pen(Color.Magenta, 3f), P.BoundingBox);
+                // Draw our player's shadow:
+                g.FillEllipse(new SolidBrush(Color.FromArgb(120, 40, 40, 40)), _pr);
+                // Draw the character:
+                g.DrawImage(player.CurrentSprite, player.ScreenX, player.ScreenY, player.Width, player.Height);
+                if (Options.showBoundingBox == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Magenta, 3f), P.BoundingBox);
+                }
+                if (showPlayerName == true)
+                {
+                    Rectangle nameTag = new Rectangle(player.ScreenX, player.ScreenY - 20, player.Width, 20);
+                    g.DrawString(player.Name, PlayerNameTag, Brushes.Black, nameTag, sf);
+                }
             }
-            if (showPlayerName == true)
-            {
-                Rectangle nameTag = new Rectangle(player.ScreenX, player.ScreenY - 20, player.Width, 20);
-                g.DrawString(player.Name, PlayerNameTag, Brushes.Black, nameTag, sf);
-            }
+
             // Draw monsters with higher z-index:
             DrawMonsters(g, 1);
 
