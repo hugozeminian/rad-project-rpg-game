@@ -19,8 +19,8 @@ namespace carrot_game
 
         Audio ItemSoundEffect = new Audio();
 
-        public int PosX { get; set; }
-        public int PosY { get; set; }
+        public int ScreenX { get; set; }
+        public int ScreenY { get; set; }
         public int Width { get; set; } = 80;
         public int Height { get; set; } = 80;
         public bool IsCollected { get; set; }
@@ -30,8 +30,8 @@ namespace carrot_game
 
         public Item(int x, int y)
         {
-            PosX = x;
-            PosY = y;
+            ScreenX = x;
+            ScreenY = y;
             IsCollected = false;
         }
 
@@ -48,7 +48,7 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(PosX, PosY, Width, Height);
+                return new Rectangle(ScreenX, ScreenY, Width, Height);
             }
         }
 

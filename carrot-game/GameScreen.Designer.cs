@@ -1,4 +1,7 @@
-﻿namespace carrot_game
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace carrot_game
 {
     partial class GameScreen
     {
@@ -28,6 +31,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            // ----- Manually added rows:
+
+
+            // ----- End of added rows;
+
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();

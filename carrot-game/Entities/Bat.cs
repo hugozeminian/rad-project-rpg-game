@@ -15,7 +15,7 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(PosX + 3 * Width / 8, PosY + 2* Height / 3, Width / 4, Height / 3);
+                return new Rectangle(ScreenX + 3 * Width / 8, ScreenY + 2* Height / 3, Width / 4, Height / 3);
             }
         }
         public Bat() {
@@ -26,8 +26,8 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 5;
-            PosX = Random.Next(-200, 0);
-            PosY = Random.Next(-200, 1200);
+            ScreenX = Random.Next(-200, 0);
+            ScreenY = Random.Next(-200, 1200);
             PosZ = 1;
             Direction = "down";
             Carrots = 1;

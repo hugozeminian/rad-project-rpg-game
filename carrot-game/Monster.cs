@@ -54,19 +54,19 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(PosX, PosY, Width, Height);
+                return new Rectangle(ScreenX, ScreenY, Width, Height);
             }
         }
         // Move the character on X, Y and Z axis.
         public override void Move(int x, int y, int z)
         {
-            PosX += x;
-            PosY += y;
+            ScreenX += x;
+            ScreenY += y;
             PosZ += z;
         }
 
         // This makes monsters follow the player.
-        public void FollowPlayer(ref Player p)
+        public void FollowPlayer(Player p)
         {
             // This makes movement "in turns", to avoid movement being "too smooth". 
             // Remove the _moveCounter if blocks to make movement smooth.
@@ -239,10 +239,10 @@ namespace carrot_game
         // Check if the monster is colliding with the player.
         public bool IsColliding(Entity player)
         {
-            return  PosX < player.PosX + player.Width   &&
-                    PosX + Width > player.PosX          &&
-                    PosY < player.PosY + player.Height  &&
-                    PosY + Height > player.PosY;
+            return  ScreenX < player.ScreenX + player.Width   &&
+                    ScreenX + Width > player.ScreenX          &&
+                    ScreenY < player.ScreenY + player.Height  &&
+                    ScreenY + Height > player.ScreenY;
         }
 
         public void Die()

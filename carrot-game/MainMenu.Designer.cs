@@ -83,6 +83,7 @@ namespace carrot_game
             this.mediaIntro = new AxWMPLib.AxWindowsMediaPlayer();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pnlList.SuspendLayout();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Program.FormClosed);
             this.pnlOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).BeginInit();
             this.SuspendLayout();

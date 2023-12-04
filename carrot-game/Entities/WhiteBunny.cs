@@ -14,7 +14,7 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(PosX + Width / 4, PosY + Height / 2, 2 * Width / 3, Height / 2);
+                return new Rectangle(ScreenX + Width / 4, ScreenY + Height / 2, 2 * Width / 3, Height / 2);
             }
         }
         public WhiteBunny() {
@@ -25,8 +25,8 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 3;
-            PosX = Random.Next(-200, 2200);
-            PosY = 1200;
+            ScreenX = Random.Next(-200, 2200);
+            ScreenY = 1200;
             PosZ = 1;
             Direction = "down";
             Carrots = 1;

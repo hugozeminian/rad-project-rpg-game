@@ -11,70 +11,74 @@ namespace carrot_game
     internal class Map
     {
  
-        private List<Image> tileImages;
-        private int tileSize = 64; // Tile size in pixels
         private int[,] mapData;
 
-        public Map(int[,] mapData)
+        public Map()
         {
-            this.mapData = mapData;
-            LoadTileImages();
+            mapData = GenerateMap();
         }
 
         // Load tile images from resources
-        private void LoadTileImages()
+        private int[,] GenerateMap()
         {
-            // Load tile images
-            tileImages = new List<Image>
-            {
-                Properties.Resources.grass1, //1
-            
-                Properties.Resources.water1, //2
-                Properties.Resources.water2, //3
-                Properties.Resources.water3, //4
-                Properties.Resources.water4, //5
-                Properties.Resources.water5, //6
-
-                Properties.Resources.GrassBottomLeft_WaterTopRight, //7
-                Properties.Resources.GrassBottomRight_WaterTopLeft, //8
-                Properties.Resources.GrassBottom_WaterAround, //9
-                Properties.Resources.GrassBottom_WaterTop, //10
-                Properties.Resources.GrassLeft_WaterAround, //11
-                Properties.Resources.GrassLeft_WaterRight, //12
-                Properties.Resources.GrassRight_WaterAround, //13
-                Properties.Resources.GrassRight_WaterLeft, //14
-                Properties.Resources.GrassTopLeft_WaterBottomRight, //15
-                Properties.Resources.GrassTopRight_WaterBottomLeft, //16
-                Properties.Resources.GrassTop_WaterAround, //17
-                Properties.Resources.GrassTop_WaterBottom, //18
-
-                Properties.Resources.wall, //19
-                Properties.Resources.House, //20
+           int[,] _m = {
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19, 19, 19, 19},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19,  0,  0, 19},
+                { 0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19,  0,  0, 19},
+                { 0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19, 19, 19, 19},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 18, 18,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 18, 18,  0, 12,  2,  5, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  4,  3, 14, 12,  5,  6, 16,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0},
+                { 0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  2,  3, 16, 15,  4,  2,  4, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  5,  4,  5,  6,  3,  4,  3, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  7,  2,  3,  2,  2,  5,  2, 16,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  4,  2,  4,  2,  3,  5, 14,  0,  0,  0,  1,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  2,  6,  3,  3,  4,  6, 14,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  2,  9,  3,  2,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 10,  0, 10, 10,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+                { 0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0},
+                { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}
             };
+            return _m;
         }
 
         // Draw the map based on the mapData
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, GameScreen gs)
         {
             for (int row = 0; row < mapData.GetLength(0); row++)
             {
                 for (int col = 0; col < mapData.GetLength(1); col++)
                 {
                     int tileType = mapData[row, col];
-                    if (tileType >= 1 && tileType <= tileImages.Count)
+                    if (tileType >= 1 && tileType <= MapTile.TileImages.Length)
                     {
+                        Image tileImage = MapTile.TileImages[tileType - 1].img;
+                        int worldX = col * MapTile.tileSize;
+                        int worldY = row * MapTile.tileSize;
+                        int screenX = worldX - gs.player.WorldX + gs.player.ScreenX;
+                        int screenY = worldY - gs.player.WorldY + gs.player.ScreenY;
+
                         // Draw the tile image at the specified position
-                        Image tileImage = tileImages[tileType - 1];
-                        if(tileType == 20)
+                        if (tileType != 20)
                         {
-                            g.DrawImage(tileImage, col * tileSize, -tileSize, tileSize*4, tileSize*4);
+                            g.DrawImage(tileImage, screenX, screenY, MapTile.tileSize, MapTile.tileSize);
                         }
+                        // Special case (House) [TODO: change to entity later]:
                         else
-                            g.DrawImage(tileImage, col * tileSize, row * tileSize, tileSize, tileSize);
+                        {
+
+                            g.DrawImage(tileImage, col * MapTile.tileSize, -MapTile.tileSize, MapTile.tileSize *4, MapTile.tileSize *4);
+
+                        }
                     }
                 }
             }
         }
-
     }
 }

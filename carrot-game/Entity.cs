@@ -20,8 +20,10 @@ namespace carrot_game
         public int Attack { get; set; }
         public int Speed { get; set; }
         public int Defense { get; set; }
-        public int PosX { get; set; }
-        public int PosY { get; set; }
+        public int WorldX {get; set;}
+        public int WorldY {get; set; }
+        public int ScreenX { get; set; }
+        public int ScreenY { get; set; }
         public int PosZ { get; set; }
         public string Direction { get; set; }
         public Bitmap[,] SpriteImages;

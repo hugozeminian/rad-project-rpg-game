@@ -28,17 +28,17 @@ namespace carrot_game
         public static int GlobalScale = 2;
 
         // Limits the number of monsters
-        private static int _monsterLimit = 3;
+        private static int _monsterLimit = 1;
 
         // List of items carrots
         private List<Item> carrots = new List<Item>();
         private static int _carrotsLimit = 3;
 
-        private Map gameMap;
+        private Map gameMap = new Map();
 
         UIPlayer uIPlayer = new UIPlayer();
 
-        Player heroCharacter = new Player();
+        internal Player player = new Player();
         internal static Player P
         {
             get
@@ -48,7 +48,7 @@ namespace carrot_game
         }
 
         public int savePos;
-        public GameScreen gs; 
+        public static GameScreen gs; 
 
         // Declaring a refresh rate of 30 frames per second [33.33ms] (1000ms / 30)
         public static int fps = 30;
@@ -67,26 +67,25 @@ namespace carrot_game
 
         public GameScreen()
         {
+            // Initialization configuration moved to InitializeComponent to declutter code here.
             InitializeComponent();
+
+            MapTile.PopulateArray();
+            CenterScreen(player);
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             Size = new Size(ScreenWidth, ScreenHeight);
             gs = this;
-
             if (Options.bgm)
-            bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
-
-            CreateMap();
+                bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
             Program.CurrentScreen = "Game Screen";
-
-            // Adjusting name tag text and alignment:
             sf.Alignment = StringAlignment.Center;
-            sf.LineAlignment = StringAlignment.Center;  
+            sf.LineAlignment = StringAlignment.Center;
         }
         public GameScreen(int save) : this() 
         {
             savePos = save;
-            heroCharacter = new Player(save);
+            player = new Player(save);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -95,18 +94,18 @@ namespace carrot_game
             Refresh();
 
             // Deal with collisions
-            heroCharacter.AllowMovement();
+            player.AllowMovement();
             foreach (var m in Monster.SpawnedMonsters)
             {
-                if (heroCharacter.IsColliding(m))
-                    heroCharacter.RestrictMovement(m);
+                if (player.IsColliding(m))
+                    player.RestrictMovement(m);
             }
+
             // updates the character's position and sprite image.
-            heroCharacter.Update();
+            player.Update();
             SpawnMonsters();
-            //m.FollowPlayer(ref heroCharacter);
             AnimateMonsters();
-            UpdateMonsters(ref Monster.SpawnedMonsters);
+            UpdateMonsters(Monster.SpawnedMonsters);
 
             // Spawn a new carrot every x seconds
             monsterSpawnTimer++;
@@ -123,13 +122,22 @@ namespace carrot_game
         {
             foreach (Monster _m in  Monster.SpawnedMonsters)
             {
-                _m.FollowPlayer(ref heroCharacter);
+                _m.FollowPlayer(player);
             }
+        }
+
+        // Solution to center player based on https://stackoverflow.com/a/18496302
+        internal void CenterScreen(Player p)
+        {
+            Screen screen = Screen.FromControl(this);
+            Rectangle workingArea = screen.WorkingArea;
+            p.ScreenX = Math.Max(workingArea.X, workingArea.X + (workingArea.Width - p.Width) / 2) - MapTile.tileSize / 2;
+            p.ScreenY = Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - p.Height) / 2) - MapTile.tileSize / 2;
         }
 
         private void PaintObjects(object sender, PaintEventArgs e)
         {
-            Rectangle _pr = new Rectangle(heroCharacter.BoundingBox.Location.X - 5, heroCharacter.BoundingBox.Location.Y + heroCharacter.BoundingBox.Height - 20, heroCharacter.BoundingBox.Width + 10, 25);
+            Rectangle _pr = new Rectangle(player.BoundingBox.Location.X - 5, player.BoundingBox.Location.Y + player.BoundingBox.Height - 20, player.BoundingBox.Width + 10, 25);
             // Create a Graphics object to draw on the form
             Graphics g = e.Graphics;
 
@@ -138,7 +146,7 @@ namespace carrot_game
             {
                 if (!c.IsCollected)
                 {
-                    g.DrawImage(c.CarrotImage, c.PosX, c.PosY, c.Width, c.Height);
+                    g.DrawImage(c.CarrotImage, c.ScreenX, c.ScreenY, c.Width, c.Height);
                 }
             }
 
@@ -149,15 +157,15 @@ namespace carrot_game
             g.DrawEllipse(Pens.Black, _pr);
             g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _pr);
             // Draw our Hero:
-            g.DrawImage(heroCharacter.CurrentSprite, heroCharacter.PosX, heroCharacter.PosY, heroCharacter.Width, heroCharacter.Height);
+            g.DrawImage(player.CurrentSprite, player.ScreenX, player.ScreenY, player.Width, player.Height);
             if (Options.showBoundingBox == true)
             {
                 g.DrawRectangle(new Pen(Color.Magenta, 3f), P.BoundingBox);
             }
             if (showPlayerName == true)
             {
-                Rectangle nameTag = new Rectangle(heroCharacter.PosX, heroCharacter.PosY - 20, heroCharacter.Width, 20);
-                g.DrawString(heroCharacter.Name, PlayerNameTag, Brushes.Black, nameTag, sf);
+                Rectangle nameTag = new Rectangle(player.ScreenX, player.ScreenY - 20, player.Width, 20);
+                g.DrawString(player.Name, PlayerNameTag, Brushes.Black, nameTag, sf);
             }
             // Draw monsters with higher z-index:
             DrawMonsters(g, 1);
@@ -168,7 +176,7 @@ namespace carrot_game
 
         private void PaintMap(object sender, PaintEventArgs e)
         {
-            gameMap.Draw(e.Graphics);
+            gameMap.Draw(e.Graphics, gs);
         }
 
         private void PaintUIPlayer(object sender, PaintEventArgs e)
@@ -196,12 +204,12 @@ namespace carrot_game
 
         private void GameScreen_KeyDown(object sender, KeyEventArgs e)
         {
-            KeyHandler.HandleKeyDown(e, heroCharacter, gs);
+            KeyHandler.HandleKeyDown(e, player, gs);
         }
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
-            KeyHandler.HandleKeyRelease(e, heroCharacter, gs);
+            KeyHandler.HandleKeyRelease(e, player, gs);
         }
 
         private void SaveToFile(int SavePosition)
@@ -211,12 +219,12 @@ namespace carrot_game
             File.Delete(path);
                 using (FileStream fs = File.Create(path))
                 {
-                    foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(heroCharacter))
+                    foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(player))
                     {
                     string name = prop.Name;
                     if (prop.PropertyType == typeof(string))
-                            AddText(fs, $"{name}=\"{prop.GetValue(heroCharacter)}\"\n");
-                    else    AddText(fs, $"{name}={prop.GetValue(heroCharacter)}\n");
+                            AddText(fs, $"{name}=\"{prop.GetValue(player)}\"\n");
+                    else    AddText(fs, $"{name}={prop.GetValue(player)}\n");
                     }
                     fs.Seek(-2, SeekOrigin.End);
                     fs.Close();
@@ -229,21 +237,7 @@ namespace carrot_game
             fs.Write(info, 0, info.Length);
         }
 
-        private void GameScreen_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            bgm.StopAudioBackgroud();
-            DisposeOfAssets();
-            MainMenu m = new MainMenu();
-            m.Show();
-        }
-
-        private void DisposeOfAssets()
-        {
-            Monster.SpawnedMonsters.Clear();
-            Monster.Counter = 0;
-        }
-
-        private void UpdateMonsters(ref List<Monster> monsters)
+        private void UpdateMonsters(List<Monster> monsters)
         {
             foreach (Monster m in monsters)
             {
@@ -261,24 +255,26 @@ namespace carrot_game
             {
                 Rectangle _r = new Rectangle(m.BoundingBox.Location.X - 5, m.BoundingBox.Location.Y + m.BoundingBox.Height - 20, m.BoundingBox.Width + 10, 25);
 
-                if (m.BoundingBox.Bottom >= heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height/2 && pos == 1) // 1 meaning draw on top of player
+                // pos == 1 means draw on top of player
+                if (m.BoundingBox.Bottom >= player.BoundingBox.Bottom - player.BoundingBox.Height/2 && pos == 1) 
                 {
                     g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _r);
-                    g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
+                    g.DrawImage(m.CurrentSprite, m.ScreenX, m.ScreenY, m.Width, m.Height);
                     if (Options.showBoundingBox == true)
                     {
                         g.DrawRectangle(Pens.Red, m.BoundingBox);
                     }
                     if (showMonsterNames == true)
                     {
-                        Rectangle nameTag = new Rectangle(m.PosX - (nameTagMaxWidth - m.Width)/2, m.PosY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
+                        Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width)/2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
                         g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
                     }
                 }
-                else if (m.BoundingBox.Bottom < heroCharacter.BoundingBox.Bottom - heroCharacter.BoundingBox.Height /2 && pos == 0) // 0 meaning draw under player
+                // pos == 0 means draw under player
+                else if (m.BoundingBox.Bottom < player.BoundingBox.Bottom - player.BoundingBox.Height /2 && pos == 0) 
                 {
                     g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _r);
-                    g.DrawImage(m.CurrentSprite, m.PosX, m.PosY, m.Width, m.Height);
+                    g.DrawImage(m.CurrentSprite, m.ScreenX, m.ScreenY, m.Width, m.Height);
 
                     if (Options.showBoundingBox == true)
                     {
@@ -286,13 +282,12 @@ namespace carrot_game
                     }
                     if (showMonsterNames == true)
                     {
-                            Rectangle nameTag = new Rectangle(m.PosX - (nameTagMaxWidth - m.Width) / 2, m.PosY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
+                            Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width) / 2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
                             g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
                     }
                 }
             }
         }
-
 
         // Draws the damage numbers on top of the player
         private void DrawDamage(Graphics g)
@@ -310,21 +305,21 @@ namespace carrot_game
 
             // To avoid wasting processing power when we don't have any damage to display:
             if (Monster.damageNumbers.Count > 0)
-                foreach (var dmg in _d)
+            foreach (var dmg in _d)
+            {
+                int _ind = _d.IndexOf(dmg) + _indxtra;
+                Rectangle _dmgBox = new Rectangle(player.ScreenX - 5, player.ScreenY - dmg[1], player.Width + 10, 25);
+
+                g.DrawString(dmg[0].ToString(), PlayerNameTag, Brushes.Red, _dmgBox, sf);
+
+                Monster.damageNumbers[_ind][1]++;
+
+                if (Monster.damageNumbers[_ind][1] > fps*4)
                 {
-                    int _ind = _d.IndexOf(dmg) + _indxtra;
-                    Rectangle _dmgBox = new Rectangle(heroCharacter.PosX - 5, heroCharacter.PosY - dmg[1], heroCharacter.Width + 10, 25);
-
-                    g.DrawString(dmg[0].ToString(), PlayerNameTag, Brushes.Red, _dmgBox, sf);
-
-                    Monster.damageNumbers[_ind][1]++;
-
-                    if (Monster.damageNumbers[_ind][1] > fps*4)
-                    {
-                        Monster.damageNumbers.Remove(dmg);
-                        _indxtra--;
-                    }
+                    Monster.damageNumbers.Remove(dmg);
+                    _indxtra--;
                 }
+            }
         }
 
         private static void SpawnMonsters()
@@ -348,7 +343,7 @@ namespace carrot_game
 
         public void CollectCarrots()
         {
-            Rectangle playerBoundingBox = heroCharacter.BoundingBox;
+            Rectangle playerBoundingBox = player.BoundingBox;
 
             foreach (var carrot in carrots)
             {
@@ -361,38 +356,17 @@ namespace carrot_game
             }
         }
 
-        private void CreateMap()
+        private void DisposeOfAssets()
         {
-
-            //Map data as a 2D array [22 rows and 40 col]
-            int[,] mapData = new int[,]
-            {
-                {20,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19, 19, 19, 19},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19,  0,  0, 19},
-                {0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19,  0,  0, 19},
-                {0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 19, 19, 19, 19},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 18, 18,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 18, 18,  0, 12,  2,  5, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  4,  3, 14, 12,  5,  6, 16,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0},
-                {0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  2,  3, 16, 15,  4,  2,  4, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  5,  4,  5,  6,  3,  4,  3, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  7,  2,  3,  2,  2,  5,  2, 16,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  4,  2,  4,  2,  3,  5, 14,  0,  0,  0,  1,  0,  0,  0,  0},
-                {0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 12,  2,  6,  3,  3,  4,  6, 14,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  2,  9,  3,  2,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 10,  0, 10, 10,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
-                {0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0},
-                {0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}
-            };
-
-            // Create the map
-            gameMap = new Map(mapData);
+            Monster.SpawnedMonsters.Clear();
+            Monster.Counter = 0;
+        }
+        private void GameScreen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            bgm.StopAudioBackgroud();
+            DisposeOfAssets();
+            MainMenu m = new MainMenu();
+            m.Show();
         }
     }
 }

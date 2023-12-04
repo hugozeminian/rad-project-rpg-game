@@ -35,17 +35,19 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(PosX + Width/3, PosY+ 2*Height / 3, Width/3, Height / 3);
+                return new Rectangle(ScreenX + Width/3, ScreenY+ 2*Height / 3, Width/3, Height / 3);
             }
         }
 
         // Move the character on X, Y and Z axis.
         public override void Move(int x, int y, int z)
         {
-            PosX += x;
-            PosY += y;
+            WorldX += x;
+            WorldY += y;
             PosZ += z;
         }
+
+
 
         public Player()
         {
@@ -56,8 +58,8 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 4;
-            PosX = 100; // ToDo - Change to middle of the screen
-            PosY = 100; // ToDo - Change to middle of the screen
+            ScreenX = 100; // ToDo - Change to middle of the screen
+            ScreenY = 100; // ToDo - Change to middle of the screen
             PosZ = 1;
             Direction = "down";
             Carrots = 0;
