@@ -21,7 +21,6 @@ namespace carrot_game
             var main = new MainMenu();
             main.Show();
             Application.Run();
-
             // initialize a KeyHandler
             // initialize GameScreen
             // Create a player character

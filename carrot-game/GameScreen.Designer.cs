@@ -31,11 +31,6 @@ namespace carrot_game
         /// </summary>
         private void InitializeComponent()
         {
-            // ----- Manually added rows:
-
-
-            // ----- End of added rows;
-
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -49,6 +44,7 @@ namespace carrot_game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImage = global::carrot_game.Properties.Resources.grass;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.DoubleBuffered = true;
@@ -61,7 +57,6 @@ namespace carrot_game
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
             this.ResumeLayout(false);
-
 
         }
 
