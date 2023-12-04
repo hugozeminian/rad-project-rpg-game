@@ -60,8 +60,8 @@ namespace carrot_game
         // Move the character on X, Y and Z axis.
         public override void Move(int x, int y, int z)
         {
-            ScreenX += x;
-            ScreenY += y;
+            WorldX += x;
+            WorldY += y;
             PosZ += z;
         }
 
@@ -132,7 +132,7 @@ namespace carrot_game
                 _attackFrame++;
                 if (_attackFrame > GameScreen.fps*_attackSpeed)
                 {
-                    int attackDamage = Math.Max(this.Attack - Player.currentPlayer.Defense, 1);
+                    int attackDamage = Math.Max(Attack - Player.currentPlayer.Defense, 1);
                     int[] arrayToAdd = { attackDamage, 0 };
                     damageNumbers.Add(arrayToAdd);
                     Player.currentPlayer.CurrentHealthPoints -= attackDamage;
@@ -140,7 +140,7 @@ namespace carrot_game
 
 
                     // Monster Sounds Attack based on the monster type
-                    var monsterType = this.GetType();
+                    var monsterType = GetType();
                     if (monsterType == typeof(Bat))
                     {
                         MonsterSoundEffect.PlayMonsterBatAttackSoundEffect(MonsterSoundEffect.AudioMonsterBatAttack);
@@ -250,34 +250,7 @@ namespace carrot_game
             SpawnedMonsters.Remove(this);
 
             // Earn experience points based on monster type
-            int experiencePointsEarned = GetExperiencePointsForMonster();
-            Player.currentPlayer.GainExperience(experiencePointsEarned);
-        }
-
-        private int GetExperiencePointsForMonster()
-        {
-            var monsterType = this.GetType();
-
-            int experiencePoints = 0;
-
-            if (monsterType == typeof(Bat))
-            {
-                experiencePoints = 5; 
-            }
-            else if (monsterType == typeof(Spider1))
-            {
-                experiencePoints = 5; 
-            }
-            else if (monsterType == typeof(WhiteBunny))
-            {
-                experiencePoints = 10; 
-            }
-            else if (monsterType == typeof(BlackBunny))
-            {
-                experiencePoints = 15; 
-            }
-
-            return experiencePoints;
+            Player.currentPlayer.GainExperience(ExperiencePoints);
         }
     }
 }

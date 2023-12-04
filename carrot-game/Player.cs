@@ -35,7 +35,7 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(ScreenX + Width/3, ScreenY+ 2*Height / 3, Width/3, Height / 3);
+                return new Rectangle(ScreenX + Width/3, ScreenY+ 2*Height / 3, Width * GameScreen.GlobalScale / 6, Height * GameScreen.GlobalScale / 6);
             }
         }
 

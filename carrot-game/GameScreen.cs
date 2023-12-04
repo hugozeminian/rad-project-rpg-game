@@ -34,7 +34,7 @@ namespace carrot_game
         private List<Item> carrots = new List<Item>();
         private static int _carrotsLimit = 3;
 
-        private Map gameMap = new Map();
+        internal Map gameMap = new Map();
 
         UIPlayer uIPlayer = new UIPlayer();
 
@@ -62,8 +62,8 @@ namespace carrot_game
         public static bool showMonsterNames = true;
 
         private static readonly StringFormat sf = new StringFormat();
-        private readonly Font PlayerNameTag = new Font("Georgia", 14, FontStyle.Bold, GraphicsUnit.Point);
-        private readonly Font MonsterNameTag = new Font("Georgia", 12, GraphicsUnit.Point);
+        private readonly Font PlayerNameTag = new Font("Georgia", 7 * GlobalScale, FontStyle.Bold, GraphicsUnit.Point);
+        private readonly Font MonsterNameTag = new Font("Georgia", 6 * GlobalScale, GraphicsUnit.Point);
 
         //Text box and conversations variables
         private ConversationTextBox conversationTextBox;
@@ -75,20 +75,23 @@ namespace carrot_game
 
         public GameScreen()
         {
-            // Initialization configuration moved to InitializeComponent to declutter code here.
             InitializeComponent();
 
-            MapTile.PopulateArray();
             CenterScreen(player);
+
+            // Format window:
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             Size = new Size(ScreenWidth, ScreenHeight);
             gs = this;
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+
+            // Manage options choice
             if (Options.bgm)
                 bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
             Program.CurrentScreen = "Game Screen";
-            sf.Alignment = StringAlignment.Center;
-            sf.LineAlignment = StringAlignment.Center;
+  
 
             // ConversationTextBox
             conversationTextBox = new ConversationTextBox(ScreenWidth, ScreenHeight);
@@ -190,16 +193,16 @@ namespace carrot_game
             }
 
             // updates the character's position and sprite image.
-            player.Update();
-            SpawnMonsters();
-            AnimateMonsters();
-            UpdateMonsters(Monster.SpawnedMonsters);
+            Task updatePlayer = Task.Run(() => player.Update());
+            Task spawnMonsters = Task.Run(() => SpawnMonsters());
+            Task animateMonsters = Task.Run(() => AnimateMonsters());
+            Task updateMonsters = Task.Run(() => UpdateMonsters(Monster.SpawnedMonsters));
 
             // Spawn a new carrot every x seconds
             monsterSpawnTimer++;
             if (monsterSpawnTimer % (fps * 10) == 0 )
             {
-                SpawnCarrot();
+                Task spawnCarrot = Task.Run(() => SpawnCarrot());
             }
 
             // Check and update carrot collection
@@ -219,8 +222,8 @@ namespace carrot_game
         {
             Screen screen = Screen.FromControl(this);
             Rectangle workingArea = screen.WorkingArea;
-            p.ScreenX = Math.Max(workingArea.X, workingArea.X + (workingArea.Width - p.Width) / 2) - MapTile.tileSize / 2;
-            p.ScreenY = Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - p.Height) / 2) - MapTile.tileSize / 2;
+            p.ScreenX = workingArea.X + (workingArea.Width - p.Width) / 2 - MapTile.tileSize / 2;
+            p.ScreenY = workingArea.Y + (workingArea.Height - p.Height) / 2 - MapTile.tileSize / 2;
         }
 
         private void PaintObjects(object sender, PaintEventArgs e)
@@ -242,8 +245,7 @@ namespace carrot_game
             DrawMonsters(g, 0);
 
             // Draw our Hero's Shadow:
-            g.DrawEllipse(Pens.Black, _pr);
-            g.FillEllipse(new SolidBrush(Color.FromArgb(190, 40, 40, 40)), _pr);
+            g.FillEllipse(new SolidBrush(Color.FromArgb(120, 40, 40, 40)), _pr);
             // Draw our Hero:
             g.DrawImage(player.CurrentSprite, player.ScreenX, player.ScreenY, player.Width, player.Height);
             if (Options.showBoundingBox == true)
@@ -341,6 +343,10 @@ namespace carrot_game
 
             foreach (Monster m in Monster.SpawnedMonsters)
             {
+                m.ScreenX = m.WorldX - gs.player.WorldX - gs.player.ScreenX;
+                m.ScreenY = m.WorldY - gs.player.WorldY - gs.player.ScreenY;
+
+                // rectangle that contains the monster shadow
                 Rectangle _r = new Rectangle(m.BoundingBox.Location.X - 5, m.BoundingBox.Location.Y + m.BoundingBox.Height - 20, m.BoundingBox.Width + 10, 25);
 
                 // pos == 1 means draw on top of player
@@ -424,7 +430,7 @@ namespace carrot_game
         {
             if (carrots.Count < _carrotsLimit)
             {
-                Item newCarrot = Item.SpawnCarrot(ScreenWidth, ScreenHeight);
+                Item newCarrot = Item.SpawnCarrot(gameMap);
                 carrots.Add(newCarrot);
             }
         }

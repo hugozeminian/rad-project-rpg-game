@@ -4,11 +4,16 @@ ImgPack=""
 BoundingBox={X=1226,Y=685,Width=42,Height=42}
 Name="Player"
 MaxHealthPoints=10
+<<<<<<< HEAD
 CurrentHealthPoints=6
+=======
+CurrentHealthPoints=10
+>>>>>>> 0b4366eb68da39b98778c81dd62311bf7e22e747
 ExperiencePoints=0
 Attack=1
 Speed=4
 Defense=0
+<<<<<<< HEAD
 WorldX=136
 WorldY=-164
 ScreenX=1184
@@ -19,3 +24,15 @@ Carrots=0
 Width=128
 Height=128
 FrameCounter=43
+=======
+WorldX=212
+WorldY=248
+ScreenX=864
+ScreenY=420
+PosZ=1
+Direction="down"
+Carrots=0
+Width=128
+Height=128
+FrameCounter=3
+>>>>>>> 0b4366eb68da39b98778c81dd62311bf7e22e747

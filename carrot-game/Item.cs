@@ -19,8 +19,27 @@ namespace carrot_game
 
         Audio ItemSoundEffect = new Audio();
 
-        public int ScreenX { get; set; }
-        public int ScreenY { get; set; }
+        public int ScreenX { 
+            get {
+                return WorldX - GameScreen.gs.player.WorldX + GameScreen.gs.player.ScreenX;
+            }
+            set {
+                ScreenX = value;
+            } 
+        }
+        public int ScreenY
+        {
+            get
+            {
+                return WorldY - GameScreen.gs.player.WorldY + GameScreen.gs.player.ScreenY;
+            }
+            set
+            {
+                ScreenY = value;
+            }
+        }
+        public int WorldX;
+        public int WorldY;
         public int Width { get; set; } = 80;
         public int Height { get; set; } = 80;
         public bool IsCollected { get; set; }
@@ -30,18 +49,23 @@ namespace carrot_game
 
         public Item(int x, int y)
         {
-            ScreenX = x;
-            ScreenY = y;
+            WorldX = x;
+            WorldY = y;
             IsCollected = false;
         }
 
-        public static Item SpawnCarrot(int screenWidth, int screenHeight)
+        public static Item SpawnCarrot(Map map)
         {
-            var random = new Random();
-            int x = random.Next(0, screenWidth - Properties.Resources.carrot.Width);
-            int y = random.Next(0, screenHeight - Properties.Resources.carrot.Height);
+            Random _r = new Random();
+            int row = 0;
+            int col = 0;
+            while (GameScreen.gs.gameMap.mapArray[row,col].collision != false)
+            {
+                row = _r.Next(0, GameScreen.gs.gameMap.mapData.GetLength(0));
+                col = _r.Next(0, GameScreen.gs.gameMap.mapData.GetLength(1));
+            }
 
-            return new Item(x, y);
+            return new Item(row * MapTile.tileSize, col * MapTile.tileSize);
         }
 
         public Rectangle BoundingBox

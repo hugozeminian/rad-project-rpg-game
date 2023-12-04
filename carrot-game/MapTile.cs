@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,52 +12,71 @@ namespace carrot_game
     {
         public bool collision = false;
         public static int tileSize = 64;
-        public Image img; 
-        internal static int _arraySize = 20;
-        internal static readonly MapTile[] TileImages = new MapTile[_arraySize];
-            
-        internal static void PopulateArray()
+        public Image img;
+        internal static MapTile[] TileSet;
+
+        static MapTile()
         {
-            for (int i = 0; i < _arraySize; i++)
+            InitializeTileSet();
+        }
+
+        public MapTile(bool collision, Image img) : base()
+        {
+            this.collision = collision;
+            this.img = img;
+        }
+        public MapTile()
+        {
+        }
+
+        private static void InitializeTileSet()
+        {
+            TileSet = new MapTile[20]
             {
-                TileImages[i] = new MapTile();
+            new MapTile { img = Properties.Resources.grass },   // 0
+            new MapTile { img = Properties.Resources.water1 },  // 1
+            new MapTile { img = Properties.Resources.water2 },  // 2
+            new MapTile { img = Properties.Resources.water3 },  // 3
+            new MapTile { img = Properties.Resources.water4 },  // 4
+            new MapTile { img = Properties.Resources.water5 },  // 5
+
+            new MapTile { img = Properties.Resources.GrassBottomLeft_WaterTopRight },   // 6
+            new MapTile { img = Properties.Resources.GrassBottomRight_WaterTopLeft },   // 7
+            new MapTile { img = Properties.Resources.GrassBottom_WaterAround },         // 8
+            new MapTile { img = Properties.Resources.GrassBottom_WaterTop },            // 9
+            new MapTile { img = Properties.Resources.GrassLeft_WaterAround },           // 10
+            new MapTile { img = Properties.Resources.GrassLeft_WaterRight },            // 11
+            new MapTile { img = Properties.Resources.GrassRight_WaterAround },          // 12
+            new MapTile { img = Properties.Resources.GrassRight_WaterLeft },            // 13
+            new MapTile { img = Properties.Resources.GrassTopLeft_WaterBottomRight },   // 14
+            new MapTile { img = Properties.Resources.GrassTopRight_WaterBottomLeft },   // 15
+            new MapTile { img = Properties.Resources.GrassTop_WaterAround },            // 16
+            new MapTile { img = Properties.Resources.GrassTop_WaterBottom },            // 17
+
+            new MapTile { img = Properties.Resources.wall },                            // 18
+            new MapTile { img = Properties.Resources.House }                            // 19
+            };
+
+            for (int i = 0; i < TileSet.Length; i++)
+            {
+                TileSet[i].collision = CheckCollision(i);
             }
+        }
 
-            TileImages[0].img = Properties.Resources.grass1; //1
-            
-            TileImages[1].img = Properties.Resources.water1; //2
-            TileImages[1].collision = true;
-
-            TileImages[2].img = Properties.Resources.water2; //3
-            TileImages[2].collision = true;
-
-            TileImages[3].img = Properties.Resources.water3; //4
-            TileImages[3].collision = true;
-
-            TileImages[4].img = Properties.Resources.water4; //5
-            TileImages[4].collision = true;
-
-            TileImages[5].img = Properties.Resources.water5; //6
-            TileImages[5].collision = true;
-
-            TileImages[6].img = Properties.Resources.GrassBottomLeft_WaterTopRight; //7
-            TileImages[7].img = Properties.Resources.GrassBottomRight_WaterTopLeft; //8
-            TileImages[8].img = Properties.Resources.GrassBottom_WaterAround; //9
-            TileImages[9].img = Properties.Resources.GrassBottom_WaterTop; //10
-            TileImages[10].img = Properties.Resources.GrassLeft_WaterAround; //11
-            TileImages[11].img = Properties.Resources.GrassLeft_WaterRight; //12
-            TileImages[12].img = Properties.Resources.GrassRight_WaterAround; //13
-            TileImages[13].img = Properties.Resources.GrassRight_WaterLeft; //14
-            TileImages[14].img = Properties.Resources.GrassTopLeft_WaterBottomRight; //15
-            TileImages[15].img = Properties.Resources.GrassTopRight_WaterBottomLeft; //16
-            TileImages[16].img = Properties.Resources.GrassTop_WaterAround; //17
-            TileImages[17].img = Properties.Resources.GrassTop_WaterBottom; //18
-
-            TileImages[18].img = Properties.Resources.wall; //19
-            TileImages[18].collision = true;
-
-            TileImages[19].img = Properties.Resources.House; //20
-            TileImages[19].collision = true;
+            public static bool CheckCollision(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 18:
+                case 19:
+                    return true;
+                default: return false;
+            }
         }
     }
 }
