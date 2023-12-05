@@ -83,7 +83,17 @@ namespace carrot_game
         public GameScreen()
         {
             InitializeComponent();
+            ResetDefault();
+        }
+        public GameScreen(int save) : this() 
+        {
+            savePos = save;
+            player = new Player(save);
+        }
 
+        private void ResetDefault()
+        {
+            drawHero = false;
             CenterScreen(player);
 
             // Format window:
@@ -98,7 +108,7 @@ namespace carrot_game
             if (Options.bgm)
                 bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
             Program.CurrentScreen = "Game Screen";
-  
+
 
             // ConversationTextBox
             conversationTextBox = new ConversationTextBox(ScreenWidth, ScreenHeight);
@@ -122,12 +132,6 @@ namespace carrot_game
             // Draw the welcome message:
             DisplayMessages(0, 0);
             player.DisableMovement();
-
-        }
-        public GameScreen(int save) : this() 
-        {
-            savePos = save;
-            player = new Player(save);
         }
 
         private void GameScreen_KeyPress(object sender, KeyPressEventArgs e)
@@ -300,6 +304,9 @@ namespace carrot_game
 
             // Draw damage numbers:
             DrawDamage(g);
+
+            // Draw attacks:
+            DrawAttacks(g);
         }
 
         private void PaintMap(object sender, PaintEventArgs e)
@@ -373,6 +380,14 @@ namespace carrot_game
             }
         }
 
+        private void DrawAttacks(Graphics g)
+        {
+            foreach (Attack a in Attack.AttacksList)
+            {
+                g.DrawRectangle(Pens.Red, a.BoundingBox);
+            }
+        }
+
         private void DrawMonsters(Graphics g, int pos)
         {
             int nameTagTextGap = 5;
@@ -380,9 +395,9 @@ namespace carrot_game
             int nameTagMaxWidth = 200;
 
             foreach (Monster m in Monster.SpawnedMonsters)
-            {
-                m.ScreenX = m.WorldX - gs.player.WorldX - gs.player.ScreenX;
-                m.ScreenY = m.WorldY - gs.player.WorldY - gs.player.ScreenY;
+            { 
+                m.ScreenX = m.WorldX - gs.player.WorldX + gs.player.ScreenX;
+                m.ScreenY = m.WorldY - gs.player.WorldY + gs.player.ScreenY;
 
                 // rectangle that contains the monster shadow
                 Rectangle _r = new Rectangle(m.BoundingBox.Location.X - 5, m.BoundingBox.Location.Y + m.BoundingBox.Height - 20, m.BoundingBox.Width + 10, 25);
@@ -414,8 +429,8 @@ namespace carrot_game
                     }
                     if (showMonsterNames == true)
                     {
-                            Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width) / 2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
-                            g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
+                        Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width) / 2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
+                        g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
                     }
                 }
             }
@@ -461,6 +476,26 @@ namespace carrot_game
             {
             Type _t = Monster.MonsterList[_r.Next(Monster.MonsterList.Count)];
                 object m = Activator.CreateInstance(_t);
+            }
+
+            Random _r2 = new Random();
+            int row = 0;
+            int col = 0;
+
+            while (gs.gameMap.mapArray[row, col].collision != false)
+            {
+                row = _r2.Next(3, gs.gameMap.mapData.GetLength(0) - 11);
+                col = _r2.Next(14, gs.gameMap.mapData.GetLength(1) - 15);
+            }
+
+            foreach (Monster m in Monster.SpawnedMonsters)
+            {
+                if (m.isSpawned == false)
+                {
+                    Monster.SpawnedMonsters.Last().WorldX = col * MapTile.tileSize;
+                    Monster.SpawnedMonsters.Last().WorldY = row * MapTile.tileSize;
+                    m.isSpawned = true;
+                }
             }
         }
 

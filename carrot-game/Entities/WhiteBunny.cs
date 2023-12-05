@@ -25,8 +25,8 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 3;
-            ScreenX = Random.Next(-200, 2200);
-            ScreenY = 1200;
+            WorldX = 1000;
+            WorldY = 1000;
             PosZ = 1;
             Direction = "down";
             Carrots = 1;

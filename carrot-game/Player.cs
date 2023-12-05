@@ -22,9 +22,10 @@ namespace carrot_game
         // This is a placeholder to receive new outfits in the future:
         public string ImgPack { get; set; } = "";
 
+        // Controls the current sprite image, to avoid rapidly changing images.
         public Bitmap CurrentSprite;
 
-        // Controls the current sprite image, to avoid rapidly changing images.
+        public List<Attack> attacks = new List<Attack>();
         public bool IsAttacking = false;
         public int attackFrame = -1;
 
@@ -210,19 +211,22 @@ namespace carrot_game
                     }
                     FrameCounter = 0;
                 }
-                else if (attackFrame > 9 && IsAttacking)
+                else if (attackFrame > 3 && IsAttacking)
                 {
                     if (Sprite == 0)
                     {
                         Sprite = 1;
+                        attackFrame = 0;
                     }
                     else if (Sprite == 1)
                     {
                         Sprite = 2;
+                        attackFrame = 0;
                     }
                     else if (Sprite == 2)
                     {
                         Sprite = 3;
+                        attackFrame = 0;
                     }
                     else if (Sprite == 3)
                     {
@@ -400,6 +404,7 @@ namespace carrot_game
                 Sprite = 0;
                 DisableMovement();
                 pSoundEffect.PlayHeroAttackSoundEffect(pSoundEffect.AudioHeroAttack);
+                Attack a = new Attack();
             }
             if (attackFrame == -1)
             {

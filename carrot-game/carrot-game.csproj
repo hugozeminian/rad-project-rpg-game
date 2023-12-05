@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attack.cs" />
     <Compile Include="CollisionChecker.cs" />
     <Compile Include="Entities\Spider1.cs" />
     <Compile Include="Entities\Bat.cs" />

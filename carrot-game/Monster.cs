@@ -27,6 +27,8 @@ namespace carrot_game
         //Player sounds
         Audio MonsterSoundEffect = new Audio();
 
+        public bool isSpawned = false;
+
         // A list of all monster types. Whenever a new monster class is created, it should be added to this list.
         // This is used to spawn monsters at random. We can later implement different difficulties monster lists or even environment-specific lists. Ex.: Cave monsters, Grass monsters, water, etc.
         public static List<Type> MonsterList = new List<Type>() {
@@ -70,10 +72,6 @@ namespace carrot_game
         {
             // This makes movement "in turns", to avoid movement being "too smooth". 
             // Remove the _moveCounter if blocks to make movement smooth.
-            if (_moveCounter <= GameScreen.fps)
-            {
-                DisableMovement();
-            }
 
                 if (_moveCounter > GameScreen.fps/(Speed + 1))
             {

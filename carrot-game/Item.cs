@@ -76,7 +76,7 @@ namespace carrot_game
                 col = _r.Next(14, GameScreen.gs.gameMap.mapData.GetLength(1)-15);
             }
 
-            return new Item(row * MapTile.tileSize + 22, col * MapTile.tileSize + 32, Properties.Resources.carrot);
+            return new Item(col * MapTile.tileSize + 22, row * MapTile.tileSize + 32, Properties.Resources.carrot);
         }
 
         public Rectangle BoundingBox
