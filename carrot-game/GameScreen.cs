@@ -62,6 +62,7 @@ namespace carrot_game
         public static int monsterSpawnTimer = 0;
 
         Audio bgm = new Audio();
+        Audio doorSoundEffect = new Audio();
 
         // Declaring the name tag variables:
         public static bool showPlayerName = true;
@@ -151,6 +152,7 @@ namespace carrot_game
                         player.Move(0, player.Speed, 0);
                         await Task.Delay(100);
                         player.DownPressed =  false;
+                        doorSoundEffect.PlayDoorSoundEffect(doorSoundEffect.AudioDoor);
                     });
                 }
                 messageSent = false;
@@ -320,7 +322,7 @@ namespace carrot_game
             this.Paint += new PaintEventHandler(this.PaintUIPlayer);
 
             // Start the timer for redrawing
-            timer1.Start();
+            //timer1.Start();
         }
 
         private void GameScreen_FormClosing(object sender, FormClosingEventArgs e)

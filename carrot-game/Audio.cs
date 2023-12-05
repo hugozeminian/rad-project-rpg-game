@@ -30,6 +30,7 @@ namespace carrot_game
         public AudioFileReader AudioMonsterBlackBunnyAttack { get; private set; } = new AudioFileReader("Resources\\mixkit-martial-arts-fast-punch-2047.wav");
 
         public AudioFileReader AudioItemCarrotCollected { get; private set; } = new AudioFileReader("Resources\\mixkit-player-jumping-in-a-video-game-2043.wav");
+        public AudioFileReader AudioDoor { get; private set; } = new AudioFileReader("Resources\\mixkit-automatic-door-shut-204.wav");
 
 
 
@@ -45,6 +46,7 @@ namespace carrot_game
         private WaveOutEvent WaveOutMonsterBlackBunnyAttack = new WaveOutEvent();
 
         private WaveOutEvent WaveOutItemCarrotCollected = new WaveOutEvent();
+        private WaveOutEvent WaveOutAudioDoor = new WaveOutEvent();
 
 
 
@@ -128,9 +130,15 @@ namespace carrot_game
             PlaySoundEffect(WaveOutMonsterBlackBunnyAttack, audioEffect);
         }
 
+        // Other effects
         public void PlayItemCarrotCollectedSoundEffect(AudioFileReader audioEffect)
         {
             PlaySoundEffect(WaveOutItemCarrotCollected, audioEffect);
+        }
+
+        public void PlayDoorSoundEffect(AudioFileReader audioEffect)
+        {
+            PlaySoundEffect(WaveOutAudioDoor, audioEffect);
         }
 
 
@@ -145,6 +153,7 @@ namespace carrot_game
             WaveOutMonsterBunnyAttack.Dispose();
             WaveOutMonsterBlackBunnyAttack.Dispose();
             WaveOutItemCarrotCollected.Dispose();
+            WaveOutAudioDoor.Dispose();
 
             AudioMenu.Dispose();
             AudioBackgroundPhase1.Dispose();
@@ -153,6 +162,8 @@ namespace carrot_game
             AudioMonsterBatAttack.Dispose();
             AudioMonsterBunnyAttack.Dispose();
             AudioMonsterBlackBunnyAttack.Dispose();
+            AudioItemCarrotCollected.Dispose();
+            AudioDoor.Dispose();
         }
     }
 }

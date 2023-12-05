@@ -912,6 +912,15 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_automatic_door_shut_204 {
+            get {
+                return ResourceManager.GetStream("mixkit_automatic_door_shut_204", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream mixkit_body_punch_quick_hit_2153 {
             get {
                 return ResourceManager.GetStream("mixkit_body_punch_quick_hit_2153", resourceCulture);
