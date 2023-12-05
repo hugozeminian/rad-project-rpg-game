@@ -501,7 +501,11 @@ namespace carrot_game
 
         private void SpawnCarrot()
         {
-            if (carrots.Count < _carrotsLimit)
+            // Count the number of uncollected carrots
+            int uncollectedCarrotsCount = carrots.Count(carrot => !carrot.IsCollected);
+
+            // Check if the limit of uncollected carrots has been reached
+            if (uncollectedCarrotsCount < _carrotsLimit)
             {
                 Item newCarrot = Item.SpawnCarrot(gameMap);
                 newCarrot.Width = 43;
