@@ -33,37 +33,37 @@ namespace carrot_game
         {
             TileSet = new MapTile[32]
             {
-            new MapTile { img = Properties.Resources.grass },   // 0
+            new MapTile { img = Properties.Resources.grass2 },  // 0
             new MapTile { img = Properties.Resources.water1 },  // 1
             new MapTile { img = Properties.Resources.water2 },  // 2
             new MapTile { img = Properties.Resources.water3 },  // 3
             new MapTile { img = Properties.Resources.water4 },  // 4
             new MapTile { img = Properties.Resources.water5 },  // 5
 
-            new MapTile { img = Properties.Resources.GrassBottomLeft_WaterTopRight },   // 6
-            new MapTile { img = Properties.Resources.GrassBottomRight_WaterTopLeft },   // 7
-            new MapTile { img = Properties.Resources.GrassBottom_WaterAround },         // 8
-            new MapTile { img = Properties.Resources.GrassBottom_WaterTop },            // 9
-            new MapTile { img = Properties.Resources.GrassLeft_WaterAround },           // 10
-            new MapTile { img = Properties.Resources.GrassLeft_WaterRight },            // 11
-            new MapTile { img = Properties.Resources.GrassRight_WaterAround },          // 12
-            new MapTile { img = Properties.Resources.GrassRight_WaterLeft },            // 13
-            new MapTile { img = Properties.Resources.GrassTopLeft_WaterBottomRight },   // 14
-            new MapTile { img = Properties.Resources.GrassTopRight_WaterBottomLeft },   // 15
-            new MapTile { img = Properties.Resources.GrassTop_WaterAround },            // 16
-            new MapTile { img = Properties.Resources.GrassTop_WaterBottom },            // 17
+            new MapTile { img = Properties.Resources.GrassBottomLeft_WaterTopRight2 },   // 6
+            new MapTile { img = Properties.Resources.GrassBottomRight_WaterTopLeft2 },   // 7
+            new MapTile { img = Properties.Resources.GrassBottom_WaterAround2 },         // 8
+            new MapTile { img = Properties.Resources.GrassBottom_WaterTop2 },            // 9
+            new MapTile { img = Properties.Resources.GrassLeft_WaterAround2 },           // 10
+            new MapTile { img = Properties.Resources.GrassLeft_WaterRight2 },            // 11
+            new MapTile { img = Properties.Resources.GrassRight_WaterAround2 },          // 12
+            new MapTile { img = Properties.Resources.GrassRight_WaterLeft2 },            // 13
+            new MapTile { img = Properties.Resources.GrassTopLeft_WaterBottomRight2 },   // 14
+            new MapTile { img = Properties.Resources.GrassTopRight_WaterBottomLeft2 },   // 15
+            new MapTile { img = Properties.Resources.GrassTop_WaterAround2 },            // 16
+            new MapTile { img = Properties.Resources.GrassTop_WaterBottom2 },            // 17
 
             new MapTile { img = Properties.Resources.wall },                            // 18
-            new MapTile { img = Properties.Resources.grass },                           // 19 grass with collision
+            new MapTile { img = Properties.Resources.grass2 },                          // 19 grass with collision
 
-            new MapTile { img = Properties.Resources.fence_top },                   // 20
-            new MapTile { img = Properties.Resources.fence_right },                 // 21
-            new MapTile { img = Properties.Resources.fence_bottom },                // 22
-            new MapTile { img = Properties.Resources.fence_left },                  // 23
-            new MapTile { img = Properties.Resources.fence_top_left },              // 24
-            new MapTile { img = Properties.Resources.fence_top_right },             // 25
-            new MapTile { img = Properties.Resources.fence_bottom_right },          // 26
-            new MapTile { img = Properties.Resources.fence_bottom_left },           // 27
+            new MapTile { img = Properties.Resources.fence_top2 },                   // 20
+            new MapTile { img = Properties.Resources.fence_right2 },                 // 21
+            new MapTile { img = Properties.Resources.fence_bottom2 },                // 22
+            new MapTile { img = Properties.Resources.fence_left2 },                  // 23
+            new MapTile { img = Properties.Resources.fence_top_left2 },              // 24
+            new MapTile { img = Properties.Resources.fence_top_right2 },             // 25
+            new MapTile { img = Properties.Resources.fence_bottom_right2 },          // 26
+            new MapTile { img = Properties.Resources.fence_bottom_left2 },           // 27
 
             new MapTile { img = Properties.Resources.Tree_02 },             // 28
 
@@ -100,6 +100,9 @@ namespace carrot_game
                 case 26:
                 case 27:
                 case 28:
+                case 29:
+                case 30:
+                case 31:
                     return true;
                 default: return false;
             }

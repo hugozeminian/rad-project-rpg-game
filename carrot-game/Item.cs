@@ -67,16 +67,16 @@ namespace carrot_game
         public static Item SpawnCarrot(Map map)
         {
             Random _r = new Random();
-            int row = _r.Next(0, GameScreen.gs.gameMap.mapData.GetLength(0));
-            int col = _r.Next(0, GameScreen.gs.gameMap.mapData.GetLength(1));
+            int row = 0;
+            int col = 0;
 
             while (GameScreen.gs.gameMap.mapArray[row,col].collision != false)
             {
-                row = _r.Next(0, GameScreen.gs.gameMap.mapData.GetLength(0));
-                col = _r.Next(0, GameScreen.gs.gameMap.mapData.GetLength(1));
+                row = _r.Next(3, GameScreen.gs.gameMap.mapData.GetLength(0)-11);
+                col = _r.Next(14, GameScreen.gs.gameMap.mapData.GetLength(1)-15);
             }
 
-            return new Item(row * MapTile.tileSize, col * MapTile.tileSize, Properties.Resources.carrot);
+            return new Item(row * MapTile.tileSize + 22, col * MapTile.tileSize + 32, Properties.Resources.carrot);
         }
 
         public Rectangle BoundingBox

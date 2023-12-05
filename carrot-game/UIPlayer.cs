@@ -87,8 +87,8 @@ namespace carrot_game
             int carrotX = LinearProgressBarLocation.X + 360;
             int carrotY = LinearProgressBarLocation.Y + (LinearProgressBarSize.Height - 80) / 2;
 
-            int carrotWidth = 80;
-            int carrotHeight = 80;
+            int carrotWidth = 43;
+            int carrotHeight = 64;
 
             g.DrawImage(carrot, new Rectangle(carrotX, carrotY, carrotWidth, carrotHeight));
 

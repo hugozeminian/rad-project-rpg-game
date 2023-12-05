@@ -467,6 +467,8 @@ namespace carrot_game
             if (carrots.Count < _carrotsLimit)
             {
                 Item newCarrot = Item.SpawnCarrot(gameMap);
+                newCarrot.Width = 43;
+                newCarrot.Height = 64;
                 carrots.Add(newCarrot);
             }
         }

@@ -527,5 +527,71 @@
   <ItemGroup>
     <None Include="bin\Debug\res\image\tiles\mountain3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\grass2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottom_WaterAround2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottom_WaterTop2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottomLeft_WaterTopRight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassBottomRight_WaterTopLeft2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassLeft_WaterAround2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassLeft_WaterRight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassRight_WaterAround2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassRight_WaterLeft2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTop_WaterAround2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTop_WaterBottom2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTopLeft_WaterBottomRight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\tiles\GrassTopRight_WaterBottomLeft2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_top_left2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_top2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_right2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_left2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_bottom_right2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_bottom_left2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_bottom2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\props\fence_top_right2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\item\carrot.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

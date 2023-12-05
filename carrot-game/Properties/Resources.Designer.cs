@@ -339,9 +339,39 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fence_bottom_left2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_bottom_left2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fence_bottom_right {
             get {
                 object obj = ResourceManager.GetObject("fence_bottom_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fence_bottom_right2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_bottom_right2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fence_bottom2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_bottom2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -359,9 +389,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fence_left2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_left2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fence_right {
             get {
                 object obj = ResourceManager.GetObject("fence_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fence_right2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_right2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -389,9 +439,39 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fence_top_left2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_top_left2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fence_top_right {
             get {
                 object obj = ResourceManager.GetObject("fence_top_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fence_top_right2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_top_right2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fence_top2 {
+            get {
+                object obj = ResourceManager.GetObject("fence_top2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -468,9 +548,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap grass2 {
+            get {
+                object obj = ResourceManager.GetObject("grass2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassBottom_WaterAround {
             get {
                 object obj = ResourceManager.GetObject("GrassBottom_WaterAround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GrassBottom_WaterAround2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassBottom_WaterAround2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -488,9 +588,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GrassBottom_WaterTop2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassBottom_WaterTop2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassBottomLeft_WaterTopRight {
             get {
                 object obj = ResourceManager.GetObject("GrassBottomLeft_WaterTopRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GrassBottomLeft_WaterTopRight2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassBottomLeft_WaterTopRight2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -508,9 +628,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GrassBottomRight_WaterTopLeft2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassBottomRight_WaterTopLeft2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassLeft_WaterAround {
             get {
                 object obj = ResourceManager.GetObject("GrassLeft_WaterAround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GrassLeft_WaterAround2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassLeft_WaterAround2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -528,9 +668,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GrassLeft_WaterRight2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassLeft_WaterRight2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassRight_WaterAround {
             get {
                 object obj = ResourceManager.GetObject("GrassRight_WaterAround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GrassRight_WaterAround2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassRight_WaterAround2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -548,9 +708,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GrassRight_WaterLeft2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassRight_WaterLeft2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassTop_WaterAround {
             get {
                 object obj = ResourceManager.GetObject("GrassTop_WaterAround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GrassTop_WaterAround2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassTop_WaterAround2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -568,6 +748,16 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GrassTop_WaterBottom2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassTop_WaterBottom2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassTopLeft_WaterBottomRight {
             get {
                 object obj = ResourceManager.GetObject("GrassTopLeft_WaterBottomRight", resourceCulture);
@@ -578,9 +768,29 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GrassTopLeft_WaterBottomRight2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassTopLeft_WaterBottomRight2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GrassTopRight_WaterBottomLeft {
             get {
                 object obj = ResourceManager.GetObject("GrassTopRight_WaterBottomLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GrassTopRight_WaterBottomLeft2 {
+            get {
+                object obj = ResourceManager.GetObject("GrassTopRight_WaterBottomLeft2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
