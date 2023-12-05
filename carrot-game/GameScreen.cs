@@ -60,6 +60,7 @@ namespace carrot_game
         public static int fps = 30;
         public static int refreshTime = 1000/fps;
         public static int monsterSpawnTimer = 0;
+        public static int carrotSpawnTimer = 0;
 
         Audio bgm = new Audio();
         Audio doorSoundEffect = new Audio();
@@ -222,13 +223,13 @@ namespace carrot_game
 
             // updates the character's position and sprite image.
             Task updatePlayer = Task.Run(() => player.Update());
-            Task spawnMonsters = Task.Run(() => SpawnMonsters());
+            Task spawnMonsters = Task.Run(() => SpawnMonsters(player));
             Task animateMonsters = Task.Run(() => AnimateMonsters());
             Task updateMonsters = Task.Run(() => UpdateMonsters(Monster.SpawnedMonsters));
 
             // Spawn a new carrot every x seconds
-            monsterSpawnTimer++;
-            if (monsterSpawnTimer % (fps * 10) == 0 )
+            carrotSpawnTimer++;
+            if (carrotSpawnTimer % (fps * 10) == 0 )
             {
                 Task spawnCarrot = Task.Run(() => SpawnCarrot());
             }
@@ -413,8 +414,8 @@ namespace carrot_game
                     }
                     if (showMonsterNames == true)
                     {
-                        Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width)/2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
-                        g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
+                        Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width) / 2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
+                        g.DrawString(m.Name, MonsterNameTag, Brushes.Crimson, nameTag, sf);
                     }
                 }
                 // pos == 0 means draw under player
@@ -430,11 +431,14 @@ namespace carrot_game
                     if (showMonsterNames == true)
                     {
                         Rectangle nameTag = new Rectangle(m.ScreenX - (nameTagMaxWidth - m.Width) / 2, m.ScreenY - nameTagHeight - nameTagTextGap, nameTagMaxWidth, nameTagHeight);
-                        g.DrawString(m.Name, MonsterNameTag, Brushes.IndianRed, nameTag, sf);
+                        g.DrawString(m.Name, MonsterNameTag, Brushes.Crimson, nameTag, sf);
                     }
+
                 }
             }
         }
+
+
 
         // Draws the damage numbers on top of the player
         private void DrawDamage(Graphics g)
@@ -445,13 +449,13 @@ namespace carrot_game
             //}
 
             // We create a copy of the original list, because we will both iterate through and modify it:
-            List<int[]> _d = new List<int[]>(Monster.damageNumbers);
+            List<int[]> _d = new List<int[]>(player.damageNumbers);
 
             // This is the displacement value when we remove items from the list, to avoid out of bounds exception.
             int _indxtra = 0;
 
             // To avoid wasting processing power when we don't have any damage to display:
-            if (Monster.damageNumbers.Count > 0)
+            if (player.damageNumbers.Count > 0)
             foreach (var dmg in _d)
             {
                 int _ind = _d.IndexOf(dmg) + _indxtra;
@@ -459,17 +463,17 @@ namespace carrot_game
 
                 g.DrawString(dmg[0].ToString(), PlayerNameTag, Brushes.Red, _dmgBox, sf);
 
-                Monster.damageNumbers[_ind][1]++;
+                player.damageNumbers[_ind][1]++;
 
-                if (Monster.damageNumbers[_ind][1] > fps*4)
+                if (player.damageNumbers[_ind][1] > fps*4)
                 {
-                    Monster.damageNumbers.Remove(dmg);
+                    player.damageNumbers.Remove(dmg);
                     _indxtra--;
                 }
             }
         }
 
-        private static void SpawnMonsters()
+        private static void SpawnMonsters(Player p)
         {
             var _r = new Random();
             if (Monster.Counter < _monsterLimit)
@@ -479,10 +483,10 @@ namespace carrot_game
             }
 
             Random _r2 = new Random();
-            int row = 0;
-            int col = 0;
+            int row = 10;
+            int col = 10;
 
-            while (gs.gameMap.mapArray[row, col].collision != false)
+            while (gs.gameMap.mapArray[row, col].collision != false || Math.Abs(p.WorldX - col * MapTile.tileSize) < 200 || Math.Abs(p.WorldY - row * MapTile.tileSize) < 200)
             {
                 row = _r2.Next(3, gs.gameMap.mapData.GetLength(0) - 11);
                 col = _r2.Next(14, gs.gameMap.mapData.GetLength(1) - 15);
@@ -518,13 +522,16 @@ namespace carrot_game
         {
             Rectangle playerBoundingBox = player.BoundingBox;
 
-            foreach (var carrot in carrots)
+            List<Item> _carrots = new List<Item>(carrots);
+
+            foreach (var carrot in _carrots)
             {
                 if (!carrot.IsCollected && playerBoundingBox.IntersectsWith(carrot.BoundingBox))
                 {
                     carrot.IsCollected = true;
                     Player.currentPlayer.Carrots += 1;
                     carrot.ItemCarrotCollected();
+                    carrots.Remove(carrot);
                 }
             }
         }

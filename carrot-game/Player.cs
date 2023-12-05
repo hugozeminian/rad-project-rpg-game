@@ -16,6 +16,12 @@ namespace carrot_game
     {
         // Defines the current player instance:
         public static Player currentPlayer;
+
+
+        // This is the list that stores the damage values the player received and their relative position on top of the player. [dmg, pos].
+        // Damage values are added by ResolveAttack and removed after their position reaches a treshold.
+        public List<int[]> damageNumbers = new List<int[]>();
+
         public int ExpToNextLevel { get; set; } = 100;
         public int Level { get; set; } = 1;
 
@@ -172,7 +178,7 @@ namespace carrot_game
 
                 // Checking for any tile collision
                 isColliding = false;
-                GameScreen.gs.cChecker.CheckCollision(this);
+                GameScreen.gs.cChecker.CheckTileCollision(this);
 
                 // Allow movement if no collision:
                  if (!isColliding)
@@ -405,6 +411,21 @@ namespace carrot_game
                 DisableMovement();
                 pSoundEffect.PlayHeroAttackSoundEffect(pSoundEffect.AudioHeroAttack);
                 Attack a = new Attack();
+
+                if (Monster.SpawnedMonsters.Count > 0)
+                foreach (Monster m in Monster.SpawnedMonsters)
+                {
+                if (a.BoundingBox.IntersectsWith(m.BoundingBox))
+                    {
+                        int attackDamage = Math.Max(Attack - m.Defense, 1);
+                        int[] arrayToAdd = { attackDamage, 0 };
+                        m.damageNumbers.Add(arrayToAdd);
+                        m.CurrentHealthPoints -= attackDamage;
+
+                        if (m.CurrentHealthPoints <= 0)
+                            m.Die();
+                    }
+                }
             }
             if (attackFrame == -1)
             {

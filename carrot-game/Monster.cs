@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,10 +18,15 @@ namespace carrot_game
     class Monster : Entity, ICollision
     {
         internal static int Counter = 0;
+        private int _moveDelay = -1;
 
         public static Random Random = new Random();
 
         public static List<Monster> SpawnedMonsters = new List<Monster>();
+
+        // This is the list that stores the damage values the monster received and their relative position on top of them. [dmg, pos].
+        // Damage values are added by ResolveAttack and removed after their position reaches a treshold.
+        public List<int[]> damageNumbers = new List<int[]>();
 
         private int _moveCounter = 0;
 
@@ -36,10 +42,6 @@ namespace carrot_game
             typeof(BlackBunny),
             typeof(Spider1),
             typeof(Bat)};
-
-        // This is the list that stores the damage values the player received and their relative position on top of the player. [dmg, pos].
-        // Damage values are added by ResolveAttack and removed after their position reaches a treshold.
-        public static List<int[]> damageNumbers = new List<int[]>();
 
         // A placeholder to receive extra outfits.
         public string ImgPack { get; set; } = "";
@@ -70,56 +72,112 @@ namespace carrot_game
         // This makes monsters follow the player.
         public void FollowPlayer(Player p)
         {
+            if (_moveDelay > GameScreen.fps * 2)
+            {
+                LeftPressed = false;
+                RightPressed = false;
+                UpPressed = false;
+                DownPressed = false;
+            } 
             // This makes movement "in turns", to avoid movement being "too smooth". 
             // Remove the _moveCounter if blocks to make movement smooth.
-
-                if (_moveCounter > GameScreen.fps/(Speed + 1))
+            if (Math.Abs(p.WorldX - this.WorldX) < MapTile.tileSize * 5 && Math.Abs(p.WorldY - this.WorldY) < MapTile.tileSize * 5)
             {
-                // If player is to the left of the monster 
-                if (BoundingBox.Left > p.BoundingBox.Right)
+                if (_moveCounter > GameScreen.fps/(Speed + 1))
                 {
-                    RightPressed = false;
-                    LeftPressed = true;
-                }
-                if(BoundingBox.Left <= p.BoundingBox.Right) 
-                {
-                    LeftPressed = false;
-                }
-                // If player is to the right of the monster
-                if (BoundingBox.Right < p.BoundingBox.Left)
-                {
-                    RightPressed = true;
-                    LeftPressed = false;
-                }
-                if (BoundingBox.Right >= p.BoundingBox.Left)
-                {
-                    RightPressed = false;
-                }
+                    // If player is to the left of the monster 
+                    if (BoundingBox.Left > p.BoundingBox.Right)
+                    {
+                        RightPressed = false;
+                        LeftPressed = true;
+                    }
+                    if(BoundingBox.Left <= p.BoundingBox.Right) 
+                    {
+                        LeftPressed = false;
+                    }
+                    // If player is to the right of the monster
+                    if (BoundingBox.Right < p.BoundingBox.Left)
+                    {
+                        RightPressed = true;
+                        LeftPressed = false;
+                    }
+                    if (BoundingBox.Right >= p.BoundingBox.Left)
+                    {
+                        RightPressed = false;
+                    }
 
-                // If player is to the top of the monster
-                if (BoundingBox.Top > p.BoundingBox.Bottom)
-                {
-                    DownPressed = false;
-                    UpPressed = true;
-                }
-                if (BoundingBox.Top <= p.BoundingBox.Bottom)
-                {
-                    UpPressed = false;
-                }
+                    // If player is to the top of the monster
+                    if (BoundingBox.Top > p.BoundingBox.Bottom)
+                    {
+                        DownPressed = false;
+                        UpPressed = true;
+                    }
+                    if (BoundingBox.Top <= p.BoundingBox.Bottom)
+                    {
+                        UpPressed = false;
+                    }
 
-                // If player is to the bottom of the monster
-                if (BoundingBox.Bottom < p.BoundingBox.Top)
-                {
-                    DownPressed = true;
-                    UpPressed = false;
+                    // If player is to the bottom of the monster
+                    if (BoundingBox.Bottom < p.BoundingBox.Top)
+                    {
+                        DownPressed = true;
+                        UpPressed = false;
+                    }
+                    if (BoundingBox.Bottom >= p.BoundingBox.Top)
+                    {
+                        DownPressed = false;
+                    }
+                    if (_moveCounter > GameScreen.fps)
+                        _moveCounter = 0;
                 }
-                if (BoundingBox.Bottom >= p.BoundingBox.Top)
-                {
-                    DownPressed = false;
-                }
-                if (_moveCounter > GameScreen.fps)
-                    _moveCounter = 0;
             }
+
+            else
+            {
+                Task.Run(() =>
+                {
+                    if (_moveDelay == -1)
+                        _moveDelay = 0;
+                    if (_moveDelay == 0)
+                    {
+                        Random _r = new Random();
+                        int direction = _r.Next(0, 3);
+                        _moveDelay++;
+                        switch (direction)
+                        {
+                            case 0:
+                                UpPressed = true;
+                                DownPressed = false;
+                                break;
+                            case 1:
+                                UpPressed = false;
+                                DownPressed = true;
+                                break;
+                            case 2:
+                                RightPressed = true;
+                                LeftPressed = false;
+                                break;
+                            case 3:
+                                RightPressed = false;
+                                LeftPressed = true;
+                                break;
+                            default:
+                                RightPressed = LeftPressed = UpPressed = DownPressed = false;
+                                break;
+                        }
+                    }
+                    else if (_moveDelay > 0 && _moveDelay <= GameScreen.fps)
+                        _moveDelay++;
+                    else if (_moveDelay > GameScreen.fps && _moveDelay <= GameScreen.fps * 2)
+                    {
+                        RightPressed = LeftPressed = UpPressed = DownPressed = false;
+                        _moveDelay++;
+                    }
+                    else if (_moveDelay > GameScreen.fps * 2)
+                        _moveDelay = -1;
+                });
+            }
+
         }
 
         // Calculates monster attack damage and adds it to the damage displaying array.
@@ -132,7 +190,7 @@ namespace carrot_game
                 {
                     int attackDamage = Math.Max(Attack - Player.currentPlayer.Defense, 1);
                     int[] arrayToAdd = { attackDamage, 0 };
-                    damageNumbers.Add(arrayToAdd);
+                    GameScreen.gs.player.damageNumbers.Add(arrayToAdd);
                     Player.currentPlayer.CurrentHealthPoints -= attackDamage;
                     _attackFrame = 0;
 
@@ -171,27 +229,40 @@ namespace carrot_game
             {
                 if (UpPressed)
                 {
-                    Move(0, -Speed, 0);
                     Direction = "up";
                 }
                 if (DownPressed)
                 {
-                    Move(0, Speed, 0);
                     Direction = "down";
                 }
                 if (LeftPressed)
                 {
-                    Move(-Speed, 0, 0);
                     Direction = "left";
                 }
                 if (RightPressed)
                 {
-                    Move(Speed, 0, 0);
                     Direction = "right";
                 }
 
+                // Checking for any tile collision
+                isColliding = false;
+                GameScreen.gs.cChecker.CheckTileCollision(this);
+
+                // Allow movement if no collision:
+                if (!isColliding)
+                {
+                    if (LeftPressed)
+                        Move(-Speed, 0, 0);
+                    if (RightPressed)
+                        Move(Speed, 0, 0);
+                    if (UpPressed)
+                        Move(0, -Speed, 0);
+                    if (DownPressed)
+                        Move(0, Speed, 0);
+                }
                 // adds a counter to our movement frame counter
                 FrameCounter++;
+
 
                 // once we reach this threshold, we change the image to the next available in the array.
                 if (FrameCounter > 9)
@@ -245,10 +316,17 @@ namespace carrot_game
 
         public void Die()
         {
-            SpawnedMonsters.Remove(this);
+            Task.Run(() =>
+            {
+                SpawnedMonsters.Remove(this);
+                Counter--;
 
+                Random _r = new Random();
+                int _timer = _r.Next(GameScreen.fps, GameScreen.fps * 10);
+                GameScreen.monsterSpawnTimer = _timer;
+                Player.currentPlayer.GainExperience(ExperiencePoints);
+            });
             // Earn experience points based on monster type
-            Player.currentPlayer.GainExperience(ExperiencePoints);
         }
     }
 }
