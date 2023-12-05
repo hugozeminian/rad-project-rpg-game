@@ -183,3 +183,4 @@ D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Res
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-long-hit-swoosh-1473.wav
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-martial-arts-fast-punch-2047.wav
 D:\Bow Valley College\Carrot-Game\rad-project-rpg-game\carrot-game\bin\Debug\Resources\mixkit-player-jumping-in-a-video-game-2043.wav
+C:\Hugo_C\IT\BVC\Term_3\SODV2101 - Rad\Project\App\carrot-game\bin\Debug\Resources\mixkit-automatic-door-shut-204.wav

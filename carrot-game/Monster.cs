@@ -75,7 +75,7 @@ namespace carrot_game
                 DisableMovement();
             }
 
-                if (_moveCounter > GameScreen.fps/Speed)
+                if (_moveCounter > GameScreen.fps/(Speed + 1))
             {
                 // If player is to the left of the monster 
                 if (BoundingBox.Left > p.BoundingBox.Right)

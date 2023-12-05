@@ -593,5 +593,10 @@
   <ItemGroup>
     <None Include="bin\Debug\res\image\item\carrot.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mixkit-automatic-door-shut-204.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
