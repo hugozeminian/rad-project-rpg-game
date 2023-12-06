@@ -15,25 +15,38 @@ namespace carrot_game
         private int _minimum = 0;
         private int _linearProgressBarHeight = 30;
 
+        Screen screen;
+        Rectangle workingArea;
 
         // Properties Carrot
         public Image carrot = Properties.Resources.carrot;
 
 
         // Properties for circular progress bar (XP)
-        public Point CircularProgressBarLocation { get; set; } = new Point(20, 1220);
-        public Size CircularProgressBarSize { get; set; } = new Size(200, 200);
+        //public Point CircularProgressBarLocation { get; set; } = new Point(20, 1220);
+        public Point CircularProgressBarLocation { get; set; }
+        public Size CircularProgressBarSize { get; set; }
         public int xpCurrentValue { get; set; } = 0;
 
 
         // Properties for linear progress bar (HP)
-        public Point LinearProgressBarLocation { get; set; } = new Point(20, 40);
-        public Size LinearProgressBarSize { get; set; } = new Size(300, 30);
+        public Point LinearProgressBarLocation { get; set; }
+        public Size LinearProgressBarSize { get; set; }
         public int hpCurrentValue { get; set; } = 100;
 
         public UIPlayer()
         {
+            screen = Screen.FromControl(this);
+            workingArea = screen.WorkingArea;
 
+            //CircularProgressBarLocation = new Point(workingArea.X + (workingArea.Width) / 2 - Size.Width / 2, workingArea.Y + workingArea.Height - 160);
+            CircularProgressBarLocation = new Point(workingArea.X + 40, workingArea.Y + workingArea.Height - CircularProgressBarSize.Height - 190);
+
+            CircularProgressBarSize = new Size(200, 200);
+
+
+            LinearProgressBarLocation = new Point(workingArea.X + 40, workingArea.Y + 40);
+            LinearProgressBarSize = new Size(300, 30);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -84,7 +97,7 @@ namespace carrot_game
         public void DrawCarrot(Graphics g)
         {
             // Calculate carrot position based on LinearProgressBarLocation and LinearProgressBarSize
-            int carrotX = LinearProgressBarLocation.X + 360;
+            int carrotX = LinearProgressBarLocation.X + 380;
             int carrotY = LinearProgressBarLocation.Y + (LinearProgressBarSize.Height - 80) / 2;
 
             int carrotWidth = 43;
@@ -99,7 +112,7 @@ namespace carrot_game
             SizeF labelSize = g.MeasureString(label, labelFont);
 
             // Adjust the label location
-            PointF labelLocation = new PointF(carrotX + carrotWidth - 10, carrotY + (carrotHeight - labelSize.Height) / 2);
+            PointF labelLocation = new PointF(carrotX + carrotWidth - 5, carrotY + (carrotHeight - labelSize.Height) / 2 + 5);
 
             g.DrawString(label, labelFont, labelBrush, labelLocation);
         }
