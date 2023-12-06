@@ -318,11 +318,13 @@ namespace carrot_game
         {
             Task.Run(() =>
             {
+                GameScreen.monsterSpawnTimer = 1000;
                 SpawnedMonsters.Remove(this);
                 Counter--;
 
                 Random _r = new Random();
                 int _timer = _r.Next(GameScreen.fps, GameScreen.fps * 10);
+                
                 GameScreen.monsterSpawnTimer = _timer;
                 Player.currentPlayer.GainExperience(ExperiencePoints);
             });

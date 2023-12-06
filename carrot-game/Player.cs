@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
 
@@ -382,7 +383,7 @@ namespace carrot_game
         private void LevelUp()
         {
             Level++;
-            ExperiencePoints = ExperiencePoints - ExpToNextLevel;
+            ExperiencePoints -= ExpToNextLevel;
             ExpToNextLevel = (int)(ExpToNextLevel * 1.2);
 
             MaxHealthPoints += 2;
@@ -405,6 +406,7 @@ namespace carrot_game
 
         public void PlayerAttack()
         {
+            // If this is the first frame of attack animation play sound, instantiate new attack and disable movement:
             if (attackFrame == 0)
             {
                 Sprite = 0;
@@ -412,21 +414,26 @@ namespace carrot_game
                 pSoundEffect.PlayHeroAttackSoundEffect(pSoundEffect.AudioHeroAttack);
                 Attack a = new Attack();
 
-                if (Monster.SpawnedMonsters.Count > 0)
-                foreach (Monster m in Monster.SpawnedMonsters)
+                // Check if we hit any monsters:
+                Task.Run(() =>
                 {
-                if (a.BoundingBox.IntersectsWith(m.BoundingBox))
+                    if (Monster.SpawnedMonsters.Count > 0)
+                    foreach (Monster m in Monster.SpawnedMonsters)
                     {
-                        int attackDamage = Math.Max(Attack - m.Defense, 1);
-                        int[] arrayToAdd = { attackDamage, 0 };
-                        m.damageNumbers.Add(arrayToAdd);
-                        m.CurrentHealthPoints -= attackDamage;
+                    if (a.BoundingBox.IntersectsWith(m.BoundingBox))
+                        {
+                            int attackDamage = Math.Max(Attack - m.Defense, 1);
+                            int[] arrayToAdd = { attackDamage, 0 };
+                            m.damageNumbers.Add(arrayToAdd);
+                            m.CurrentHealthPoints -= attackDamage;
 
-                        if (m.CurrentHealthPoints <= 0)
-                            m.Die();
+                            if (m.CurrentHealthPoints <= 0)
+                                m.Die();
+                        }
                     }
-                }
+                });
             }
+            // Release movement after attack animation
             if (attackFrame == -1)
             {
                 IsAttacking = false;
