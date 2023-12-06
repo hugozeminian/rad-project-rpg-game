@@ -1,48 +1,30 @@
 ExpToNextLevel=10
 Level=1
-<<<<<<< Updated upstream
-ImgPack=""
-BoundingBox={X=1226,Y=685,Width=42,Height=42}
-Name="Player"
-=======
 ImgPack=
 BoundingBox={X=906,Y=505,Width=42,Height=42}
 Name=Player
->>>>>>> Stashed changes
 MaxHealthPoints=10
-CurrentHealthPoints=8
-ExperiencePoints=3
+CurrentHealthPoints=10
+ExperiencePoints=0
 Attack=1
 Speed=4
 Defense=0
-<<<<<<< Updated upstream
-WorldX=1454
-WorldY=388
-ScreenX=1184
-ScreenY=600
-PosZ=1
-Direction="up"
-Carrots=1
-Width=128
-Height=128
-FrameCounter=0
-=======
-WorldX=994
-WorldY=304
+WorldX=1010
+WorldY=416
 ScreenX=864
 ScreenY=420
 PosZ=1
-Direction=left
+Direction=down
 Carrots=0
 Width=128
 Height=128
-FrameCounter=6
+FrameCounter=17
 damageNumbers=[]
 attacks=[]
 IsAttacking=False
 attackFrame=-1
-Weapon=
-Sprite=1
+Weapon=Stick
+Sprite=0
 originalSpeed=4
 isColliding=False
 CanMoveUp=True
@@ -53,4 +35,3 @@ UpPressed=False
 DownPressed=False
 LeftPressed=False
 RightPressed=False
->>>>>>> Stashed changes

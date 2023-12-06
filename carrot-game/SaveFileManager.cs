@@ -22,7 +22,7 @@ namespace carrot_game
 
                 foreach (var property in properties)
                 {
-                    // Skip specified properties
+                    // Skip some properties
                     if (property.Name == "CurrentSprite" || property.Name == "SpriteImages" || property.Name == "currentPlayer")
                     {
                         continue;
@@ -34,7 +34,7 @@ namespace carrot_game
 
                 foreach (var field in fields)
                 {
-                    // Skip specified fields
+                    // Skip some fields
                     if (field.Name == "CurrentSprite" || field.Name == "SpriteImages" || field.Name == "currentPlayer")
                     {
                         continue;
@@ -50,7 +50,7 @@ namespace carrot_game
         {
             if (value is IList list)
             {
-                // Handle List<T>
+                // Handle List<T> types that were causing conflict:
                 writer.WriteLine($"{name}=[{string.Join(",", list.Cast<object>())}]");
             }
             else if (value != null && value.GetType().IsArray)
@@ -223,6 +223,12 @@ namespace carrot_game
 
                             case "Weapon":
                                 player.Weapon = propertyValue;
+                                if (propertyValue.ToString() == "Stick")
+                                {
+                                    Item stick = new Item(150 + MapTile.tileSize * 13, MapTile.tileSize * 6, Properties.Resources.big_stick);
+                                    stick.Name = "Stick";
+                                    player.EquipWeapon(stick);
+                                }
                                 break;
                         }
                     }

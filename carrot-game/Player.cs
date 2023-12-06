@@ -38,7 +38,7 @@ namespace carrot_game
         public int attackFrame = -1;
 
         // equipped weapon:
-        public string Weapon = "";
+        public string Weapon;
 
         //Player sounds
         Audio pSoundEffect = new Audio();
@@ -287,6 +287,7 @@ namespace carrot_game
 
         public void EquipWeapon(Item w)
         {
+            Weapon = w.Name;
             switch (w.Name)
             {
                 case "Stick":
