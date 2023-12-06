@@ -452,9 +452,9 @@ namespace carrot_game
             if (attackFrame == 0)
             {
                 Sprite = 0;
+                Attack a = new Attack(Direction);
                 DisableMovement();
                 pSoundEffect.PlayHeroAttackSoundEffect(pSoundEffect.AudioHeroAttack);
-                Attack a = new Attack(Direction);
 
                 // Check if we hit any monsters:
                 Task.Run(() =>

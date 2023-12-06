@@ -134,9 +134,9 @@ namespace carrot_game
             items.Add(house);
 
             // Spawn stick on the ground
-            Item stick = new Item(150 + MapTile.tileSize * 13, 230, Properties.Resources.big_stick);
+            Item stick = new Item(150 + MapTile.tileSize * 13, MapTile.tileSize * 6, Properties.Resources.big_stick);
             stick.Name = "Stick";
-            items.Add(stick);
+            items.Add(stick);            
 
             // Draw the welcome message:
             DisplayMessages(0, 0);
@@ -147,7 +147,7 @@ namespace carrot_game
         {
             if (e.KeyChar == 'o' || e.KeyChar == 'O') //test message
             {
-                DisplayMessages(1, 3);
+                DisplayMessages(1, 2);
             }
             
             // Next message inside the array message
@@ -155,6 +155,8 @@ namespace carrot_game
             {
                 // Prevent the key from being processed further
                 e.Handled = true;
+
+                // If this is the first time we are spawning (exiting the house when starting a new game):
                 if (!drawHero)
                 {
                     Task.Run(async () =>
@@ -166,6 +168,7 @@ namespace carrot_game
                         await Task.Delay(100);
                         player.DownPressed =  false;
                         doorSoundEffect.PlayDoorSoundEffect(doorSoundEffect.AudioDoor);
+
                     });
                 }
                 messageSent = false;
@@ -230,10 +233,10 @@ namespace carrot_game
             }
 
             // updates the character's position and sprite image.
-            Task updatePlayer = Task.Run(() => player.Update());
-            Task spawnMonsters = Task.Run(() => SpawnMonsters(player));
-            Task animateMonsters = Task.Run(() => AnimateMonsters());
-            Task updateMonsters = Task.Run(() => UpdateMonsters(Monster.SpawnedMonsters));
+            Task.Run(() => player.Update());
+            Task.Run(() => SpawnMonsters(player));
+            Task.Run(() => AnimateMonsters());
+            Task.Run(() => UpdateMonsters(Monster.SpawnedMonsters));
 
             // Spawn a new carrot every x seconds
             carrotSpawnTimer++;
@@ -244,8 +247,8 @@ namespace carrot_game
             }
 
             // Check and update carrot collection
-            CollectCarrots();
-            CollectItems();
+            Task.Run(() => CollectCarrots());
+            Task.Run(() => CollectItems());
         }
 
         private void AnimateMonsters()
@@ -395,24 +398,24 @@ namespace carrot_game
         {
             foreach (Attack a in Attack.AttacksList)
             {
-                switch(a.direction)
+                switch(a.Direction)
                 {
                     case "up":
                         if (a.frame == 0)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top+a.BoundingBox.Height, a.BoundingBox.Width, a.BoundingBox.Height, 315, 45);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 45, -45);
                         }
                         if (a.frame == 1)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 340, 75);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 0, -75);
                         }
                         if (a.frame == 2)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 5, 90);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 315, -90);
                         }
                         if (a.frame == 3)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 30, 115);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 270, -115);
                         }
                         a.frame++;
                         break;
@@ -438,38 +441,38 @@ namespace carrot_game
                     case "left":
                         if (a.frame == 0)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 315, -45);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 315, -45);
                         }
                         if (a.frame == 1)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 290, -75);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 290, -75);
                         }
                         if (a.frame == 2)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 265, -90);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 265, -90);
                         }
                         if (a.frame == 3)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 240, -115);
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 240, -115);
                         }
                         a.frame++;
                         break;
                     case "right":
                         if (a.frame == 0)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 135, -45);
+                            g.DrawArc(attackSweep, a.BoundingBox.Right - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 135, -45);
                         }
                         if (a.frame == 1)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 110, -75);
+                            g.DrawArc(attackSweep, a.BoundingBox.Right - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 110, -75);
                         }
                         if (a.frame == 2)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 85, -90);
+                            g.DrawArc(attackSweep, a.BoundingBox.Right - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 85, -90);
                         }
                         if (a.frame == 3)
                         {
-                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 60, -115);
+                            g.DrawArc(attackSweep, a.BoundingBox.Right - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 60, -115);
                         }
                         a.frame++;
                         break;
@@ -637,7 +640,11 @@ namespace carrot_game
                 {
                     item.IsCollected = true;
                     if (item.Name == "Stick")
+                    {
                         player.EquipWeapon(item);
+                        // Display message "picked up a stick"
+                        DisplayMessages(3, 3);
+                    }
                     items.Remove(item);
                 }
             }

@@ -116,10 +116,13 @@ namespace carrot_game
                 //0
                 ("Mom", $"Good morning, {GameScreen.gs.player.Name}...Could you go outside and play? Mom and dad are busy today."),
                 
-                //1-3
-                ("NPC", "Hi there! How can I help you?"),
+                //1-2
+                //("NPC", "Hi there! How can I help you?"),
                 ("Player", "I'm exploring the game world."),
-                ("NPC", "Watch out for monsters!"),
+                ("Dad", "Watch out for monsters!"),
+
+                //3
+                ("Picked up", "Stick. Maybe I can use this as a weapon if I press F...")
             };
         }
 

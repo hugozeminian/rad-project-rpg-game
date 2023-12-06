@@ -13,16 +13,17 @@ namespace carrot_game
         readonly Player p = GameScreen.gs.player;
         public int extraRange = 0;
         public int frame;
-        public string direction = "down";
+        public string direction;
 
         public static List<Attack> AttacksList = new List<Attack>();
 
         internal Attack(string direction)
         {
+            Direction = direction;
             AttacksList.Add(this);
-                Task.Run(() =>
+                Task.Run(async () =>
                 {
-                    Thread.Sleep(200);
+                    await Task.Delay(200);
                     AttacksList.Remove(this);
                 });
         }
