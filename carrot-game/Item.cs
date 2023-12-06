@@ -38,14 +38,17 @@ namespace carrot_game
         }
         public int WorldX;
         public int WorldY;
+        public string Name = "Item";
         public int Width { get; set; } = 64;
         public int Height { get; set; } = 64;
         public bool IsCollected { get; set; }
+        public bool isCollectible = true;
         public Image img;
 
-        private GameScreen gameScreen;
+        public Item()
+        {
 
-
+        }
         public Item(int x, int y, Image img)
         {
             WorldX = x;

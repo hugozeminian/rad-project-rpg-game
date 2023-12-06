@@ -63,6 +63,46 @@ namespace carrot_game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap atk_down_stick1 {
+            get {
+                object obj = ResourceManager.GetObject("atk_down_stick1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_down_stick2 {
+            get {
+                object obj = ResourceManager.GetObject("atk_down_stick2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_down_stick3 {
+            get {
+                object obj = ResourceManager.GetObject("atk_down_stick3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_down_stick4 {
+            get {
+                object obj = ResourceManager.GetObject("atk_down_stick4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap atk_down1 {
             get {
                 object obj = ResourceManager.GetObject("atk_down1", resourceCulture);
@@ -96,6 +136,46 @@ namespace carrot_game.Properties {
         internal static System.Drawing.Bitmap atk_down4 {
             get {
                 object obj = ResourceManager.GetObject("atk_down4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_right_stick1 {
+            get {
+                object obj = ResourceManager.GetObject("atk_right_stick1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_right_stick2 {
+            get {
+                object obj = ResourceManager.GetObject("atk_right_stick2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_right_stick3 {
+            get {
+                object obj = ResourceManager.GetObject("atk_right_stick3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap atk_right_stick4 {
+            get {
+                object obj = ResourceManager.GetObject("atk_right_stick4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -225,6 +305,16 @@ namespace carrot_game.Properties {
         internal static System.Drawing.Bitmap bat6 {
             get {
                 object obj = ResourceManager.GetObject("bat6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap big_stick {
+            get {
+                object obj = ResourceManager.GetObject("big_stick", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1125,6 +1215,16 @@ namespace carrot_game.Properties {
         internal static System.Drawing.Bitmap spider1_4 {
             get {
                 object obj = ResourceManager.GetObject("spider1_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stick {
+            get {
+                object obj = ResourceManager.GetObject("stick", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

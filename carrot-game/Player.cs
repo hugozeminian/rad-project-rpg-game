@@ -23,7 +23,7 @@ namespace carrot_game
         // Damage values are added by ResolveAttack and removed after their position reaches a treshold.
         public List<int[]> damageNumbers = new List<int[]>();
 
-        public int ExpToNextLevel { get; set; } = 100;
+        public int ExpToNextLevel { get; set; } = 10;
         public int Level { get; set; } = 1;
 
         // This is a placeholder to receive new outfits in the future:
@@ -32,9 +32,13 @@ namespace carrot_game
         // Controls the current sprite image, to avoid rapidly changing images.
         public Bitmap CurrentSprite;
 
+        // This is a list of player's attacks, so we can check for collision with the monsters.
         public List<Attack> attacks = new List<Attack>();
         public bool IsAttacking = false;
         public int attackFrame = -1;
+
+        // equipped weapon:
+        public string Weapon = "";
 
         //Player sounds
         Audio pSoundEffect = new Audio();
@@ -66,8 +70,8 @@ namespace carrot_game
             Attack = 1;
             Defense = 0;
             Speed = 4;
-            WorldX = 150 + MapTile.tileSize*13;
-            WorldY = 230;
+            WorldX = 150 + MapTile.tileSize*12;
+            WorldY = 200;
             PosZ = 1;
             Direction = "down";
             Carrots = 0;
@@ -280,6 +284,44 @@ namespace carrot_game
             }
         }
 
+        public void EquipWeapon(Item w)
+        {
+            switch (w.Name)
+            {
+                case "Stick":
+                    Bitmap atk_down1 = Properties.Resources.atk_down_stick1;
+                    Bitmap atk_down2 = Properties.Resources.atk_down_stick2;
+                    Bitmap atk_down3 = Properties.Resources.atk_down_stick3;
+                    Bitmap atk_down4 = Properties.Resources.atk_down_stick4;
+                    Bitmap atk_left1 = Properties.Resources.atk_right_stick1;
+                    Bitmap atk_left2 = Properties.Resources.atk_right_stick2;
+                    Bitmap atk_left3 = Properties.Resources.atk_right_stick3;
+                    Bitmap atk_left4 = Properties.Resources.atk_right_stick4;
+                    atk_left1.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    atk_left2.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    atk_left3.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    atk_left4.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    Bitmap atk_right1 = Properties.Resources.atk_right_stick1;
+                    Bitmap atk_right2 = Properties.Resources.atk_right_stick2;
+                    Bitmap atk_right3 = Properties.Resources.atk_right_stick3;
+                    Bitmap atk_right4 = Properties.Resources.atk_right_stick4;
+
+                    SpriteImages[5, 0] = atk_down1;
+                    SpriteImages[5, 1] = atk_down2;
+                    SpriteImages[5, 2] = atk_down3;
+                    SpriteImages[5, 3] = atk_down4;
+                    SpriteImages[6, 0] = atk_left1;
+                    SpriteImages[6, 1] = atk_left2;
+                    SpriteImages[6, 2] = atk_left3;
+                    SpriteImages[6, 3] = atk_left4; 
+                    SpriteImages[7, 0] = atk_right1;
+                    SpriteImages[7, 1] = atk_right2;
+                    SpriteImages[7, 2] = atk_right3;
+                    SpriteImages[7, 3] = atk_right4;
+                    break;
+            }
+        }
+
         // We will use this Method to get the proper collection of images corresponding to the "Image Pack" (or let's call it outfit pack). This way we can change the character's appearance once we add more visual styles.
         public Bitmap[,] GetPlayerImages(string imgPack)
         {
@@ -386,9 +428,9 @@ namespace carrot_game
             ExperiencePoints -= ExpToNextLevel;
             ExpToNextLevel = (int)(ExpToNextLevel * 1.2);
 
-            MaxHealthPoints += 2;
+            MaxHealthPoints += 1;
             CurrentHealthPoints = MaxHealthPoints;
-            Attack += 2;
+            Attack += 1;
             Defense += 1;
             Speed += 1;
         }
@@ -412,7 +454,7 @@ namespace carrot_game
                 Sprite = 0;
                 DisableMovement();
                 pSoundEffect.PlayHeroAttackSoundEffect(pSoundEffect.AudioHeroAttack);
-                Attack a = new Attack();
+                Attack a = new Attack(Direction);
 
                 // Check if we hit any monsters:
                 Task.Run(() =>

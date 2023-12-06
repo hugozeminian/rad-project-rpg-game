@@ -599,5 +599,35 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down_stick1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down_stick2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down_stick3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_down_stick4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_right_stick1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_right_stick2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_right_stick3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\entity\character\atk_right_stick4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\item\stick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\image\item\big_stick.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

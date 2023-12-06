@@ -40,6 +40,8 @@ namespace carrot_game
 
         UIPlayer uIPlayer = new UIPlayer();
 
+        Pen attackSweep = new Pen(Color.White, 2);
+
         internal Player player = new Player();
         internal static Player P
         {
@@ -127,8 +129,14 @@ namespace carrot_game
             cChecker = new CollisionChecker(gs);
 
             // Draw the house
-            Item house = new Item(MapTile.tileSize * 14, MapTile.tileSize * 0, Properties.Resources.House, MapTile.tileSize * 4, MapTile.tileSize * 4);
+            Item house = new Item(MapTile.tileSize * 13, MapTile.tileSize * 0 - MapTile.tileSize/2, Properties.Resources.House, MapTile.tileSize * 4, MapTile.tileSize * 4);
+            house.isCollectible = false;
             items.Add(house);
+
+            // Spawn stick on the ground
+            Item stick = new Item(150 + MapTile.tileSize * 13, 230, Properties.Resources.big_stick);
+            stick.Name = "Stick";
+            items.Add(stick);
 
             // Draw the welcome message:
             DisplayMessages(0, 0);
@@ -232,10 +240,12 @@ namespace carrot_game
             if (carrotSpawnTimer % (fps * 10) == 0 )
             {
                 Task spawnCarrot = Task.Run(() => SpawnCarrot());
+                
             }
 
             // Check and update carrot collection
             CollectCarrots();
+            CollectItems();
         }
 
         private void AnimateMonsters()
@@ -385,7 +395,85 @@ namespace carrot_game
         {
             foreach (Attack a in Attack.AttacksList)
             {
-                g.DrawRectangle(Pens.Red, a.BoundingBox);
+                switch(a.direction)
+                {
+                    case "up":
+                        if (a.frame == 0)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top+a.BoundingBox.Height, a.BoundingBox.Width, a.BoundingBox.Height, 315, 45);
+                        }
+                        if (a.frame == 1)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 340, 75);
+                        }
+                        if (a.frame == 2)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 5, 90);
+                        }
+                        if (a.frame == 3)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 30, 115);
+                        }
+                        a.frame++;
+                        break;
+                    case "down":
+                        if (a.frame == 0)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 225,-45);
+                        }
+                        if (a.frame == 1)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 200, -75);
+                        }
+                        if (a.frame == 2)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 175, -90);
+                        }
+                        if (a.frame == 3)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 150, -115);
+                        }
+                        a.frame++;
+                        break;
+                    case "left":
+                        if (a.frame == 0)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 315, -45);
+                        }
+                        if (a.frame == 1)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 290, -75);
+                        }
+                        if (a.frame == 2)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 265, -90);
+                        }
+                        if (a.frame == 3)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Left - a.BoundingBox.Width, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 240, -115);
+                        }
+                        a.frame++;
+                        break;
+                    case "right":
+                        if (a.frame == 0)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 135, -45);
+                        }
+                        if (a.frame == 1)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 110, -75);
+                        }
+                        if (a.frame == 2)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 85, -90);
+                        }
+                        if (a.frame == 3)
+                        {
+                            g.DrawArc(attackSweep, a.BoundingBox.Right, a.BoundingBox.Top, a.BoundingBox.Width, a.BoundingBox.Height, 60, -115);
+                        }
+                        a.frame++;
+                        break;
+                }
             }
         }
 
@@ -514,6 +602,7 @@ namespace carrot_game
                 Item newCarrot = Item.SpawnCarrot(gameMap);
                 newCarrot.Width = 43;
                 newCarrot.Height = 64;
+                newCarrot.Name = "Carrot";
                 carrots.Add(newCarrot);
             }
         }
@@ -532,6 +621,24 @@ namespace carrot_game
                     Player.currentPlayer.Carrots += 1;
                     carrot.ItemCarrotCollected();
                     carrots.Remove(carrot);
+                }
+            }
+        }
+
+        public void CollectItems()
+        {
+            Rectangle playerBoundingBox = player.BoundingBox;
+
+            List<Item> _items = new List<Item>(items);
+
+            foreach (var item in _items)
+            {
+                if (!item.IsCollected && playerBoundingBox.IntersectsWith(item.BoundingBox) && item.isCollectible)
+                {
+                    item.IsCollected = true;
+                    if (item.Name == "Stick")
+                        player.EquipWeapon(item);
+                    items.Remove(item);
                 }
             }
         }
