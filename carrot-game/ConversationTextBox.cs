@@ -16,7 +16,7 @@ namespace carrot_game
 
         public ConversationTextBox(int screenWidth, int screenHeight)
         {
-            Screen screen = Screen.FromControl(this);
+            Screen screen = Screen.FromControl(GameScreen.gs);
             Rectangle workingArea = screen.WorkingArea;
             Size = new Size(600, 100);
             Location = new Point(workingArea.X + (workingArea.Width) / 2 - Size.Width/2, workingArea.Y + workingArea.Height - 160);
@@ -114,7 +114,7 @@ namespace carrot_game
             return new[]
             {
                 //0
-                ("Mom:", $"Good morning, {GameScreen.gs.player.Name}...Could you go outside and play? Mom and dad are busy today."),
+                ("Mom", $"Good morning, {GameScreen.gs.player.Name}...Could you go outside and play? Mom and dad are busy today."),
                 
                 //1-3
                 ("NPC", "Hi there! How can I help you?"),
