@@ -83,69 +83,70 @@ namespace carrot_game
             currentPlayer = this;
         }
 
+        // Original version of load a character from file. Leaving here for educational purposes (Strings are loaded wrong, with an added pair of "")
         // This constructor is used to Load a character from a save file, given the save slot number:
-        public Player(int save) : base()
-        {
-            List<string> lines = new List<string>();
+        //public Player(int save) : base()
+        //{
+        //    List<string> lines = new List<string>();
 
-            // This obtains the list of properties from 'this' object (the instance of Player)
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
+        //    // This obtains the list of properties from 'this' object (the instance of Player)
+        //    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
 
-            try
-            {
-                using (StreamReader sr = new StreamReader(File.OpenRead($"save{save}.txt")))
-                {
-                    while (sr.EndOfStream == false)
-                    {
-                        string line = sr.ReadLine();
-                        if (line != null)
-                            lines.Add(line);
-                        else continue;
-                    }
-                    sr.Close();
+        //    try
+        //    {
+        //        using (StreamReader sr = new StreamReader(File.OpenRead($"save{save}.txt")))
+        //        {
+        //            while (sr.EndOfStream == false)
+        //            {
+        //                string line = sr.ReadLine();
+        //                if (line != null)
+        //                    lines.Add(line);
+        //                else continue;
+        //            }
+        //            sr.Close();
 
-                    // for every line of our save-file
-                    for (int i = 0; i < lines.Count; i++)
-                    {
-                        List<string> prop = lines[i].Split('=').ToList();
-                        string propName = prop[0];
-                        prop.RemoveAt(0);
-                        string propValue = string.Join("=", prop);
+        //            // for every line of our save-file
+        //            for (int i = 0; i < lines.Count; i++)
+        //            {
+        //                List<string> prop = lines[i].Split('=').ToList();
+        //                string propName = prop[0];
+        //                prop.RemoveAt(0);
+        //                string propValue = string.Join("=", prop);
 
-                        // We search the properties list using our property name, obtained from the save file.
-                        PropertyDescriptor myProperty = properties.Find($"{propName}", false);
+        //                // We search the properties list using our property name, obtained from the save file.
+        //                PropertyDescriptor myProperty = properties.Find($"{propName}", false);
 
-                            // If it's a string, we can use the text file to directly assign the value:
-                            if (myProperty.PropertyType == typeof(string))
-                            myProperty.SetValue(this, propValue);
+        //                    // If it's a string, we can use the text file to directly assign the value:
+        //                    if (myProperty.PropertyType == typeof(string))
+        //                    myProperty.SetValue(this, propValue);
 
-                            // if it's not a string, we must parse the string:
-                            else if (myProperty.PropertyType == typeof(int))
-                            myProperty.SetValue(this, Int32.Parse(propValue));
-                            else if (myProperty.PropertyType == typeof(bool))
-                            myProperty.SetValue(this, Boolean.Parse(propValue));
-                            else if (myProperty.PropertyType == typeof(Rectangle))
-                            {
-                            int x = Int32.Parse(propValue.Split(',')[0].Split('=')[1]);
-                            int y = Int32.Parse(propValue.Split(',')[1].Split('=')[1]);
-                            int w = Int32.Parse(propValue.Split(',')[2].Split('=')[1]);
-                            int h = Int32.Parse(propValue.Split(',')[3].Split('=')[1].Replace("}", ""));
-                            myProperty.SetValue(this, new Rectangle(x,y,w,h));
-                        }
-                    }
-                }
-            } catch (FileNotFoundException fnfEx)
-            {
-                // Do nothing with the exception for now
-            } 
+        //                    // if it's not a string, we must parse the string:
+        //                    else if (myProperty.PropertyType == typeof(int))
+        //                    myProperty.SetValue(this, Int32.Parse(propValue));
+        //                    else if (myProperty.PropertyType == typeof(bool))
+        //                    myProperty.SetValue(this, Boolean.Parse(propValue));
+        //                    else if (myProperty.PropertyType == typeof(Rectangle))
+        //                    {
+        //                    int x = Int32.Parse(propValue.Split(',')[0].Split('=')[1]);
+        //                    int y = Int32.Parse(propValue.Split(',')[1].Split('=')[1]);
+        //                    int w = Int32.Parse(propValue.Split(',')[2].Split('=')[1]);
+        //                    int h = Int32.Parse(propValue.Split(',')[3].Split('=')[1].Replace("}", ""));
+        //                    myProperty.SetValue(this, new Rectangle(x,y,w,h));
+        //                }
+        //            }
+        //        }
+        //    } catch (FileNotFoundException fnfEx)
+        //    {
+        //        // Do nothing with the exception for now
+        //    } 
 
-            finally
-            {
-                // Load the corresponding images
-                CurrentSprite = Properties.Resources.front1; // ToDo this will be displaying the default skin before the player moves. --should fix.
-                SpriteImages = GetPlayerImages(ImgPack);
-            }
-        }
+        //    finally
+        //    {
+        //        // Load the corresponding images
+        //        CurrentSprite = Properties.Resources.front1; // ToDo this will be displaying the default skin before the player moves. --should fix.
+        //        SpriteImages = GetPlayerImages(ImgPack);
+        //    }
+        //}
 
         // Changes the character's name.
         public void ChangeName(string name)

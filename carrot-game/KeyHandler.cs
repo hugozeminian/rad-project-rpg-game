@@ -40,7 +40,10 @@ namespace carrot_game
             else if (e.KeyCode == Keys.Escape)
             {
                 if (Program.CurrentScreen == "Game Screen")
+                {
                 g.Close();
+                }
+
             }
         }
 

@@ -90,6 +90,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MapTile.cs" />
+    <Compile Include="SaveFileManager.cs" />
     <Compile Include="UIPlayer.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -52,9 +52,10 @@ namespace carrot_game
             }
         }
 
-        public int savePos;
+        public int savePos = 0;
         public static GameScreen gs;
         internal CollisionChecker cChecker;
+        public static bool newGame = true;
 
         // To allow drawing the player character:
         public static bool drawHero = false;
@@ -87,18 +88,26 @@ namespace carrot_game
         public GameScreen()
         {
             InitializeComponent();
+            CenterScreen(player);
+
             ResetDefault();
+
         }
         public GameScreen(int save) : this() 
         {
+            drawHero = true;
+
             savePos = save;
-            player = new Player(save);
+            player = SaveFileManager.LoadPlayerFromFile($"save{savePos}.txt");
+            player.AllowMovement();
+            Player.currentPlayer = player;
+            CenterScreen(player);
+            timer1.Start();
+            if (player.Speed == 0 ) { player.Speed = 4 + player.Level; }
         }
 
         private void ResetDefault()
         {
-            drawHero = false;
-            CenterScreen(player);
 
             // Format window:
             FormBorderStyle = FormBorderStyle.None;
@@ -112,7 +121,6 @@ namespace carrot_game
             if (Options.bgm)
                 bgm.PlayAudioBackgroud(bgm.AudioBackgroundPhase1);
             Program.CurrentScreen = "Game Screen";
-
 
             // ConversationTextBox
             conversationTextBox = new ConversationTextBox(ScreenWidth, ScreenHeight);
@@ -134,6 +142,13 @@ namespace carrot_game
             house.isCollectible = false;
             items.Add(house);
 
+            if (newGame)
+            NewGameSettings();
+        }
+
+        private void NewGameSettings()
+        {
+            drawHero = false;
             // Spawn stick on the ground
             Item stick = new Item(150 + MapTile.tileSize * 13, MapTile.tileSize * 6, Properties.Resources.big_stick);
             stick.Name = "Stick";
@@ -142,6 +157,7 @@ namespace carrot_game
             // Draw the welcome message:
             DisplayMessages(0, 0);
             player.DisableMovement();
+
         }
 
         private void GameScreen_KeyPress(object sender, KeyPressEventArgs e)
@@ -354,14 +370,11 @@ namespace carrot_game
             this.Paint += new PaintEventHandler(this.PaintMap);
             this.Paint += new PaintEventHandler(this.PaintObjects);
             this.Paint += new PaintEventHandler(this.PaintUIPlayer);
-
-            // Start the timer for redrawing
-            //timer1.Start();
         }
 
         private void GameScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveToFile(savePos);
+            SaveFileManager.SavePlayerToFile(player, $"save{savePos}.txt");
         }
 
         private void GameScreen_KeyDown(object sender, KeyEventArgs e)
@@ -374,30 +387,31 @@ namespace carrot_game
             KeyHandler.HandleKeyRelease(e, player, gs);
         }
 
-        private void SaveToFile(int SavePosition)
-        {
-            string path = $"save{SavePosition}.txt";
-            // This should run only the first time the game is closed, if the user hasn't manually saved it.
-            File.Delete(path);
-                using (FileStream fs = File.Create(path))
-                {
-                    foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(player))
-                    {
-                    string name = prop.Name;
-                    if (prop.PropertyType == typeof(string))
-                            AddText(fs, $"{name}=\"{prop.GetValue(player)}\"\n");
-                    else    AddText(fs, $"{name}={prop.GetValue(player)}\n");
-                    }
-                    fs.Seek(-2, SeekOrigin.End);
-                    fs.Close();
-                }
-        }
-        // Encoding function Obtained from Microsoft Learning: (https://learn.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-7.0)
-        private static void AddText(FileStream fs, string value)
-        {
-            byte[] info = new UTF8Encoding(true).GetBytes(value);
-            fs.Write(info, 0, info.Length);
-        }
+        // First version of save-to-file. Saving it for educational purposes:
+        //private void SaveToFile(int SavePosition)
+        //{
+        //    string path = $"save{SavePosition}.txt";
+        //    // This should run only the first time the game is closed, if the user hasn't manually saved it.
+        //    File.Delete(path);
+        //        using (FileStream fs = File.Create(path))
+        //        {
+        //            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(player))
+        //            {
+        //            string name = prop.Name;
+        //            if (prop.PropertyType == typeof(string))
+        //                    AddText(fs, $"{name}=\"{prop.GetValue(player)}\"\n");
+        //            else    AddText(fs, $"{name}={prop.GetValue(player)}\n");
+        //            }
+        //            fs.Seek(-2, SeekOrigin.End);
+        //            fs.Close();
+        //        }
+        //}
+        //// Encoding function Obtained from Microsoft Learning: (https://learn.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-7.0)
+        //private static void AddText(FileStream fs, string value)
+        //{
+        //    byte[] info = new UTF8Encoding(true).GetBytes(value);
+        //    fs.Write(info, 0, info.Length);
+        //}
 
         private void UpdateMonsters(List<Monster> monsters)
         {
