@@ -35,6 +35,7 @@ namespace carrot_game
         private List<Item> carrots = new List<Item>();
         private List<Item> items = new List<Item>();
         private static int _carrotsLimit = 3;
+        private bool isFirstCarrotCollected = false;
 
         internal Map gameMap = new Map();
 
@@ -174,6 +175,18 @@ namespace carrot_game
                 messageSent = false;
                 messageCurrentIndex++;
                 conversationTextBox.ClearConversation();
+            }
+        }
+
+        private void ResolveDisplayMessages(int startIndex, int endIndex)
+        {
+            if (conversationTextBox.InvokeRequired)
+            {
+                conversationTextBox.Invoke(new MethodInvoker(() => DisplayMessages(startIndex, endIndex)));
+            }
+            else
+            {
+                DisplayMessages(startIndex, endIndex);
             }
         }
 
@@ -624,9 +637,17 @@ namespace carrot_game
                     Player.currentPlayer.Carrots += 1;
                     carrot.ItemCarrotCollected();
                     carrots.Remove(carrot);
+
+                    if (!isFirstCarrotCollected)
+                    {
+                        isFirstCarrotCollected = true;
+                        ResolveDisplayMessages(4,4);
+                    }
                 }
+
             }
         }
+
 
         public void CollectItems()
         {
@@ -642,8 +663,7 @@ namespace carrot_game
                     if (item.Name == "Stick")
                     {
                         player.EquipWeapon(item);
-                        // Display message "picked up a stick"
-                        DisplayMessages(3, 3);
+                        ResolveDisplayMessages(3,3);
                     }
                     items.Remove(item);
                 }

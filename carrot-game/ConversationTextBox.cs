@@ -88,10 +88,24 @@ namespace carrot_game
 
             if (hintTextLabel != null)
             {
-                hintTextLabel.Visible = false;
+                if (hintTextLabel.InvokeRequired)
+                {
+                    hintTextLabel.Invoke(new MethodInvoker(() => hintTextLabel.Visible = false));
+                }
+                else
+                {
+                    hintTextLabel.Visible = false;
+                }
             }
 
-            Hide();
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(() => Hide()));
+            }
+            else
+            {
+                Hide();
+            }
         }
 
         public void ShowConversation()
@@ -103,9 +117,24 @@ namespace carrot_game
 
             if (hintTextLabel != null)
             {
-                hintTextLabel.Visible = true;
+                if (hintTextLabel.InvokeRequired)
+                {
+                    hintTextLabel.Invoke(new MethodInvoker(() => hintTextLabel.Visible = true));
+                }
+                else
+                {
+                    hintTextLabel.Visible = true;
+                }
             }
-            Show();
+
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(() => Show()));
+            }
+            else
+            {
+                Show();
+            }
         }
 
         // Get the array of conversations
@@ -122,7 +151,10 @@ namespace carrot_game
                 ("Dad", "Watch out for monsters!"),
 
                 //3
-                ("Picked up", "Stick. Maybe I can use this as a weapon if I press F...")
+                ("Picked up", "Stick. Maybe I can use this as a weapon if I press F..."),
+
+                //4
+                ("Picked up", "Carrot. Hmm.. I love carrot cake.")
             };
         }
 
