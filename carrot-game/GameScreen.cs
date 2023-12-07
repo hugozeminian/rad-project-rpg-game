@@ -116,7 +116,7 @@ namespace carrot_game
         // Default setting for any game (Load or New)
         private void ResetDefault()
         {
-
+            MainMenu.skipIntro = true;
             // Format window:
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;

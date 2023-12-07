@@ -12,10 +12,11 @@ namespace carrot_game
 {
     partial class MainMenu : Form
     {
-        private static string newPlayerName = "Player";
-        private bool skipIntro = true;
-        private bool nameEntered = false;
+        // Change this to skip intro video.
+        internal static bool skipIntro = false;
+
         public static MainMenu instance;
+        public static bool bgmOn = true;
 
         private static Color _menuGreen = Color.FromArgb(255, 0, 192, 0);
         private void MainMenu_Load(object sender, EventArgs e)
@@ -50,7 +51,16 @@ namespace carrot_game
 
         private void SetOptions()
         {
-            btnBgm.Text = Options.bgm ? "ON" : "OFF";
+            if (bgmOn)
+            {
+                btnBgm.Text = "ON";
+                Options.bgm = true;
+            }
+            else
+            {
+                btnBgm.Text = "OFF";
+                Options.bgm = false;
+            }
             btnBoundingBoxes.Text = Options.showBoundingBox ? "ON" : "OFF";
             btnPlayerName.Text = Options.showPlayerName ? "ON" : "OFF";
             btnMonsterNames.Text = Options.showMonsterNames ? "ON" : "OFF";
@@ -134,12 +144,15 @@ namespace carrot_game
             if (btnBgm.Text == "ON")
             {
                 btnBgm.Text = "OFF";
+                Options.bgm = false;
                 btnBgm.BackColor = Color.Red;
                 bgm.StopAudioBackgroud();
             }
             else if (btnBgm.Text == "OFF")
             {
                 btnBgm.Text = "ON";
+                Options.bgm = true;
+
                 btnBgm.BackColor = Color.FromArgb(255,0,192,0);
                 bgm.PlayAudioBackgroud(bgm.AudioMenu);
             }

@@ -434,8 +434,6 @@ namespace carrot_game
             Attack += 1;
             Defense += 1;
             Speed += 1;
-
-
         }
 
         // Gain exp
