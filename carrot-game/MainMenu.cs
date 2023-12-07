@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -11,7 +12,11 @@ namespace carrot_game
 {
     partial class MainMenu : Form
     {
+        private static string newPlayerName = "Player";
         private bool skipIntro = true;
+        private bool nameEntered = false;
+        public static MainMenu instance;
+
         private static Color _menuGreen = Color.FromArgb(255, 0, 192, 0);
         private void MainMenu_Load(object sender, EventArgs e)
         {
@@ -39,6 +44,8 @@ namespace carrot_game
             WindowState = FormWindowState.Maximized;
             Size = new Size(1920, 1080);
             SetOptions();
+            instance = this;
+            Program.CurrentScreen = "Main Menu";
         }
 
         private void SetOptions()
@@ -75,24 +82,30 @@ namespace carrot_game
         private void btnHover (object sender, EventArgs e)
         {
             Button b = sender as Button;
-            b.ForeColor = System.Drawing.Color.Black;
+            b.ForeColor = Color.Black;
         }
 
         private void btnLeaveHover(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            b.ForeColor = System.Drawing.Color.FromArgb(40,40,40);
+            b.ForeColor = Color.FromArgb(40,40,40);
         }
 
-        private void btnNewGame_Click(object sender, EventArgs e)
+        internal void btnNewGame_Click(object sender, EventArgs e)
         {
+            pnlList.Visible = false;
+            NameInputDialog1.Visible = true;
+            NameInputDialog1.Dock = DockStyle.Fill;
+            NameInputDialog1.nameInput.Focus();
+
             GameScreen.newGame = true;
-           bgm.StopAudioBackgroud();
-           bgm.Dispose();
-           Form game = new GameScreen();
-           game.Show();
-           Close();
+            bgm.StopAudioBackgroud();
+            bgm.Dispose();
+
+
+            NameInputDialog1.Focus();    
         }
+
 
         private void btnContinue_Click(object sender, EventArgs e)
         {

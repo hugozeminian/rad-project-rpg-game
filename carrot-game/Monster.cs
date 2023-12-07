@@ -22,6 +22,10 @@ namespace carrot_game
 
         public static Random Random = new Random();
 
+        public static StringFormat sf = new StringFormat();
+        private readonly Font MonsterDamageTag = new Font("Georgia", 7 + 4 * GameScreen.GlobalScale, FontStyle.Bold, GraphicsUnit.Point);
+
+
         public static List<Monster> SpawnedMonsters = new List<Monster>();
 
         // This is the list that stores the damage values the monster received and their relative position on top of them. [dmg, pos].
@@ -60,6 +64,12 @@ namespace carrot_game
             {
                 return new Rectangle(ScreenX, ScreenY, Width, Height);
             }
+        }
+
+        static Monster()
+        {
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
         }
         // Move the character on X, Y and Z axis.
         public override void Move(int x, int y, int z)
@@ -183,15 +193,20 @@ namespace carrot_game
         // Calculates monster attack damage and adds it to the damage displaying array.
         public void ResolveAttack()
         {
-            if (Player.currentPlayer.IsColliding(this))
+            Player _p = Player.currentPlayer;
+            if (_p.IsColliding(this))
             {
                 _attackFrame++;
                 if (_attackFrame > GameScreen.fps*_attackSpeed)
                 {
-                    int attackDamage = Math.Max(Attack - Player.currentPlayer.Defense, 1);
+                    int attackDamage = Math.Max(Attack - _p.Defense, 1);
                     int[] arrayToAdd = { attackDamage, 0 };
                     GameScreen.gs.player.damageNumbers.Add(arrayToAdd);
-                    Player.currentPlayer.CurrentHealthPoints -= attackDamage;
+                    _p.CurrentHealthPoints -= attackDamage;
+                    if (_p.CurrentHealthPoints <= 0 )
+                    {
+                        _p.Die();
+                    }
                     _attackFrame = 0;
 
 
@@ -303,6 +318,36 @@ namespace carrot_game
                         break;
                 }
             }
+        }
+
+        internal void DrawDamage(Graphics g)
+        {
+            //TODO - add this condition to the whole function
+            //if (showDamageNumbers == true)
+
+            // We create a copy of the original list, because we will both iterate through and modify it:
+            List<int[]> _d = new List<int[]>(damageNumbers);
+
+            // This is the displacement value when we remove items from the list, to avoid out of bounds exception.
+            int _indxtra = 0;
+
+            // To avoid wasting processing power when we don't have any damage to display:
+            if (damageNumbers.Count > 0)
+                foreach (var dmg in _d)
+                {
+                    int _ind = _d.IndexOf(dmg) + _indxtra;
+                    Rectangle _dmgBox = new Rectangle(ScreenX - 5, ScreenY - dmg[1], Width + 10, 25);
+
+                    g.DrawString(dmg[0].ToString(), MonsterDamageTag, Brushes.OrangeRed, _dmgBox, sf);
+
+                    damageNumbers[_ind][1]++;
+
+                    if (damageNumbers[_ind][1] > GameScreen.fps * 4)
+                    {
+                        damageNumbers.Remove(dmg);
+                        _indxtra--;
+                    }
+                }
         }
 
         // Check if the monster is colliding with the player.

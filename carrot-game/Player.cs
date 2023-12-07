@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
@@ -47,7 +48,7 @@ namespace carrot_game
         {
             get
             {
-                return new Rectangle(ScreenX + Width/3, ScreenY+ 2*Height / 3, Width * GameScreen.GlobalScale / 6, Height * GameScreen.GlobalScale / 6);
+                return new Rectangle(ScreenX + Width/3, ScreenY+ 2*Height / 3, Width  / 3, Height / 3);
             }
         }
 
@@ -59,17 +60,15 @@ namespace carrot_game
             PosZ += z;
         }
 
-
-
         public Player()
         {
             Name = "Player";
-            MaxHealthPoints = 10;
+            MaxHealthPoints = 6;
             CurrentHealthPoints = MaxHealthPoints;
             ExperiencePoints = 0;
             Attack = 1;
             Defense = 0;
-            Speed = 4;
+            Speed = 5;
             WorldX = 150 + MapTile.tileSize*12;
             WorldY = 200;
             PosZ = 1;
@@ -203,7 +202,7 @@ namespace carrot_game
                 FrameCounter++;
 
                 // once we reach this threshold, we change the image to the next available in the array.
-                if (FrameCounter > 9 && !IsAttacking)
+                if (FrameCounter > 6 && !IsAttacking)
                 {
                     if (Sprite == 0)
                     {
@@ -435,6 +434,8 @@ namespace carrot_game
             Attack += 1;
             Defense += 1;
             Speed += 1;
+
+
         }
 
         // Gain exp
@@ -484,7 +485,63 @@ namespace carrot_game
                 AllowMovement();
             }
         }
-        // add method interact
+        
+        public async void Die()
+        {
+            await Task.Delay(1000);
 
+            if (GameScreen.gs != null && !GameScreen.gs.IsDisposed)
+            {
+                if (GameScreen.gs.InvokeRequired)
+                {
+                    GameScreen.gs.Invoke(new MethodInvoker(() =>
+                    {
+                        // Check again in case the form was disposed after InvokeRequired check
+                        if (!GameScreen.gs.IsDisposed)
+                        {
+                            GameScreen.gs.Close();
+                        }
+                    }));
+                }
+                else
+                {
+                    // If the current thread is the UI thread, no need for invoking
+                    GameScreen.gs.Close();
+                }
+            }
+            GameOverScreen go = new GameOverScreen();
+
+
+            if (MainMenu.instance.pnlList.InvokeRequired)
+            {
+                MainMenu.instance.pnlList.Invoke(new MethodInvoker(async () =>
+                {
+                    // This code will run on the UI thread
+                    MainMenu.instance.pnlList.Hide();
+                    go.Parent = MainMenu.instance;
+                    go.Dock = DockStyle.Fill;
+                    await Task.Run(async () =>
+                    {
+                    await Task.Delay(3000);
+                    go.Hide();
+                    MainMenu.instance.pnlList.Show();
+                    });
+                }));
+            }
+            else
+            {
+                // If the current thread is the UI thread, no need for invoking
+                MainMenu.instance.pnlList.Hide();
+                go.Parent = MainMenu.instance;
+                go.Dock = DockStyle.Fill;
+                await Task.Run(async () =>
+                {
+                    await Task.Delay(3000);
+                    go.Hide();
+                    MainMenu.instance.pnlList.Show();
+                });
+
+            }
+        }
     }
 }

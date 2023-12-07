@@ -13,7 +13,6 @@ namespace carrot_game
         readonly Player p = GameScreen.gs.player;
         public int extraRange = 0;
         public int frame;
-        public string direction;
 
         public static List<Attack> AttacksList = new List<Attack>();
 

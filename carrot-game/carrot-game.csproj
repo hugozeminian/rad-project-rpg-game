@@ -90,6 +90,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MapTile.cs" />
+    <Compile Include="GameOverScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameOverScreen.Designer.cs">
+      <DependentUpon>GameOverScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NameInputDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NameInputDialog.Designer.cs">
+      <DependentUpon>NameInputDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SaveFileManager.cs" />
     <Compile Include="UIPlayer.cs">
       <SubType>Component</SubType>
@@ -118,6 +130,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameOverScreen.resx">
+      <DependentUpon>GameOverScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NameInputDialog.resx">
+      <DependentUpon>NameInputDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

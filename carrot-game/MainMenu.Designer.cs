@@ -10,29 +10,29 @@ namespace carrot_game
 {
     partial class MainMenu
     {
-        private Button btnExit;
-        private Button btnOptions;
-        private Button btnContinue;
-        private Button btnLoadGame;
-        private Button btnNewGame;
-        private Panel  pnlList;
+        internal Button btnExit;
+        internal Button btnOptions;
+        internal Button btnContinue;
+        internal Button btnLoadGame;
+        internal Button btnNewGame;
+        internal Panel  pnlList;
 
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
-        private AxWMPLib.AxWindowsMediaPlayer mediaIntro;
-        private Timer timer;
-        private Panel pnlOptions;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button btnBack;
-        private Button btnMonsterNames;
-        private Button btnPlayerName;
-        private Button btnBoundingBoxes;
-        private Button btnBgm;
+        internal System.ComponentModel.IContainer components = null;
+        internal AxWMPLib.AxWindowsMediaPlayer mediaIntro;
+        internal Timer timer;
+        internal Panel pnlOptions;
+        internal Button button1;
+        internal Button button2;
+        internal Button button3;
+        internal Button button4;
+        internal Button btnBack;
+        internal Button btnMonsterNames;
+        internal Button btnPlayerName;
+        internal Button btnBoundingBoxes;
+        internal Button btnBgm;
         Audio bgm = new Audio();
 
         /// <summary>
@@ -53,6 +53,7 @@ namespace carrot_game
             InitializeComponent();
             bgm.PlayAudioBackgroud(bgm.AudioMenu);
             Program.CurrentScreen = "Main Menu";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Program.FormClosed);
         }
 
         #region Windows Form Designer generated code
@@ -82,8 +83,8 @@ namespace carrot_game
             this.btnBack = new System.Windows.Forms.Button();
             this.mediaIntro = new AxWMPLib.AxWindowsMediaPlayer();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.NameInputDialog1 = new carrot_game.NameInputDialog();
             this.pnlList.SuspendLayout();
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Program.FormClosed);
             this.pnlOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaIntro)).BeginInit();
             this.SuspendLayout();
@@ -347,12 +348,24 @@ namespace carrot_game
             // 
             this.timer.Interval = 4200;
             // 
+            // NameInputDialog1
+            // 
+            this.NameInputDialog1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.NameInputDialog1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("NameInputDialog1.BackgroundImage")));
+            this.NameInputDialog1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.NameInputDialog1.Location = new System.Drawing.Point(616, 414);
+            this.NameInputDialog1.Name = "NameInputDialog1";
+            this.NameInputDialog1.Size = new System.Drawing.Size(344, 206);
+            this.NameInputDialog1.TabIndex = 10;
+            this.NameInputDialog1.Visible = false;
+            // 
             // MainMenu
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.BackgroundImage = global::carrot_game.Properties.Resources.Main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(852, 480);
+            this.Controls.Add(this.NameInputDialog1);
             this.Controls.Add(this.pnlOptions);
             this.Controls.Add(this.mediaIntro);
             this.Controls.Add(this.pnlList);
@@ -361,7 +374,6 @@ namespace carrot_game
             this.Name = "MainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Carrot-Game";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.pnlList.ResumeLayout(false);
             this.pnlOptions.ResumeLayout(false);
@@ -372,5 +384,6 @@ namespace carrot_game
         }
         #endregion
 
+        private NameInputDialog NameInputDialog1;
     }
 }

@@ -62,6 +62,6 @@ namespace carrot_game
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer1;
+        internal System.Windows.Forms.Timer timer1;
     }
 }

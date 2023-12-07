@@ -52,21 +52,22 @@ namespace carrot_game
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            DrawCircularProgressBar(e.Graphics);
-            DrawLinearProgressBar(e.Graphics);
+            DrawExperienceBar(e.Graphics);
+            DrawHealthBar(e.Graphics);
             DrawCarrot(e.Graphics);
         }
 
-        public void DrawCircularProgressBar(Graphics g)
+        public void DrawExperienceBar(Graphics g)
         {
-            Brush backgroundBrush = new SolidBrush(Color.Gray);
-            Brush fillBrush = new SolidBrush(Color.Green);
+            Pen backgroundPen = new Pen(Color.Wheat, 19);
+            
+            Pen fillPen = new Pen(Color.Green, 15);
 
             float angle = 360f * (Player.currentPlayer.ExperiencePoints) / (Player.currentPlayer.ExpToNextLevel);
 
             // CircularProgressBarLocation and CircularProgressBarSize properties
-            g.FillEllipse(backgroundBrush, CircularProgressBarLocation.X, CircularProgressBarLocation.Y, CircularProgressBarSize.Width, CircularProgressBarSize.Height);
-            g.FillPie(fillBrush, CircularProgressBarLocation.X, CircularProgressBarLocation.Y, CircularProgressBarSize.Width, CircularProgressBarSize.Height, -90, angle);
+            g.DrawArc(backgroundPen, CircularProgressBarLocation.X, CircularProgressBarLocation.Y, CircularProgressBarSize.Width, CircularProgressBarSize.Height, 0, 360);
+            g.DrawArc(fillPen, CircularProgressBarLocation.X, CircularProgressBarLocation.Y, CircularProgressBarSize.Width, CircularProgressBarSize.Height, -90, angle);
 
             // Draw the level label
             string levelText = "LVL " + Player.currentPlayer.Level.ToString();
@@ -77,21 +78,34 @@ namespace carrot_game
             g.DrawString(levelText, levelFont, levelBrush, levelLocation);
         }
 
-        public void DrawLinearProgressBar(Graphics g)
+        // This linear progress bar represents the Health Points:
+        public void DrawHealthBar(Graphics g)
         {
             Brush backgroundBrush = new SolidBrush(Color.Gray);
-            Brush fillBrush = new SolidBrush(Color.Blue);
+            Brush fillBrush = new SolidBrush(Color.FromArgb(255, 255, 100, 100));
 
             int fillWidth = (int)((float)(Player.currentPlayer.CurrentHealthPoints) / (Player.currentPlayer.MaxHealthPoints) * LinearProgressBarSize.Width);
 
             // Draw the HP label
-            Font labelFont = new Font("Arial", 18, FontStyle.Bold); 
+            Font labelFont = new Font("Arial", 18, FontStyle.Bold);
             Brush labelBrush = new SolidBrush(Color.Black);
             g.DrawString("HP:", labelFont, labelBrush, LinearProgressBarLocation.X, LinearProgressBarLocation.Y);
 
-            // LinearProgressBarLocation and LinearProgressBarSize properties
             g.FillRectangle(backgroundBrush, LinearProgressBarLocation.X + labelFont.SizeInPoints * 3, LinearProgressBarLocation.Y, LinearProgressBarSize.Width, LinearProgressBarSize.Height);
             g.FillRectangle(fillBrush, LinearProgressBarLocation.X + labelFont.SizeInPoints * 3, LinearProgressBarLocation.Y + LinearProgressBarSize.Height - _linearProgressBarHeight, fillWidth, _linearProgressBarHeight);
+
+            // Draw vertical lines
+            int numSegments = Player.currentPlayer.MaxHealthPoints;
+            int segmentWidth = LinearProgressBarSize.Width / numSegments;
+
+            using (Pen linePen = new Pen(Color.Black, 1))
+            {
+                for (int i = 1; i < numSegments; i++)
+                {
+                    int xPosition = (int)(LinearProgressBarLocation.X + labelFont.SizeInPoints * 3 + i * segmentWidth);
+                    g.DrawLine(linePen, xPosition, LinearProgressBarLocation.Y, xPosition, LinearProgressBarLocation.Y + LinearProgressBarSize.Height);
+                }
+            }
         }
 
         public void DrawCarrot(Graphics g)

@@ -66,6 +66,7 @@ namespace carrot_game
             }
         }
 
+        // I hard-coded the switch cases because looping was causing multiple errors when converting from String to Int32[] or Lists.
         public static Player LoadPlayerFromFile(string filePath)
         {
             Player player = new Player();

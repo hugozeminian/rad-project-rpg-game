@@ -29,7 +29,7 @@ namespace carrot_game
         public static int GlobalScale = 2;
 
         // Limits the number of monsters
-        private static int _monsterLimit = 1;
+        private static int _monsterLimit = 2;
 
         // List of items carrots
         private List<Item> carrots = new List<Item>();
@@ -68,14 +68,15 @@ namespace carrot_game
 
         Audio bgm = new Audio();
         Audio doorSoundEffect = new Audio();
+        public static Graphics graph;
 
         // Declaring the name tag variables:
         public static bool showPlayerName = true;
         public static bool showMonsterNames = true;
 
         private static readonly StringFormat sf = new StringFormat();
-        private readonly Font PlayerNameTag = new Font("Georgia", 7 * GlobalScale, FontStyle.Bold, GraphicsUnit.Point);
-        private readonly Font MonsterNameTag = new Font("Georgia", 6 * GlobalScale, GraphicsUnit.Point);
+        private readonly Font PlayerNameTag = new Font("Georgia", 7 + 4 * GlobalScale, FontStyle.Bold, GraphicsUnit.Point);
+        private readonly Font MonsterNameTag = new Font("Georgia", 6 + 3 * GlobalScale, FontStyle.Bold, GraphicsUnit.Point);
 
         //Text box and conversations variables
         private ConversationTextBox conversationTextBox;
@@ -85,13 +86,19 @@ namespace carrot_game
         private bool messageSent;
         private System.Windows.Forms.Timer timerCheckMessage;
 
+
         public GameScreen()
         {
             InitializeComponent();
             CenterScreen(player);
-
             ResetDefault();
-
+        }
+        public GameScreen(string name)
+        {
+            InitializeComponent();
+            CenterScreen(player);
+            player.Name = name;
+            ResetDefault();
         }
         public GameScreen(int save) : this() 
         {
@@ -106,6 +113,7 @@ namespace carrot_game
             if (player.Speed == 0 ) { player.Speed = 4 + player.Level; }
         }
 
+        // Default setting for any game (Load or New)
         private void ResetDefault()
         {
 
@@ -146,6 +154,7 @@ namespace carrot_game
             NewGameSettings();
         }
 
+        // Settings that are only enabled on a New Game:
         private void NewGameSettings()
         {
             drawHero = false;
@@ -299,7 +308,7 @@ namespace carrot_game
 
         private void PaintObjects(object sender, PaintEventArgs e)
         {
-            Rectangle _pr = new Rectangle(player.BoundingBox.Location.X - 5, player.BoundingBox.Location.Y + player.BoundingBox.Height - 20, player.BoundingBox.Width + 10, 25);
+            Rectangle _pr = new Rectangle(player.BoundingBox.Location.X - GlobalScale*2, player.BoundingBox.Location.Y + player.BoundingBox.Height - GlobalScale*10, player.BoundingBox.Width + GlobalScale*5, GlobalScale*12);
             // Create a Graphics object to draw on the form
             Graphics g = e.Graphics;
 
@@ -357,10 +366,11 @@ namespace carrot_game
             gameMap.Draw(e.Graphics, gs);
         }
 
+
         private void PaintUIPlayer(object sender, PaintEventArgs e)
         {
-            uIPlayer.DrawCircularProgressBar(e.Graphics);
-            uIPlayer.DrawLinearProgressBar(e.Graphics);
+            uIPlayer.DrawExperienceBar(e.Graphics);
+            uIPlayer.DrawHealthBar(e.Graphics);
             uIPlayer.DrawCarrot(e.Graphics);
         }
 
@@ -510,7 +520,7 @@ namespace carrot_game
         private void DrawMonsters(Graphics g, int pos)
         {
             int nameTagTextGap = 5;
-            int nameTagHeight = 20;
+            int nameTagHeight = 10 + GlobalScale * 5;
             int nameTagMaxWidth = 200;
 
             foreach (Monster m in Monster.SpawnedMonsters)
@@ -519,7 +529,7 @@ namespace carrot_game
                 m.ScreenY = m.WorldY - gs.player.WorldY + gs.player.ScreenY;
 
                 // rectangle that contains the monster shadow
-                Rectangle _r = new Rectangle(m.BoundingBox.Location.X - 5, m.BoundingBox.Location.Y + m.BoundingBox.Height - 20, m.BoundingBox.Width + 10, 25);
+                Rectangle _r = new Rectangle(m.BoundingBox.Location.X - GlobalScale * 2, m.BoundingBox.Location.Y + m.BoundingBox.Height - GlobalScale * 10, m.BoundingBox.Width + GlobalScale * 5, GlobalScale * 12);
 
                 // pos == 1 means draw on top of player
                 if (m.BoundingBox.Bottom >= player.BoundingBox.Bottom - player.BoundingBox.Height/2 && pos == 1) 
@@ -563,8 +573,7 @@ namespace carrot_game
         {
             //TODO - add this condition to the whole function
             //if (showDamageNumbers == true)
-            //{
-            //}
+
 
             // We create a copy of the original list, because we will both iterate through and modify it:
             List<int[]> _d = new List<int[]>(player.damageNumbers);
@@ -589,6 +598,11 @@ namespace carrot_game
                     _indxtra--;
                 }
             }
+
+            foreach (Monster m in Monster.SpawnedMonsters)
+            {
+                m.DrawDamage(g);
+            }
         }
 
         private static void SpawnMonsters(Player p)
@@ -604,7 +618,7 @@ namespace carrot_game
             int row = 10;
             int col = 10;
 
-            while (gs.gameMap.mapArray[row, col].collision != false || Math.Abs(p.WorldX - col * MapTile.tileSize) < 200 || Math.Abs(p.WorldY - row * MapTile.tileSize) < 200)
+            while (gs.gameMap.mapArray[row, col].collision != false || Math.Abs(p.WorldX - col * MapTile.tileSize) < 400 || Math.Abs(p.WorldY - row * MapTile.tileSize) < 400)
             {
                 row = _r2.Next(3, gs.gameMap.mapData.GetLength(0) - 11);
                 col = _r2.Next(14, gs.gameMap.mapData.GetLength(1) - 15);
@@ -630,13 +644,14 @@ namespace carrot_game
             if (uncollectedCarrotsCount < _carrotsLimit)
             {
                 Item newCarrot = Item.SpawnCarrot(gameMap);
-                newCarrot.Width = 43;
-                newCarrot.Height = 64;
+                newCarrot.Width = 22 * GlobalScale;
+                newCarrot.Height = 32 * GlobalScale;
                 newCarrot.Name = "Carrot";
                 carrots.Add(newCarrot);
             }
         }
 
+        // If we walk over a carrot:
         public void CollectCarrots()
         {
             Rectangle playerBoundingBox = player.BoundingBox;
@@ -663,6 +678,7 @@ namespace carrot_game
         }
 
 
+        // If we walk over a collectible item:
         public void CollectItems()
         {
             Rectangle playerBoundingBox = player.BoundingBox;
@@ -684,7 +700,7 @@ namespace carrot_game
             }
         }
 
-        private void DisposeOfAssets()
+        internal void DisposeOfAssets()
         {
             Monster.SpawnedMonsters.Clear();
             Monster.Counter = 0;
@@ -694,6 +710,7 @@ namespace carrot_game
             bgm.StopAudioBackgroud();
             DisposeOfAssets();
             MainMenu m = new MainMenu();
+            MainMenu.instance = m;
             m.Show();
         }
     }
