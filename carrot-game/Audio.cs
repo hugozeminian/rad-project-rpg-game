@@ -56,7 +56,7 @@ namespace carrot_game
         private bool isBackgroundAudioLooping = true;
         public void PlayAudioBackgroud(AudioFileReader audio)
         {
-            audio.Volume = 1.0f;
+            audio.Volume = 0.1f;
             WaveOutBackground.Init(audio);
 
             WaveOutBackground.PlaybackStopped += (sender, e) => // Loop
@@ -83,7 +83,7 @@ namespace carrot_game
         //Sound Effect
         private void PlaySoundEffect(WaveOutEvent waveOut, AudioFileReader audioEffect)
         {
-            audioEffect.Volume = 1.5f;
+            audioEffect.Volume = 0.2f;
 
             if (waveOut.PlaybackState == PlaybackState.Playing)
             {

@@ -52,6 +52,7 @@ namespace carrot_game
         {
             InitializeComponent();
             bgm.PlayAudioBackgroud(bgm.AudioMenu);
+            
             Program.CurrentScreen = "Main Menu";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Program.FormClosed);
         }
